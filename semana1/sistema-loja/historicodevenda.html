@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Funcionários</title>
+    <title>Loja Tô pronta!</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="funcionarios.css">
+    <link rel="stylesheet" type="text/css" href="historicodevendas.css">
 </head>
+
 <body>
     <header>
         <img class="logo" src="./img/Logo.jpg" alt="Logo da loja com um pote de esmalte da cor verde e o nome Loja Tô Pronta">
@@ -22,16 +23,33 @@
     </header>
 
 
+    <h2 class="tituloprincipal">Histórico de compras</h2>
 
-    <h2 class="tituloprincipal">Funcionários</h2>
-   
-    <ul class="listafuncionarios">
-        <li>Isabelle Travasso</li>
-        <li>Felipe Gomes</li>
-        <li>Thais Freitas</li>
-        <li>Lucas Oliveira</li>
-    </ul>
-    
+        <table class="tabelavenda" cellpadding = "4px">
+            <tr class="tabelahistoricopedido">
+                <th>Pedido</th>
+                <th>Data</th>
+                <th>Para</th>
+                <th>Total do pedido</th>
+                <th>Status</th>
+                <th>Rastreio</th>
+                <th> </th>
+            </tr>
+
+            <tr>
+                <td>15500657301</td>
+                <td> 03/02/2021 </td>
+                <td> Isabelle Travasso </td>
+                <td> 18.75 </td>
+                <td> Em separação </td>
+                <td> Em separação </td>
+                <td class="detalhepedidosrealizado"> Detalhes </td>
+            </tr>
+                  
+        </table>
+	</main>
+ 
+          
     <footer>
         <div>
             <p>Siga-nos nas redes sociais!</p>
@@ -43,6 +61,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>

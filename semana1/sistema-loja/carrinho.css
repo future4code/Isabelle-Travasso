@@ -1,0 +1,66 @@
+.tabelacarrinho {
+    margin: auto;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table img{
+    position: relative;
+    vertical-align: top;
+    width: 80px;
+}
+
+.descricaotabelacarrinho{
+    border: 1px solid black;
+}
+.limparcarrinho{
+    display: inline-block;
+    text-align: left;
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+    vertical-align: top;
+}
+
+ul{
+    text-align: center;
+}
+
+ul li{
+    width: 25%;
+    height: 150px;
+    display: inline-block;
+    margin: 1%;
+}
+
+.cupom{
+    vertical-align: top;
+    font-weight: bold;
+    font-size: 16px;
+    background: #f3f3f3;
+    padding: 5px;
+    text-align: center;
+}
+
+button{
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    background-color:rgb(174, 240, 174) ;
+}
+
+button:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.tabelapagamento{
+   display: inline-block;
+   border: 1px solid black;
+   border-collapse: collapse;
+}
+
