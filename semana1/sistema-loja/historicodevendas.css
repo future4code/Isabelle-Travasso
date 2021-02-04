@@ -1,0 +1,16 @@
+.tabelavenda {
+    margin: auto;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.tabelahistoricopedido{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.detalhepedidosrealizado:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

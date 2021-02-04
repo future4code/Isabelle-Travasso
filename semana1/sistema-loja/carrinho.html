@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Loja Tô pronta!</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="carrinho.css">
+</head>
+
+<body>
+    <header>
+        <img class="logo" src="./img/Logo.jpg" alt="Logo da loja com um pote de esmalte da cor verde e o nome Loja Tô Pronta">
+        <div id="menuinicial">
+            <a href="index.html">Home</a>
+            <a href="ctrl-estoque.html">Produtos</a>
+            <a href="add-produto.html">Adicionar Produto</a>
+            <a href="funcionarios.html">Funcionários</a>
+            <a href="carrinho.html">Carrinho</a>
+            <a href="historicodevenda.html">Histórico de vendas</a>
+        </div>
+    </header>
+
+
+    <h2 class="tituloprincipal">Carrinho de compras</h2>
+
+   
+        <table class="tabelacarrinho">
+            <tr class="descricaotabelacarrinho" cellpadding = "4px">
+                <th>Descrição</th>
+                <th>Quantidade</th>
+                <th>Preço (R$)</th>
+                <th>Subtotal (R$)</th>
+            </tr>
+
+            <tr>
+                <td><img src="./img/esmaltevermelho.jpg" alt="Unhas com esmalte de cor vemelha"/>Esmalte vermelho</td>
+                <td> 1 </td>
+                <td> 2.50 </td>
+                <td> 2.50 </td>
+            </tr>
+
+            <tr>
+                <td><img src="./img/adesivo.jpg" alt="imagem de adesivo para unhas e os adesivos aplicados nas unhas"/>Adesivo para unha</td>
+                <td> 5 </td>
+                <td> 1.25 </td>
+                <td> 6.25 </td>
+            </tr>
+
+            <tr>
+                <td><img src="./img/removedoresmalte.jpg" alt="imagem de uma embalagem de remodevor de esmalte"/>Removedor de esmalte</td>
+                <td> 2 </td>
+                <td> 5.00 </td>
+                <td> 10.00 </td>
+            </tr>
+        
+        </table>
+    
+        <ul>
+            <li class="limparcarrinho">
+               
+                    <p> Limpar carrinho</p>
+            </li>   
+            <li class="cupom">
+                
+                    <h4>Cupom de desconto</h4>
+                    <p>Se possuir um cupom, digite no campo abaixo</p>
+                        <input placeholder="cupom" type="text">
+                        <button>Adicionar</button>
+                
+            </li>
+            
+            <li>
+                
+                    <table class="tabelapagamento" cellpadding = "4px">
+                        <tr>
+                            <th>Subtotal </th>
+                            <th>R$ 18.75</th>
+                        </tr>
+
+                        <tr>
+                            <td> Frete </td>
+                            <td> Calcular </td>
+                        </tr>
+                    </table>
+
+                
+                    <h4>Total do pedido</h4>
+                    <p class="pagamento"><strong >R$ 18.75</strong>
+                    Cartão de crédito ou boleto bancário
+                    (Aceitamos todas as bandeiras)</p>
+           </li>
+        </ul>
+    <footer>
+        <div>
+            <p>Siga-nos nas redes sociais!</p>
+
+            <div>
+                <img src="https://image.flaticon.com/icons/png/512/25/25305.png"/>
+                <img src="https://image.flaticon.com/icons/png/512/25/25425.png"/>
+                <img src="https://image.flaticon.com/icons/png/512/8/8800.png"/>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
