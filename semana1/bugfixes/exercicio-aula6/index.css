@@ -133,3 +133,11 @@ td button {
 #back-button:hover {
     background-color: #635a3d
 }
+
+#back-button:focus{
+    color: white;
+}
+
+td button:hover {
+    background-color: #c44f00;
+}
