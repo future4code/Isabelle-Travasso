@@ -75,9 +75,14 @@ div img {
     color: white;
     font-family: Roboto;
     display: inside;
-    padding-top: 25px;
+    padding: 25px;
+    list-style-position: inside;
+    list-style-position: center;
 }
 
+ol{
+    text-align: -webkit-center;
+}
 
 #container-de-descricao>ol {
     padding: 15px 0px;
