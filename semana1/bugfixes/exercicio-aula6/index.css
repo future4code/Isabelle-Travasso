@@ -7,6 +7,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: Roboto;
 }
 
 h2 {
@@ -45,6 +46,7 @@ div img {
     border-radius: 5px;
     font-size: 20px;
     color: white;
+    font-family: Roboto;
 }
 
 .botao-amarelo:hover {
@@ -128,6 +130,7 @@ td button {
     border-radius: 5px;
     font-size: 10px;
     color: black;
+    font-family: Roboto;
 }
 
 #back-button:hover {
