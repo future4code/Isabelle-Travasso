@@ -1,0 +1,27 @@
+.contato{
+    display: inline-flex;
+    margin-top: 150px;
+    text-align: center;
+    margin-left: 200px;
+    margin-bottom: 100px;
+}
+.contatosociais{
+    display:inline-block;
+    width: 50%;
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+.imagemcontato{
+    display: inline-block;
+    max-width: 400px;
+}
+
+.linkedin {
+    color: black;
+    text-decoration: none;
+}
+
+.iconelink{
+    display: inline;
+    width: 30px;
+}

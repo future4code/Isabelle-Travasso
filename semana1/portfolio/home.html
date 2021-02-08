@@ -2,9 +2,10 @@
 <html lang="pt-br">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="whidth=device-whidth">
+		<meta name="viewport" content="whidth=device-whidthinitial-scale=1.0">
 		<title> Protifólio Isabelle Travasso </title>
 		<link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="css/style.css">
 		<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 		
         </head>
@@ -17,7 +18,7 @@
             <nav>
                 <ul class="listamenu">
                     <li><a href="home.html">Sobre</a></li>
-                    <li><a href="atuacoes.html">Atuações</a></li>
+                    <li><a href="experiencias.html">Experiencias</a></li>
                     <li><a href="projetos.html">Projetos</a></li>
                     <li><a href="contato.html">Contato</a></liclass=>
                 </ul>
@@ -41,94 +42,65 @@
         <img class= "imagempensativo" src="./img/pensativo.png">
         
     </section>
+    <hr  />
 
     <section class="formacoes">
         
-        <div class="partetectitulo">
-        <h2> Parte Tecnologia</h2>
-        </div>
-        
-        <div class="partetec">
+        <div class="formacaoflex">
+            <h2 class="formacaotitulo"> Parte Tecnologia</h2>
+                
             <ul>
-            <li>
-                <table class="tabelatec" cellpadding = "4px">
-                    <tr>
-                        <th>MBA Data Science e Analytics </th>
-                        <td> USP Esalq </td>
-                    </tr>
-
-                    <tr>
-                        <th> Full Stack </th>
-                        <td> Labenu </td>
-                    </tr>
-
-                    <tr>
-                        <th> Front End </th>
-                        <td> Alura </td>
-                    </tr>
-
-                    <tr>
-                        <th> Power BI </th>
-                        <td> Data Science Academy </td>
-                    </tr>
-
-                </table>
-            </li>
+            <li>MBA Data Science e Analytics (USP Esalq)</li>
+            <li>Full Stack (Labenu)</li>
+            <li>Front End (Alura) </li>
+            <li>Power BI (Data Science Academy) </li>
             </ul>
         </div>
-              
-            <div class="graficoformacoes">
-                
-                   <img class="imagemformacao" src="./img/formacoes.png">
-            </div>   
-            
-            <div class="partequimicatitulo">
-                <h2> Parte Química</h2>
-            </div>
-                        
-            <div  class="partequimica">
-                <ul>
-                    <li>
-                        
-                        <table class="tabelaquimica" cellpadding = "4px">
-                            <tr>
-                                <th>Bacharelado em Química </th>
-                                <td>Faculdade de São Bernardo do Campo (FASB)</td>
-                            </tr>
-                
-                            <tr>
-                                <th> Técnico em química </th>
-                                <td> ETEC Getúlio Vargas </td>
-                            </tr>
-                        </table>
-                    </li>
-                </ul>
-            </div>
+
+        <div class="graficoformacoes">
+            <img class="imagemformacao" src="./img/formacoes.png">
+        </div>   
+                                  
+        <div  class="formacaoflex">
+            <h2 class="formacaotitulo"> Parte Química</h2>
+            <ul>
+                <li>Bacharelado em Química (FASB)</li>
+                <li>Técnico em química (ETEC GV) </li>
+            </ul>
+        </div>
 
     </section>
+    <hr  />
 
-    <section Hobbies>
+    <section class="hobbies">
         <h2>Meus Hoobies</h2>
-        <ul>
-            <li>Amoo Viajar</li>
-            <li>Assistir Séries e filmes</li>
-            <li>Aventuras? Olha eu no kite surf!</li>
-            <video src="./video/kiteviedeo.mp4"></video>
-        </ul>
-
+        <div class="hobbiescomvideo">
+            <video width="200" autoplay loop>
+                <source src="./video/kitevideo.mp4" type="video/mp4">
+                    Desculpa! Seu browser não suporta este video.
+            </video>
+            <ul class="hobbieslista">
+                <li>Amoo Viajar &#128746;&#128746;</li>
+                <li>Gosto de dançar</li>
+                <li>Assistir Séries e filmes 🎥🎥</li>
+                <li>Aventuras? Olha eu no kite surf!</li>
+            </ul>
+        </div>
     </section>
+    <hr  />
+
     <section class="skills">
         <h2>Minhas Skills</h2>
-        <img src="./img/skills.png">
+        <img class="imgskill" src="./img/skills.png">
     </section>
+   
+
 </main>
 
 <footer>
-    <p class="copyright">&copy; Isabelle Frederico Travasso - 2021</p>
+    <a href="#top"><img src="img/joia.png"></a>
+   <p class="copyright">&copy; Isabelle Frederico Travasso - 2021</p>
 </footer>
-    
-
-  
     
 </body>
 </html>
