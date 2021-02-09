@@ -1,0 +1,150 @@
+/* Atividade 1   */
+#pond {
+    display: flex;
+  justify-content: flex-end;
+  }
+/* Atividade 2   */
+#pond {
+    display: flex;
+  justify-content: center;
+  }
+/* Atividade 3   */
+#pond {
+    display: flex;
+  justify-content: space-around;
+  }
+/* Atividade 4   */
+#pond {
+    display: flex;
+  justify-content: space-between;
+  }
+/* Atividade 5   */
+#pond {
+    display: flex;
+  align-items: flex-end;
+  }
+/* Atividade 6   */
+#pond {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+/* Atividade 7   */
+#pond {
+    display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  }
+/* Atividade 8   */
+#pond {
+    display: flex;
+  flex-direction: row-reverse;
+  }
+/* Atividade 9  */
+#pond {
+    display: flex;
+  flex-direction: column;
+  }
+/* Atividade 10  */
+#pond {
+    display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  }
+/* Atividade 11  */
+#pond {
+    display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  }
+/* Atividade 12  */
+#pond {
+    display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  }
+/* Atividade 13  */
+#pond {
+    display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: flex-end;
+  }
+/* Atividade 14  */
+#pond {
+    display: flex;
+  }
+  
+  .yellow {
+  order: 1;
+  }
+/* Atividade 15  */
+#pond {
+    display: flex;
+  }
+  
+  .red {
+  order: -4;
+  }
+/* Atividade 16  */
+#pond {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .yellow {
+  align-self: flex-end;
+  }
+/* Atividade 17  */
+#pond {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .yellow {
+  order: 2;
+  align-self: flex-end;
+  }
+/* Atividade 18  */
+#pond {
+    display: flex;
+  flex-wrap: wrap;
+  }
+/* Atividade 19  */
+#pond {
+    display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  }
+/* Atividade 20  */
+#pond {
+    display: flex;
+  flex-flow: column wrap;
+  }
+/* Atividade 21  */
+#pond {
+    display: flex;
+    flex-wrap: wrap;
+  align-content: flex-start;
+  }
+/* Atividade 22 */ 
+#pond {
+    display: flex;
+    flex-wrap: wrap;
+  align-content: flex-end;
+  }
+/* Atividade 23 */
+#pond {
+  display: flex;
+  flex-wrap: wrap;
+flex-direction: column-reverse;
+align-content: center;
+} 
+/* Atividade 24 */
+#pond {
+  display: flex;
+flex-direction: column-reverse;
+flex-wrap:  wrap-reverse;
+justify-content: center;
+align-content: space-between;
+}
