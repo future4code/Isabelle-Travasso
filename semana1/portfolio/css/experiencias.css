@@ -1,0 +1,17 @@
+.resumoexperiencia{
+    display: inline-block;
+    text-align: justify;
+    margin: 150px 200px 20px 150px;
+}
+
+.titulodireita, .tituloesquerda{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+section .experiencias{
+    width: 600px;
+    margin: 0 auto;
+}
+ 

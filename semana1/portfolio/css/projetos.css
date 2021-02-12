@@ -1,0 +1,35 @@
+.inicioprojeto{
+    display: inline-block;
+    text-align: justify;
+    margin: 150px 200px 20px 150px;
+}
+
+.linhas {
+display: flex;
+flex-wrap: wrap;
+padding: 0 4px;
+}
+
+.colunas {
+flex: 25%;
+max-width: 25%;
+padding: 0 4px;
+}
+
+.column .projetos {
+margin-top: 8px;
+vertical-align: middle;
+}
+
+.blocodeprojetos{
+    display: inline-block;
+    margin: 10px 40px 20px 300px;
+}
+
+.projetos{
+    width: 25%;
+}
+
+.projetos:hover{
+    width: 26%;
+}
