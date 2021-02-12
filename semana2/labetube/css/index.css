@@ -1,0 +1,28 @@
+.main{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) ;
+
+}
+
+video{
+    width: 100%;
+}
+
+.main-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    height: 100%;
+    margin: 20px;
+}
+
+.card-videos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px 2px 5px darkgray;
+    text-align: center;
+    margin: 4px;
+    
+}
