@@ -1,0 +1,240 @@
+body {
+    
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-container{
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 2fr 2fr 4fr 2fr;
+}
+
+div {
+    border: 1px solid black;
+    margin: 4px;
+    
+}
+
+#first-block {
+    background-color: red;
+    grid-column: 1/-1;
+    margin: 0 0 4px 0;
+}
+
+.blue-block1 {
+    display: grid;
+    background-color: blue;
+    grid-column: 1/3;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.blue-block2 {
+    display: grid;
+    background-color: blue;
+    grid-column: 1/3;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.yellow-block1 {
+    display: grid;
+    background-color: yellow;
+    grid-column: 3/5;
+    align-items: center;
+    justify-content: center;
+}
+
+.yellow-block2 {
+    display: grid;
+    background-color: yellow;
+    grid-column: 3/5;
+    align-items: center;
+    justify-content: center;
+}
+
+.green-block1 {
+    display: grid;
+    background-color: green;
+    grid-column: 5/7;
+    align-items: center;
+    justify-content: center;
+}
+
+.green-block2 {
+    display: grid;
+    background-color: green;
+    grid-column: 5/7;
+    align-items: center;
+    justify-content: center;
+}
+
+.black-block7{
+    display: grid;
+    background-color: black;
+    color: white;
+    grid-column: 1/4;
+    align-items: center;
+    justify-content: center;
+}
+.black-block8{
+    display: grid;
+    background-color: black;
+    color: white;
+    grid-column: 4/7;
+    align-items: center;
+    justify-content: center;
+}
+
+.white-block9{
+    display: grid;
+    background-color: white;
+    grid-column: 1/3;
+    align-items: center;
+    justify-content: center;
+}
+.white-block10{
+    display: grid;
+    background-color: white;
+    grid-column: 3/5;
+    align-items: center;
+    justify-content: center;
+}
+.white-block11{
+    display: grid;
+    background-color: white;
+    grid-column: 5/7;
+    align-items: center;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 800px){
+ 
+    #main-container{
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr 2fr 2fr 2fr 2fr 4fr 2fr 2fr;
+    }
+    
+    .blue-block1 {
+        grid-column: 1/3;
+       
+    }
+
+    .blue-block2 {
+        grid-column: 1/3;
+       
+    }
+    
+    .yellow-block1 {
+        grid-column: 3/5;
+    }
+
+    .yellow-block2 {
+        grid-column: 3/5;
+
+    }
+    
+    .green-block1 {
+        grid-column: 1 /-1;
+        grid-row: 3;
+
+    }
+
+    .green-block2 {
+        grid-column: 1/-1;
+        grid-row: 5;
+
+    }
+    
+    .black-block7{
+        grid-column: 1/3;
+
+    }
+    .black-block8{
+        grid-column: 3/5;
+
+    }
+    
+    .white-block9{
+        grid-column: 1/3;
+    }
+    .white-block10{
+        grid-column: 3/5;
+    }
+    .white-block11{
+        grid-column: 1/-1;
+        grid-row: 8;
+    }
+
+}
+
+@media only screen and (max-width: 420px){
+ 
+    #main-container{
+        grid-template-rows: repeat(12, 1fr);
+    }
+    
+    
+    .blue-block1 {
+        grid-column: 1/-1;
+        grid-row: 2;
+       
+    }
+
+    .blue-block2 {
+        grid-column: 1/-1;
+        grid-row: 5;
+    }
+    
+    .yellow-block1 {
+       grid-row: 3;
+        grid-column: 1/-1;
+    }
+
+    .yellow-block2 {
+        grid-column: 1/-1;
+        grid-row: 6;
+    }
+    
+    .green-block1 {
+        grid-column: 1/-1;
+        grid-row: 4;
+
+    }
+
+    .green-block2 {
+       grid-row: 7;
+       grid-column: 1/-1;
+    }
+    
+    .black-block7{
+        grid-column: 1/-1;
+        grid-row: 8;
+    }
+    .black-block8{
+       grid-row: 9;
+       grid-column: 1/-1;
+    }
+    
+    .white-block9{
+        grid-row: 10;
+        grid-column: 1/-1;
+    }
+    .white-block10{
+        grid-row: 11;
+        grid-column: 1/-1;
+    }
+    .white-block11{
+        grid-column: 1/-1;
+        grid-row: 12;
+    }
+
+}
