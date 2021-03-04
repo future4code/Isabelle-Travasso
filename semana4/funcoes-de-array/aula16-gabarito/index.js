@@ -24,8 +24,8 @@ function imprimirDespesas(despesas) {
     //     divDespesas.innerHTML += `<p> valor: R$ ${arrValor[i]} | tipo: ${arrTipo[i]} | descrição: ${arrDescricao[i]}</p> `
     // }
 
-    for (i = 0; i < arrDespesas.length; i++) {
-        divDespesas.innerHTML += `<p> valor: R$ ${arrDespesas[i].valor} | tipo: ${arrDespesas[i].tipo} | descrição: ${arrDespesas[i].descricao}</p> `
+    for (i = 0; i < despesas.length; i++) {
+        divDespesas.innerHTML += `<p> valor: R$ ${despesas[i].valor} | tipo: ${despesas[i].tipo} | descrição: ${despesas[i].descricao}</p> `
     }
 }
 
@@ -115,14 +115,16 @@ function filtrarDespesas() {
     let valorMax = Number(document.getElementById('valorFiltroMax').value)
 
     let despesasFiltradas = arrDespesas.filter((arrDespesas) => {
-        if(arrDespesas.tipo === tipoFiltro && arrDespesas.valor >= valorMin && arrDespesas.valor <= valorMax ) {
+        if (arrDespesas.tipo === tipoFiltro && arrDespesas.valor >= valorMin && arrDespesas.valor <= valorMax) {
 
-            return  console.log(arrDespesas)
+            return arrDespesas
 
-        } else if ('Todos' === tipoFiltro && arrDespesas.valor >= valorMin && arrDespesas.valor <= valorMax ){
-            return  console.log(arrDespesas)
+        } else if ( tipoFiltro === 'todos' && arrDespesas.valor >= valorMin && arrDespesas.valor <= valorMax) {
+
+            return arrDespesas
+        
         }
-})
+    })
 
     imprimirDespesas(despesasFiltradas)
 }
