@@ -8,7 +8,14 @@ function inverteArray(array) {
 
 function retornaNumerosParesElevadosADois(array) {
 
+   let novoArray = []
+   for (let i of array) {
+      if (i % 2 === 0) {
+         novoArray.push(i * i)
+      }
+   }
 
+   return novoArray
 
 }
 
