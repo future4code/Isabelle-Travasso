@@ -71,7 +71,24 @@ function retornaExpressoesBooleanas() {
 //Exercício 7
 
 function retornaNNumerosPares(n) {
-
+   let numeros = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+   let novoArray = []
+   let nPar = n
+   if (nPar % 2 === 0) {
+      for (let i = 0; i <= n; i++) {
+         if (numeros[i] % 2 === 0) {
+            novoArray.push(numeros[i])
+         }
+      }
+   } else {
+      nPar = n * 2
+      for (let i = 0; i < nPar; i++) {
+         if (numeros[i] % 2 === 0) {
+            novoArray.push(numeros[i])
+         }
+      }
+   }
+   return novoArray
 }
 
 // Exercício 8
