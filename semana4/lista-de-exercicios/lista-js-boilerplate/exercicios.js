@@ -94,11 +94,11 @@ function retornaNNumerosPares(n) {
 // Exercício 8
 
 function checaTriangulo(a, b, c) {
-   if( a === b && b === c && c === a){
+   if (a === b && b === c && c === a) {
       return 'Equilátero'
-   } else if (a !== b && b !== c && c !== a){
+   } else if (a !== b && b !== c && c !== a) {
       return 'Escaleno'
-   } return'Isósceles'
+   } return 'Isósceles'
 }
 
 // Exercício 9
@@ -110,19 +110,19 @@ function comparaDoisNumeros(num1, num2) {
       diferenca: 0
    }
 
-      if(num1 > num2){
-         compara.maiorNumero = num1
-         compara.diferenca = num1 - num2
-         if(compara.maiorNumero%2 === 0){
-            compara.maiorDivisivelporMenor = true
-         } false
-      } compara.maiorNumero = num2
-      compara.diferenca = num2 - num1
-      if(compara.maiorNumero%2 === 0){
+   if (num1 > num2) {
+      compara.maiorNumero = num1
+      compara.diferenca = num1 - num2
+      if (compara.maiorNumero % 2 === 0) {
          compara.maiorDivisivelporMenor = true
       } false
+   } compara.maiorNumero = num2
+   compara.diferenca = num2 - num1
+   if (compara.maiorNumero % 2 === 0) {
+      compara.maiorDivisivelporMenor = true
+   } false
 
-   return compara   
+   return compara
 }
 
 // Exercício 10
@@ -139,15 +139,32 @@ function segundoMaiorEMenor(array) {
    menor = Math.min(...array)
 
    novoArray.push(maior, menor)
-   
+
    return novoArray
 }
 
 //Exercício 11
-
+array = [20, 13, -1, 2, 5, 49, -40, 10, 70, 5]
 function ordenaArray(array) {
-   // implemente sua lógica aqui
+
+   let novoArray = []
+   let tamanhoArray = array.length
+
+   for (let i of array) {
+      while (tamanhoArray !== 0) {
+         let menor = Math.min(...array)
+         array.splice(array.indexOf(menor), 1)
+         novoArray.push(menor)
+
+         tamanhoArray--
+      }
+      return novoArray
+   }
+   return console.log(novoArray)
+
+
 }
+ordenaArray(array)
 
 // Exercício 12
 
