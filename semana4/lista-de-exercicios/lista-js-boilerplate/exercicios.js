@@ -94,13 +94,35 @@ function retornaNNumerosPares(n) {
 // Exercício 8
 
 function checaTriangulo(a, b, c) {
-
+   if( a === b && b === c && c === a){
+      return 'Equilátero'
+   } else if (a !== b && b !== c && c !== a){
+      return 'Escaleno'
+   } return'Isósceles'
 }
 
 // Exercício 9
 
 function comparaDoisNumeros(num1, num2) {
-   // implemente sua lógica aqui
+   const compara = {
+      maiorNumero: 0,
+      maiorDivisivelporMenor: 0,
+      diferenca: 0
+   }
+
+      if(num1 > num2){
+         compara.maiorNumero = num1
+         compara.diferenca = num1 - num2
+         if(compara.maiorNumero%2 === 0){
+            compara.maiorDivisivelporMenor = true
+         } false
+      } compara.maiorNumero = num2
+      compara.diferenca = num2 - num1
+      if(compara.maiorNumero%2 === 0){
+         compara.maiorDivisivelporMenor = true
+      } false
+
+   return compara   
 }
 
 // Exercício 10
