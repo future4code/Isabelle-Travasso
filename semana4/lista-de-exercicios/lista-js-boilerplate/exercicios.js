@@ -36,7 +36,9 @@ function retornaNumerosPares(array) {
 
 function retornaMaiorNumero(array) {
 
-   
+   var maior = Math.max(...array);
+
+   return maior
 }
 
 //Exercício 5
