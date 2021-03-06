@@ -193,7 +193,7 @@ function criaRetangulo(lado1, lado2) {
    const dadosRetangulo = {
       largura: lado1,
       altura: lado2,
-      perimetro: 2*(lado1+lado2),
+      perimetro: 2 * (lado1 + lado2),
       area: (lado1 * lado2)
    }
 
@@ -225,10 +225,19 @@ const arrayDePessoas = [
    { nome: "Artur", idade: 89 }
 ]
 
+
 // Exercício 16, letra A
 
 function maioresDe18(arrayDePessoas) {
-   // implemente sua lógica aqui
+   let soAdulto = []
+
+   for (i = 0; i < arrayDePessoas.length; i++) {
+      if (arrayDePessoas[i].idade >= 18) {
+         soAdulto.push(arrayDePessoas[i])
+      }
+   }
+
+   return soAdulto
 }
 
 // Exercício 16, letra B
