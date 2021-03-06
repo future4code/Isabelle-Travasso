@@ -232,7 +232,7 @@ function maioresDe18(arrayDePessoas) {
    let soAdulto = []
 
    for (i = 0; i < arrayDePessoas.length; i++) {
-      if (arrayDePessoas[i].idade >= 18) {
+      if (arrayDePessoas[i].idade >= 20) {
          soAdulto.push(arrayDePessoas[i])
       }
    }
@@ -243,7 +243,16 @@ function maioresDe18(arrayDePessoas) {
 // Exercício 16, letra B
 
 function menoresDe18(arrayDePessoas) {
-   // implemente sua lógica aqui
+
+   let soAdolescente = []
+
+   for (i = 0; i < arrayDePessoas.length; i++) {
+      if (arrayDePessoas[i].idade < 20) {
+         soAdolescente.push(arrayDePessoas[i])
+      }
+   }
+
+   return soAdolescente
 }
 
 // Exercício 17, letra A
