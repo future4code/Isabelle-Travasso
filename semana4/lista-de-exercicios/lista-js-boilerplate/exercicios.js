@@ -182,7 +182,9 @@ function filmeFavorito() {
 // Exercício 13
 
 function imprimeChamada() {
-   // implemente sua lógica aqui
+   let mensagem = `Venha assistir ao filme ${filmeFavorito().nome}, de ${filmeFavorito().ano}, dirigido por ${filmeFavorito().diretor} e estrelado por ${filmeFavorito().atores[0]}, ${filmeFavorito().atores[1]}, ${filmeFavorito().atores[2]}, ${filmeFavorito().atores[3]}.`
+
+   return mensagem
 }
 
 // Exercício 14
