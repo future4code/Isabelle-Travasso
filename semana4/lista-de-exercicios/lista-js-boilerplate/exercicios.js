@@ -144,7 +144,6 @@ function segundoMaiorEMenor(array) {
 }
 
 //Exercício 11
-array = [20, 13, -1, 2, 5, 49, -40, 10, 70, 5]
 function ordenaArray(array) {
 
    let novoArray = []
@@ -258,7 +257,14 @@ function menoresDe18(arrayDePessoas) {
 // Exercício 17, letra A
 
 function multiplicaArrayPor2(array) {
-   // implemente sua lógica aqui
+
+   const resultado = []
+
+   for (i=0; i < array.length; i++){
+      resultado.push(array[i] * 2) 
+   }
+
+   return resultado
 }
 
 // Exercício 17, letra B
