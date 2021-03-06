@@ -270,7 +270,17 @@ function multiplicaArrayPor2(array) {
 // Exercício 17, letra B
 
 function multiplicaArrayPor2S(array) {
-   // implemente sua lógica aqui
+   let resultado = []
+
+   for (i=0; i < array.length; i++){
+      resultado.push(array[i] * 2)
+   }
+
+   for (i=0; i < resultado.length; i++){
+      resultado[i] = String(resultado[i])
+   }
+
+   return resultado
 }
 
 // Exercício 17, letra C
