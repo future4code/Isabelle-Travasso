@@ -260,8 +260,8 @@ function multiplicaArrayPor2(array) {
 
    const resultado = []
 
-   for (i=0; i < array.length; i++){
-      resultado.push(array[i] * 2) 
+   for (i = 0; i < array.length; i++) {
+      resultado.push(array[i] * 2)
    }
 
    return resultado
@@ -272,11 +272,11 @@ function multiplicaArrayPor2(array) {
 function multiplicaArrayPor2S(array) {
    let resultado = []
 
-   for (i=0; i < array.length; i++){
+   for (i = 0; i < array.length; i++) {
       resultado.push(array[i] * 2)
    }
 
-   for (i=0; i < resultado.length; i++){
+   for (i = 0; i < resultado.length; i++) {
       resultado[i] = String(resultado[i])
    }
 
@@ -286,7 +286,17 @@ function multiplicaArrayPor2S(array) {
 // Exercício 17, letra C
 
 function verificaParidade(array) {
-   // implemente sua lógica aqui
+   let resultado = [...array]
+
+   for (let i = 0; i < resultado.length; i++) {
+      if (resultado[i] % 2 === 0) {
+         resultado[i] = `${resultado[i]} é par`
+      } else if(resultado[i]%2 === 1) {
+        resultado[i] = `${resultado[i]} é ímpar`
+      }
+   }
+
+   return resultado
 }
 
 // Exercício 18
