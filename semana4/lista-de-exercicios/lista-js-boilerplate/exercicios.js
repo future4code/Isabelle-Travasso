@@ -338,7 +338,24 @@ function retornaPessoasAutorizadas() {
 // Exercício 18, letra B
 
 function retornaPessoasNaoAutorizadas() {
-   // implemente sua lógica aqui
+   const pessoas = [
+      { nome: "Paula", idade: 12, altura: 1.8 },
+      { nome: "João", idade: 20, altura: 1.3 },
+      { nome: "Pedro", idade: 15, altura: 1.9 },
+      { nome: "Luciano", idade: 22, altura: 1.8 },
+      { nome: "Artur", idade: 10, altura: 1.2 },
+      { nome: "Soter", idade: 70, altura: 1.9 }
+   ]
+
+   let naoPodeEntrar = []
+
+   for (i = 0; i < pessoas.length; i++) {
+      if (pessoas[i].idade >= 60 || pessoas[i].idade <= 14 || pessoas[i].altura < 1.5) {
+         naoPodeEntrar.push(pessoas[i])
+      }
+   }
+
+   return naoPodeEntrar
 }
 
 //Exercício 19
