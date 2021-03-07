@@ -291,8 +291,8 @@ function verificaParidade(array) {
    for (let i = 0; i < resultado.length; i++) {
       if (resultado[i] % 2 === 0) {
          resultado[i] = `${resultado[i]} é par`
-      } else if(resultado[i]%2 === 1) {
-        resultado[i] = `${resultado[i]} é ímpar`
+      } else if (resultado[i] % 2 === 1) {
+         resultado[i] = `${resultado[i]} é ímpar`
       }
    }
 
@@ -365,10 +365,33 @@ const consultas = [
    { nome: "Pedro", genero: "masculino", cancelada: true, dataDaConsulta: "02/10/2019" },
    { nome: "Paula", genero: "feminino", cancelada: false, dataDaConsulta: "03/11/2019" },
    { nome: "Márcia", genero: "feminino", cancelada: true, dataDaConsulta: "04/11/2019" }
- ]
+]
 
 function retornaEmailConsulta() {
-   // implemente sua lógica aqui
+   const consultas = [
+      { nome: "João", genero: "masculino", cancelada: false, dataDaConsulta: "01/10/2019" },
+      { nome: "Pedro", genero: "masculino", cancelada: true, dataDaConsulta: "02/10/2019" },
+      { nome: "Paula", genero: "feminino", cancelada: false, dataDaConsulta: "03/11/2019" },
+      { nome: "Márcia", genero: "feminino", cancelada: true, dataDaConsulta: "04/11/2019" }
+   ]
+
+   let emailEnviado = []
+
+   for (let i = 0; i < consultas.length; i++) {
+      if (consultas[i].cancelada === false && consultas[i].genero === "feminino") {
+         emailEnviado.push( "Olá, Sra. " + consultas[i].nome + ". Estamos enviando esta mensagem para lembrá-la da sua consulta no dia " + consultas[i].dataDaConsulta + ". Por favor, acuse o recebimento deste-email.")
+   } else if(consultas[i].cancelada === false && consultas[i].genero === "masculino"){
+      emailEnviado.push( "Olá, Sr. " + consultas[i].nome + ". Estamos enviando esta mensagem para lembrá-lo da sua consulta no dia " + consultas[i].dataDaConsulta + ". Por favor, acuse o recebimento deste-email.")
+   } else if (consultas[i].cancelada === true && consultas[i].genero === "feminino"){   
+      emailEnviado.push( "Olá, Sra. " + consultas[i].nome + ". Infelizmente sua consulta marcada para o dia " + consultas[i].dataDaConsulta + " foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la.")
+   } else if(consultas[i].cancelada === true && consultas[i].genero === "masculino"){
+      emailEnviado.push( "Olá, Sr. " + consultas[i].nome + ". Infelizmente sua consulta marcada para o dia " + consultas[i].dataDaConsulta + " foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la.")
+   }
+
+}
+
+   return emailEnviado
+
 }
 
 //Exercício 20

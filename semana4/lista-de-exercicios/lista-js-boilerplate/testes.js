@@ -407,7 +407,7 @@ function testEx19() {
     "Olá, Sra. Paula. Estamos enviando esta mensagem para lembrá-la da sua consulta no dia 03/11/2019. Por favor, acuse o recebimento deste-email.",
     "Olá, Sra. Márcia. Infelizmente sua consulta marcada para o dia 04/11/2019 foi cancelada. Se quiser, pode entrar em contato conosco para remarcá-la."
     ];
-
+    
   if(arrayCompare(retornaEmailConsulta(), output)) {
     console.log('%c Você acertou a questão número 19', 'color: #00FF00')
   } else {
