@@ -1,0 +1,8 @@
+.icon-container {
+    display: flex;
+}
+
+.icon-container-salvar img {
+    margin-right: 3px;
+    width: 26px;
+}
