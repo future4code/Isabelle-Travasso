@@ -3,14 +3,13 @@ import './Post.css'
 
 import { IconeComContador } from '../IconeComContador/IconeComContador'
 import { IconeSemContador } from '../IconeSemContador/IconeSemContador'
-// import { IconeCompartilhar } from '../IconeCompartilhar/IconeCompartilhar'
 
 import iconeCoracaoBranco from '../../img/favorite-white.svg'
 import iconeCoracaoPreto from '../../img/favorite.svg'
 import iconeComentario from '../../img/comment_icon.svg'
 import iconeSalvar from '../../img/salvar.png'
 import iconeSalvo from '../../img/salvo.png'
-// import iconeCompartilhar from '../../img/share.png'
+import compartilhar from '../../img/share.png'
 import { SecaoComentario } from '../SecaoComentario/SecaoComentario'
 
 class Post extends React.Component {
@@ -20,7 +19,7 @@ class Post extends React.Component {
     comentando: false,
     numeroComentarios: 0,
     salvar: false,
-    // compartilhar: false
+    compartilhar: false
   }
 
   onClickCurtida = () => {
@@ -46,7 +45,8 @@ class Post extends React.Component {
 
   aoEnviarComentario = () => {
     this.setState({
-      compartilhar: false,
+      comentando: false,
+      numeroComentarios: this.state.numeroComentarios + 1
     })
   }
 
@@ -56,9 +56,24 @@ class Post extends React.Component {
     })
   }
 
-  // aoClicarCompartilhar = () => {
+  // onClickCompartilhar = () => {
+
+  //   let iconeCompartilhar = ["Intagram", "Facebook", "Twitter"]
+
+  //   function Listando(props){
+  //     const redes = props.redes;
+  //     const listaRedes = redes.map((redes) => 
+  //     <li>{redes}</li>);
+
+  //     return(<ul>{listaRedes}</ul>);
+  //   }
+
+  //   if(this.state.compartilhar){
+  //     Compartilhar = 
+  //   }
+
   //   this.setState({
-  //     compartilhar: !this.state.compartilhar
+  //     compartilhar: 
   //   })
   // }
 
@@ -70,12 +85,6 @@ class Post extends React.Component {
     } else {
       iconeCurtida = iconeCoracaoBranco
     }
-
-    // let componenteCompartilhar
-
-    // if (this.state.compartilhar) {
-    //   componenteCompartilhar = <IconeCompartilhar aoClicar={this.aoClicarCompartilhar} />
-    // }
 
     let iconeSalvarPost
 
@@ -106,9 +115,9 @@ class Post extends React.Component {
           valorContador={this.state.numeroCurtidas}
         />
 
-        {/* <IconeCompartilhar
-          icone={compartilhar}
-          onClickIcone={componenteCompartilhar}
+        {/* <IconeSemContador
+          icone={iconeCompartilhar}
+          onClickIcone={this.onClickCompartilhar}
         /> */}
 
         <IconeSemContador

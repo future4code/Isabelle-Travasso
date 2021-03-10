@@ -6,7 +6,7 @@ export class SecaoComentario extends Component {
 		valorDoInputComentario: ''
 	}
 
-	onClickListaCompartilhar = (ocorrencia) => {
+	onChangeComentario = (ocorrencia) => {
 		console.log(ocorrencia.target.value)
 		this.setState({valorDoInputComentario: ocorrencia.target.value})
 	}
