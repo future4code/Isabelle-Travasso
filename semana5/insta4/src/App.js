@@ -3,7 +3,7 @@ import './App.css';
 import Post from './components/Post/Post';
 import styled from 'styled-components';
 
-const estiloFormulario = styled.div`
+const EstiloFormulario = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
@@ -98,7 +98,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <estiloFormulario>
+        <EstiloFormulario>
           <input
             value={this.state.inputNomeUsuario}
             onChange={this.onChangeNomeUsuario}
@@ -116,7 +116,7 @@ class App extends React.Component {
           />
 
           <button onClick={this.adicionaPost}>Adicionar</button>
-        </estiloFormulario>
+        </EstiloFormulario>
         {postComConteudo}
       </div>
     )
