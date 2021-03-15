@@ -47,8 +47,8 @@ class App extends React.Component {
               {this.mostrarPagina()}
               <br />
               <EspacoBotao>
-              {this.state.pagina !== 4 && (<button onClick={this.proximaPagina}>Próxima etapa</button> )} 
               {this.state.pagina !== 1 && (<button onClick={this.voltarPagina}>Voltar</button>)}
+              {this.state.pagina !== 4 && (<button onClick={this.proximaPagina}>Próxima etapa</button> )} 
               </EspacoBotao>
             </div>
         )
