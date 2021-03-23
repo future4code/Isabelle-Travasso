@@ -5,9 +5,17 @@ import styled from 'styled-components';
 const DeleteButton = styled.span`
 color: red;
 `
+
+// const baseUrl = "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users"
+// const axiosConfig = {
+//     headers: {
+//         Authorization: "Isabelle-Travasso-TurmaCruz"
+//     }
+// }
+
 class UsersList extends React.Component {
     state = {
-        userList: [],
+        userList: []
     }
 
     componentDidMount = () => {
@@ -29,49 +37,62 @@ class UsersList extends React.Component {
             })
             .catch((err) => {
                 alert("Não foi possivel carregar a lista, tente novamente mais tarde")
-                console.log(err.response.data)
+                console.log(err.message)
             })
     }
+
+    // getAllUsers = async () => {
+    //     try {
+    //         const res = await axios.get(baseUrl, axiosConfig)
+    //         this.setState({ userList: res.data });
+
+    //     } catch (err) {
+    //         alert("Não foi possivel carregar a lista, tente novamente mais tarde")
+    //         console.log(err.message)
+    //     }
+    // }
 
     deleteUser = (id) => {
         axios
             .delete(
-                "https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/:id",
+                `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`,
                 {
                     headers: {
                         Authorization: "Isabelle-Travasso-TurmaCruz"
                     }
                 }
             )
-            .then((res) => {
-                this.getUsers()
+            .then(() => {
+                this.getAllUsers()
                 alert("Usuário deletado com sucesso!")
+
             })
             .catch((err) => {
                 alert("Não foi possível deletar esse usuário, tente novamente")
+            console.log(err.message)
             })
     }
 
 
     render() {
-        const usersListPage = this.state.userList.map((users) => {
+        const renderUser = this.state.userList.map((user) => {
             return (
-                <li key={users.id}>
-                    {users.name}
-                    <DeleteButton onClick={() => this.deleteUser(users.id)}>
+                <p key={user.id}>
+                    {user.name}
+                    <DeleteButton onClick={() => this.deleteUser(user.id)}>
                         X
                     </DeleteButton>
-                </li>
+                </p>
             )
         })
 
         return (
-            <div>
-                <h3>Lista de Usuários</h3>
-                <button onClick={this.props.nextPage}>Voltar para página de Registro</button>
-                {usersListPage}
 
-            </div>
+            <div>
+                <button onClick={this.props.nextPage}>Voltar para página de Registro</button>
+                <h3>Lista de Usuários</h3>
+                { renderUser}
+            </div >
         )
     }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import styled from 'styled-components';
 import Register from './Components/Register'
 import UsersList from './Components/UsersList'
 
@@ -20,7 +19,7 @@ export default class App extends React.Component {
     if(this.state.register){
       return <Register nextPage={this.changePage} />
     }  else {
-       <UsersList nextPage={this.changePage} />
+      return <UsersList nextPage={this.changePage} />
   }}
     return (
       <div>
