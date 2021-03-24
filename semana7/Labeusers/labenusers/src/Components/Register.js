@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { baseUrl, axiosConfig} from '../parameters'
+import { baseUrl, axiosConfig } from '../parameters'
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -69,25 +69,27 @@ class Register extends React.Component {
     // ------------------------------------------------------------------------------------
     render() {
         return (
-            <Container>
+            <div>
                 <button onClick={this.props.nextPage}>Ir para página de Usuários</button>
-                <h3> Cadastro do Usuário</h3>
-                <label>Nome</label>
-                <input
-                    type="text"
-                    placeholder={"Digite seu nome"}
-                    value={this.state.inputValueNome}
-                    onChange={this.handleIputNomeChange}
-                />
-                <label>E-mail</label>
-                <input
-                    type="email"
-                    placeholder={"Digite seu e-mail"}
-                    value={this.state.inputValueEmail}
-                    onChange={this.handleIputEmailChange}
-                />
-                <button onClick={this.createUser}>Enviar</button>
-            </Container>
+                <Container>
+                    <h3> Cadastro do Usuário</h3>
+                    <label>Nome</label>
+                    <input
+                        type="text"
+                        placeholder={"Digite seu nome"}
+                        value={this.state.inputValueNome}
+                        onChange={this.handleIputNomeChange}
+                    />
+                    <label>E-mail</label>
+                    <input
+                        type="email"
+                        placeholder={"Digite seu e-mail"}
+                        value={this.state.inputValueEmail}
+                        onChange={this.handleIputEmailChange}
+                    />
+                    <button onClick={this.createUser}>Enviar</button>
+                </Container>
+            </div>
         )
     }
 }

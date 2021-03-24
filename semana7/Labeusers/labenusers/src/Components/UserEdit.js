@@ -12,6 +12,7 @@ export const UserEdit = (props) => {
     onChange={props.onChangeName}
     />
     </section>
+    <label> E-mail: </label>
     <section>
     <input 
     type="email"
@@ -21,7 +22,7 @@ export const UserEdit = (props) => {
     />
     </section>
 
-    <button onClick={() => props.editUser(props.details)}>Editar</button>
+    <button onClick={() => props.editUser(props.userListDetails)}>Enviar</button>
 
 </div>
 

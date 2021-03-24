@@ -194,25 +194,7 @@ class UsersList extends React.Component {
                     <button onClick={this.resetSearch}>Limpar busca</button>
                 </section>
 
-                <h3>Lista de Usuários</h3>
-                {this.state.userList.map((user) => {
-
-                    return (
-                        <p key={user.id}>
-                            <Image
-                                onClick={() => this.userDetails(user)}
-                                src={detail}
-                                alt="Detalhes do usuário"
-                            />
-                            {user.name}
-                            <DeleteButton onClick={() => this.deleteConfirm(this.props.userListDetails)}>
-                                X
-                    </DeleteButton>
-                        </p>
-
-                    )
-                })}
-
+                
                 {this.state.openDetails && (
                     <UsersDetails
                     userListDetails={this.state.userListDetails}
@@ -225,6 +207,25 @@ class UsersList extends React.Component {
                         inputEmail={this.state.inputEmail}
                     />
                 )}
+
+                <h3>Lista de Usuários</h3>
+                {this.state.userList.map((user) => {
+
+                    return (
+                        <p key={user.id}>
+                            <Image
+                                onClick={() => this.userDetails(user)}
+                                src={detail}
+                                alt="Detalhes do usuário"
+                            />
+                            {user.name}
+                            <DeleteButton onClick={() => this.deleteConfirm(user)}>
+                                X
+                            </DeleteButton>
+                        </p>
+
+                    )
+                })}
 
             </div >
         )
