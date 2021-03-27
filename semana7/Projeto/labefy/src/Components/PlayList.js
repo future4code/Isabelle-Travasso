@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { baseUrl, axiosConfig } from '../parameters'
-import ViewPlayList from './ViewPlayList';
+// import ViewPlayList from './ViewPlayList';
 // import styled from 'styled-components';
 
 class PlayList extends React.Component {
@@ -12,6 +12,7 @@ class PlayList extends React.Component {
         playListId: ''
     }
 
+
     componentDidMount = () => {
         this.getAllPlayLists()
     }
@@ -19,7 +20,7 @@ class PlayList extends React.Component {
     getAllPlayLists = async () => {
         try {
             const res = await axios.get(baseUrl, axiosConfig)
-            this.setState({ playLists: res.data.result.list})
+            this.setState({ playLists: res.data.result.list })
 
         } catch (err) {
             alert("Não foi possivel carregar a Lista de PlayLists")
@@ -28,14 +29,18 @@ class PlayList extends React.Component {
 
 
     deletePlayList = async (playList) => {
-        window.confirm(`Você tem certeza que deseja excluir a playlist ${playList.name}?`)
-        try {
-            await axios.delete(`${baseUrl}/${playList.id}`, axiosConfig)
-            this.getAllPlayLists()
-            window.location.reload();
-            alert("PlayList excluida com sucesso")
-        } catch (err) {
-            alert("Não foi possível excluir essa PlayList, tente novamente mais tarde")
+
+        const confirm = window.confirm(`Você tem certeza que deseja excluir a playlist ${playList.name}?`)
+        if (confirm === true) {
+            try {
+                await axios.delete(`${baseUrl}/${playList.id}`, axiosConfig)
+                this.getAllPlayLists()
+                window.location.reload();
+                alert("PlayList excluida com sucesso")
+            } catch (err) {
+                alert("Não foi possível excluir essa PlayList, tente novamente mais tarde")
+
+            }
         }
     }
 
@@ -46,7 +51,7 @@ class PlayList extends React.Component {
     searchPlayList = async () => {
         try {
             const res = await axios.get(`${baseUrl}/search?name=${this.state.inputSearchPlayList}`, axiosConfig)
-            this.setState({ playLists: res.data.result.playlist, inputSearchName: '' })
+            this.props.setState({ playLists: res.data.result.playlist, inputSearchName: '' })
         } catch (err) {
             alert("PlayList não encontrada, verifique o nome digitado")
         }
@@ -57,15 +62,24 @@ class PlayList extends React.Component {
     }
 
     selectPlayList = (id) => {
-        const openTrack = this.state.playLists.filter((playlist) => {
-            if(id === playlist.id){
-            this.setState({playListId: playlist.id})
+        const returnId = this.state.playLists.filter((playlist) => {
+            if (id === playlist.id) {
+                this.setState({playListId: id})
+                return playlist.id 
             }
         })
-        return openTrack
+
+        return returnId
+    }
+
+    trackPage (e) {
+        this.selectPlayList(e)
+        this.props.page()
     }
 
     render() {
+
+        
         return (
             <div>
                 <input
@@ -83,8 +97,10 @@ class PlayList extends React.Component {
                 {this.state.playLists.map((playList) => {
                     return (
                         <p key={playList.id}>
-                            <li onClick={() =>  this.selectPlayList(playList.id)} onclick={console.log(<ViewPlayList />)} > {playList.name}</li>
-                            <button onClick={() => this.deletePlayList(playList) }>Deletar</button>
+                            <div onClick={() => this.trackPage(playList.id)}>
+                                <li> {playList.name}</li>
+                            </div>
+                            <button onClick={() => this.deletePlayList(playList)}>Deletar</button>
                         </p>
                     )
                 }
