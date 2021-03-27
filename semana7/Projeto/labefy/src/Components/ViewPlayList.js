@@ -14,9 +14,10 @@ class ViewPlayList extends React.Component {
         this.getplayListTracks()
     }
 
-    getplayListTracks = async (playlistId) => {
+   
+    getplayListTracks = async () => {
         try {
-            const res = await axios.get(`${baseUrl}/fbf83f7c-91da-47e9-a4b7-1376a607d0e0/tracks`, axiosConfig)
+            const res = await axios.get(`${baseUrl}/${this.props.playListId}/tracks`, axiosConfig)
             this.setState({ trackList: res.data.result.tracks })
             console.log(res.data.result.tracks)
         } catch (err) {
@@ -24,12 +25,13 @@ class ViewPlayList extends React.Component {
             console.log(err.message)
         }
     }
+    
 
-    deleteTrack = async (playlistId, track) => {
+    deleteTrack = async (track) => {
         window.confirm(`Você tem certeza que deseja excluir a musica ${track.id}?`)
         try {
-            await axios.delete(`${baseUrl}/${playlistId}/tracks/${track.id}`, axiosConfig)
-            this.getplayListTracks()
+            await axios.delete(`${baseUrl}/${this.props.playListId}/tracks/${track.id}`, axiosConfig)
+            this.getplayListTracks(this.props.playlistId)
             this.setState({ openAddTrack: false })
             window.location.reload();
             alert("Musica apagada com sucesso")

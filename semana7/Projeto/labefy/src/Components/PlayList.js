@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { baseUrl, axiosConfig } from '../parameters'
-import ViewPlayList from   './ViewPlayList'
+import ViewPlayList from './ViewPlayList';
 // import styled from 'styled-components';
 
 class PlayList extends React.Component {
@@ -9,7 +9,7 @@ class PlayList extends React.Component {
     state = {
         playLists: [],
         inputSearchPlayList: '',
-        playListId: '',
+        playListId: ''
     }
 
     componentDidMount = () => {
@@ -19,13 +19,13 @@ class PlayList extends React.Component {
     getAllPlayLists = async () => {
         try {
             const res = await axios.get(baseUrl, axiosConfig)
-            this.setState({ playLists: res.data.result.list,
-            playListId: res.data.result.list.id })
+            this.setState({ playLists: res.data.result.list})
+
         } catch (err) {
             alert("Não foi possivel carregar a Lista de PlayLists")
         }
     }
-    
+
 
     deletePlayList = async (playList) => {
         window.confirm(`Você tem certeza que deseja excluir a playlist ${playList.name}?`)
@@ -56,8 +56,16 @@ class PlayList extends React.Component {
         this.getAllPlayLists()
     }
 
-    render() {
+    selectPlayList = (id) => {
+        const openTrack = this.state.playLists.filter((playlist) => {
+            if(id === playlist.id){
+            this.setState({playListId: playlist.id})
+            }
+        })
+        return openTrack
+    }
 
+    render() {
         return (
             <div>
                 <input
@@ -75,8 +83,7 @@ class PlayList extends React.Component {
                 {this.state.playLists.map((playList) => {
                     return (
                         <p key={playList.id}>
-
-                            <li onClick={<ViewPlayList />}> {playList.name}</li>
+                            <li onClick={() =>  this.selectPlayList(playList.id)} onclick={console.log(<ViewPlayList />)} > {playList.name}</li>
                             <button onClick={() => this.deletePlayList(playList) }>Deletar</button>
                         </p>
                     )
