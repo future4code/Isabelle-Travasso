@@ -72,6 +72,8 @@ class AddTrack extends React.Component {
                 <section>
                     <button onClick={this.addTrack}>Adicionar</button>
                 </section>
+
+                <button onClick={this.props.backTracks}>Voltar</button>
             </div>
         )
     }

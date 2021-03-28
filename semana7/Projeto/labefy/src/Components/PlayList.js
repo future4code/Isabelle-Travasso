@@ -54,7 +54,7 @@ class PlayList extends React.Component {
 
     searchPlayList = async () => {
         try {
-            const res = await axios.get(`${baseUrl}/search?name=${this.state.inputSearchPlayList}`, axiosConfig)
+            const res = await axios.get(`${baseUrl}/${this.state.inputSearchPlayList}`, axiosConfig)
             this.props.setState({ playLists: res.data.result.playlist, inputSearchName: '' })
         } catch (err) {
             alert("PlayList não encontrada, verifique o nome digitado")
@@ -65,10 +65,11 @@ class PlayList extends React.Component {
         this.getAllPlayLists()
     }
 
-    getplayListTracks = async (playList) => {
+    getplayListTracks = async (playlist) => {
+        this.setState({  viewTrack: true })
         try {
-            const res = await axios.get(baseUrlTrack(playList.id), axiosConfig)
-            this.setState({ trackList: res.data.result.tracks, playListDetail: playList, viewTrack: true })
+            const res = await axios.get(`${baseUrl}/${playlist.id}/tracks`, axiosConfig)
+            this.setState({ trackList: res.data.result.tracks, playListDetail: this.state.playLists })
             console.log(res.data.result.tracks)
         } catch (err) {
             alert("Não foi possivel abrir a lista de musica")
@@ -92,16 +93,9 @@ class PlayList extends React.Component {
         this.setState({ viewTrack: false })
     }
 
-    openTrack = () => {
-
+    backTracks = () => {
         this.setState({ viewTrack: true })
     }
-
-    open () {
-        this.getplayListTracks()
-        this.openTrack()
-    }
-
 
     render() {
         const tracks = () => {
@@ -110,7 +104,8 @@ class PlayList extends React.Component {
                     playListName={this.state.playListDetail.name}
                     tracks={this.state.trackList}
                     backPlaylists={this.backPlaylists}
-                    idPlaylist={this.state.playListDetail.id}
+                    backTracks={this.backTracks}
+                    playlistId={this.state.playListDetail.id}
                     deleteTrack={this.deleteTrack} />
             )
         }
@@ -135,12 +130,12 @@ class PlayList extends React.Component {
                         <h3>PlayLists</h3>
                         {this.state.playLists.map((playList) => {
                             return (
-                                <p key={playList.id}>
-                                    <div onClick={() => this.open()}>
+                                <div key={playList.id}>
+                                    <div onClick={() => this.getplayListTracks(playList)}>
                                         <li> {playList.name}</li>
                                     </div>
                                     <button onClick={() => this.deletePlayList(playList)}>Deletar</button>
-                                </p>
+                                </div>
                             )
                         }
                         )}

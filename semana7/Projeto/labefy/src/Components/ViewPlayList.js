@@ -8,6 +8,10 @@ class ViewPlayList extends React.Component {
         addTrackOpen: false,
     }
 
+    getplayListTracks = () => {
+        this.props.getplayListTracks()
+    }
+
     onClickAdd = () => {
         this.setState({ addTrackOpen: true })
     }
@@ -19,7 +23,7 @@ class ViewPlayList extends React.Component {
                 <button onClick={() => this.onClickAdd()} > + </button>
                 {this.state.addTrackOpen ? <AddTrack /> : (
                     <div>
-                        {this.props.trackList.map(list => {
+                        {this.props.tracks.map(list => {
                             return (
                                 <div>
                                     <p>{list.artist} - {list.name}</p>
