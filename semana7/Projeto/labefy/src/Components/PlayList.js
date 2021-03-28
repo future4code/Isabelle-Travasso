@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import { baseUrl, axiosConfig } from '../parameters'
-// import ViewPlayList from './ViewPlayList';
+import { baseUrl, axiosConfig, baseUrlDeleteTrack, baseUrlTrack } from '../parameters'
+import ViewPlayList from './ViewPlayList';
 // import styled from 'styled-components';
 
 class PlayList extends React.Component {
@@ -9,7 +9,11 @@ class PlayList extends React.Component {
     state = {
         playLists: [],
         inputSearchPlayList: '',
+        trackList: [],
+        playListDetail: [],
+        viewTrack: false,
         playListId: ''
+
     }
 
 
@@ -61,50 +65,92 @@ class PlayList extends React.Component {
         this.getAllPlayLists()
     }
 
-    selectPlayList = (id) => {
-        const returnId = this.state.playLists.filter((playlist) => {
-            if (id === playlist.id) {
-                this.setState({playListId: id})
-                return playlist.id 
+    getplayListTracks = async (playList) => {
+        try {
+            const res = await axios.get(baseUrlTrack(playList.id), axiosConfig)
+            this.setState({ trackList: res.data.result.tracks, playListDetail: playList, viewTrack: true })
+            console.log(res.data.result.tracks)
+        } catch (err) {
+            alert("Não foi possivel abrir a lista de musica")
+        }
+    }
+
+    deleteTrack = async (playlist, track) => {
+        const confirm = window.confirm(`Você tem certeza que deseja excluir a musica ${track.id}?`)
+        if (confirm === true) {
+            try {
+                await axios.delete(baseUrlDeleteTrack(playlist.id, track), axiosConfig)
+                window.location.reload();
+                alert("Musica apagada com sucesso")
+            } catch (err) {
+                alert("Não foi possivel excluir essa musica, tente novamente mais tarde")
             }
-        })
-
-        return returnId
+        }
     }
 
-    trackPage (e) {
-        this.selectPlayList(e)
-        this.props.page()
+    backPlayLists = () => {
+        this.setState({ viewTrack: false })
     }
+
+    openTrack = () => {
+
+        this.setState({ viewTrack: true })
+    }
+
+    open () {
+        this.getplayListTracks()
+        this.openTrack()
+    }
+
 
     render() {
+        const tracks = () => {
+            return (
+                <ViewPlayList
+                    playListName={this.state.playListDetail.name}
+                    tracks={this.state.trackList}
+                    backPlaylists={this.backPlaylists}
+                    idPlaylist={this.state.playListDetail.id}
+                    deleteTrack={this.deleteTrack} />
+            )
+        }
 
-        
         return (
             <div>
-                <input
-                    type="text"
-                    value={this.state.inputSearchPlayList}
-                    placeholder="Buscar Playlist"
-                    onChange={this.onchangeSearchPlayList}
-                />
-                <section>
-                    <button onClick={this.searchPlayList}>Buscar</button>
-                    <button onClick={this.resetSearch}>Limpar busca</button>
-                </section>
+                {this.state.viewTrack ? (
+                    tracks()
+                ) : (
+                    <div>
+                        <input
+                            type="text"
+                            value={this.state.inputSearchPlayList}
+                            placeholder="Buscar Playlist"
+                            onChange={this.onchangeSearchPlayList}
+                        />
+                        <section>
+                            <button onClick={this.searchPlayList}>Buscar</button>
+                            <button onClick={this.resetSearch}>Limpar busca</button>
+                        </section>
 
-                <h3>PlayLists</h3>
-                {this.state.playLists.map((playList) => {
-                    return (
-                        <p key={playList.id}>
-                            <div onClick={() => this.trackPage(playList.id)}>
-                                <li> {playList.name}</li>
-                            </div>
-                            <button onClick={() => this.deletePlayList(playList)}>Deletar</button>
-                        </p>
-                    )
+                        <h3>PlayLists</h3>
+                        {this.state.playLists.map((playList) => {
+                            return (
+                                <p key={playList.id}>
+                                    <div onClick={() => this.open()}>
+                                        <li> {playList.name}</li>
+                                    </div>
+                                    <button onClick={() => this.deletePlayList(playList)}>Deletar</button>
+                                </p>
+                            )
+                        }
+                        )}
+                    </div>
+                )
+
                 }
-                )}
+
+
+
             </div>
         )
 
