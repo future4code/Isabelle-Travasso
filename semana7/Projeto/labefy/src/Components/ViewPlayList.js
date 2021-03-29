@@ -16,13 +16,20 @@ class ViewPlayList extends React.Component {
         this.setState({ addTrackOpen: true })
     }
 
+    backTracks = () => {
+        this.setState({ addTrackOpen: false })
+    }
+
     render() {
         return (
             <div>
                 <h3>{this.props.playListName}</h3>
-                <button onClick={() => this.onClickAdd()} > + </button>
-                {this.state.addTrackOpen ? <AddTrack /> : (
+                {this.state.addTrackOpen ? <AddTrack 
+                backTracks={this.state.addTrackOpen}
+                /> : (
                     <div>
+                        <button onClick={this.props.backPlaylists}>Voltar</button>
+                        <button onClick={() => this.onClickAdd()} > + </button>
                         {this.props.tracks.map(list => {
                             return (
                                 <div>
@@ -32,7 +39,7 @@ class ViewPlayList extends React.Component {
                                 </div>
                             )
                         })}
-                        <button onClick={this.props.backPlaylists}>Voltar</button>
+                        
                     </div>
                 )
                 }

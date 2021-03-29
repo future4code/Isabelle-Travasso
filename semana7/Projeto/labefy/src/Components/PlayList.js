@@ -90,11 +90,7 @@ class PlayList extends React.Component {
     }
 
     backPlayLists = () => {
-        this.setState({ viewTrack: false })
-    }
-
-    backTracks = () => {
-        this.setState({ viewTrack: true })
+        <PlayList />
     }
 
     render() {
@@ -104,7 +100,6 @@ class PlayList extends React.Component {
                     playListName={this.state.playListDetail.name}
                     tracks={this.state.trackList}
                     backPlaylists={this.backPlaylists}
-                    backTracks={this.backTracks}
                     playlistId={this.state.playListDetail.id}
                     deleteTrack={this.deleteTrack} />
             )
