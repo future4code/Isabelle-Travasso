@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { baseUrl, axiosConfig, baseUrlDeleteTrack, baseUrlTrack } from '../parameters'
+import { baseUrl, axiosConfig } from '../parameters'
 import ViewPlayList from './ViewPlayList';
 // import styled from 'styled-components';
 
@@ -10,12 +10,16 @@ class PlayList extends React.Component {
         playLists: [],
         inputSearchPlayList: '',
         trackList: [],
-        playListDetail: [],
         viewTrack: false,
-        playListId: ''
+        playlistId: '',
+        playlistName: '',
+        inputName: '',
+        inputArtist: '',
+        inputUrl: '',
 
     }
 
+    // ----------------------- Playlist --------------------------------------
 
     componentDidMount = () => {
         this.getAllPlayLists()
@@ -64,46 +68,79 @@ class PlayList extends React.Component {
     resetSearch = () => {
         this.getAllPlayLists()
     }
+    // ----------------------------- Tracks -------------------------------------------------
 
     getplayListTracks = async (playlist) => {
-        this.setState({  viewTrack: true })
+        this.setState({ viewTrack: true })
         try {
             const res = await axios.get(`${baseUrl}/${playlist.id}/tracks`, axiosConfig)
-            this.setState({ trackList: res.data.result.tracks, playListDetail: this.state.playLists })
-            console.log(res.data.result.tracks)
+            this.setState({ trackList: res.data.result.tracks, playlistId: playlist.id, playlistName: playlist.name })
         } catch (err) {
             alert("Não foi possivel abrir a lista de musica")
         }
     }
 
-    deleteTrack = async (playlist, track) => {
-        const confirm = window.confirm(`Você tem certeza que deseja excluir a musica ${track.id}?`)
-        if (confirm === true) {
-            try {
-                await axios.delete(baseUrlDeleteTrack(playlist.id, track), axiosConfig)
-                window.location.reload();
-                alert("Musica apagada com sucesso")
-            } catch (err) {
-                alert("Não foi possivel excluir essa musica, tente novamente mais tarde")
-            }
+    
+    addTrack = async () => {
+
+        const body = {
+            name: this.state.inputName,
+            artist: this.state.inputArtist,
+            url: this.state.inputUrl
+        }
+
+        try {
+            await axios.post(`${baseUrl}/${this.state.playlistId}/tracks`, body, axiosConfig)
+            this.setState({ inputArtist: '', inputName: '', inputUrl: '' })
+            alert("Musica adicionada com sucesso")
+            window.location.reload();
+        } catch (err) {
+            alert("Não foi possivel adicionar esta música a playList")
         }
     }
 
-    backPlayLists = () => {
-        <PlayList />
+    onchangeInputName = (e) => {
+        this.setState({ inputName: e.target.value })
     }
 
+    onchangeInputUrl = (e) => {
+        console.log(e)
+        this.setState({ inputUrl: e.target.value })
+    }
+
+    onchangeInputArtist = (e) => {
+        this.setState({ inputArtist: e.target.value })
+    }
+
+
+    backPlayLists = () => {
+        this.setState({ viewTrack: false })
+    }
+
+    
+
     render() {
+        
         const tracks = () => {
             return (
                 <ViewPlayList
-                    playListName={this.state.playListDetail.name}
+                    playListName={this.state.playlistName}
+                    playlistId={this.state.playlistId}
                     tracks={this.state.trackList}
-                    backPlaylists={this.backPlaylists}
-                    playlistId={this.state.playListDetail.id}
-                    deleteTrack={this.deleteTrack} />
+                    backPlaylists={!this.backPlaylists}
+                    deleteTrack = {this.deleteTrack}
+                    enviarTrack={this.addTrack}
+                    inputName={this.state.inputName}
+                    inputUrl={this.state.inputUrl}
+                    inputArtist={this.state.inputArtis}
+                    onchangeInputName={this.onchangeInputName}
+                    onchangeInputUrl={this.onchangeInputUrl}
+                    onchangeInputArtist={this.onchangeInputArtist}
+                />
             )
+
         }
+
 
         return (
             <div>
