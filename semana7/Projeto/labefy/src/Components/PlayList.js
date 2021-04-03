@@ -2,7 +2,82 @@ import axios from 'axios';
 import React from 'react';
 import { baseUrl, axiosConfig } from '../parameters'
 import ViewPlayList from './ViewPlayList';
-// import styled from 'styled-components';
+import Container from '@material-ui/core/Container';
+import styled from 'styled-components';
+
+const Input = styled.input`
+    font-family: monospace;
+    font-size: 20px;
+    width: 50%;
+    padding: 2% 2%;
+    border-radius: 2rem;
+    border: 2px inset rgb(160, 160, 160);
+    margin-bottom: 2%;
+    background-color: rgb(233, 233, 233);
+`
+
+const DivSearch = styled.div`
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+`
+const DivOpenTrack = styled.div`
+    width: 50%
+`
+
+const DivTwoButton = styled.div`
+    width:50%;
+    display:flex;
+    justify-content: space-between;
+
+`
+
+const ButtonSearch = styled.button`
+    padding: 3%;
+    border-radius: 2rem;
+    border-color: 3px solid #fafaf5;
+    color: #fafaf5;
+    background-color: black;
+    cursor: pointer
+`
+
+const ButtonDelete = styled.button`
+    padding: 1%;
+    margin: 1em 0;
+    border-radius: 50%;
+    border-color: solid #fafaf5;
+    color: #fafaf5;
+    background-color: black;
+    cursor: pointer
+
+`
+const DivList = styled.div`
+    display:flex;
+    justify-content: center
+`
+
+const ListPlaylist = styled.p`
+    font-family: monospace;
+    font-size: 20px;
+    color: #fafaf5;
+    cursor: pointer;
+    margin-right: 3%;
+
+    ${DivOpenTrack}:hover & {
+        font-size: 22px;
+    }
+
+`
+
+const Titulo = styled.h3`
+    font-size: 24px;
+    color: #fafaf5;
+    font-family: monospace;
+    margin: 4% 15%;
+`
+
 
 class PlayList extends React.Component {
 
@@ -16,7 +91,6 @@ class PlayList extends React.Component {
         inputName: '',
         inputArtist: '',
         inputUrl: '',
-
     }
 
     // ----------------------- Playlist --------------------------------------
@@ -52,16 +126,22 @@ class PlayList extends React.Component {
         }
     }
 
-    onchangeSearchPlayList = (e) => {
+    onChangeSearchPlayList = (e) => {
         this.setState({ inputSearchPlayList: e.target.value })
     }
 
     searchPlayList = async () => {
         try {
-            const res = await axios.get(`${baseUrl}/${this.state.inputSearchPlayList}`, axiosConfig)
-            this.props.setState({ playLists: res.data.result.playlist, inputSearchName: '' })
+            const res = await axios.get(`${baseUrl}/search?name=${this.state.inputSearchPlayList}`, axiosConfig)
+            this.setState({ playLists: res.data.result.playlist, inputSearchName: '' })
         } catch (err) {
             alert("PlayList não encontrada, verifique o nome digitado")
+        }
+    }
+
+    onKeyDown = (e) => {
+        if (e.keyCode === 'Enter' || e.keyCode === 13) {
+            this.searchPlayList()
         }
     }
 
@@ -74,13 +154,13 @@ class PlayList extends React.Component {
         this.setState({ viewTrack: true })
         try {
             const res = await axios.get(`${baseUrl}/${playlist.id}/tracks`, axiosConfig)
-            this.setState({ trackList: res.data.result.tracks, playlistId: playlist.id, playlistName: playlist.name })
+            this.setState({ trackList: res.data.result.tracks, playlistId: playlist.id, playlistName: playlist.name, page: 'Track' })
         } catch (err) {
             alert("Não foi possivel abrir a lista de musica")
         }
     }
 
-    
+
     addTrack = async () => {
 
         const body = {
@@ -99,12 +179,30 @@ class PlayList extends React.Component {
         }
     }
 
+    onKeyDownTrack = (e) => {
+        if (e.keyCode === 'Enter' || e.keyCode === 13) {
+            this.addTrack()
+        }
+    }
+
+    deleteTrack = async (track) => {
+        const confirm = window.confirm(`Você tem certeza que deseja excluir a musica ${track.name}?`)
+        if (confirm === true) {
+            try {
+                await axios.delete(`${baseUrl}/${this.state.playlistId}/tracks/${track.id}`, axiosConfig)
+                window.location.reload();
+                alert("Musica apagada com sucesso")
+            } catch (err) {
+                alert("Não foi possivel excluir essa musica, tente novamente mais tarde")
+            }
+        }
+    }
+
     onchangeInputName = (e) => {
         this.setState({ inputName: e.target.value })
     }
 
     onchangeInputUrl = (e) => {
-        console.log(e)
         this.setState({ inputUrl: e.target.value })
     }
 
@@ -112,23 +210,19 @@ class PlayList extends React.Component {
         this.setState({ inputArtist: e.target.value })
     }
 
-
-    backPlayLists = () => {
+    backPlaylists = () => {
         this.setState({ viewTrack: false })
     }
 
-    
-
     render() {
-        
         const tracks = () => {
             return (
                 <ViewPlayList
                     playListName={this.state.playlistName}
                     playlistId={this.state.playlistId}
                     tracks={this.state.trackList}
-                    backPlaylists={!this.backPlaylists}
-                    deleteTrack = {this.deleteTrack}
+                    backPlaylists={this.backPlaylists}
+                    deleteTrack={this.deleteTrack}
                     enviarTrack={this.addTrack}
                     inputName={this.state.inputName}
                     inputUrl={this.state.inputUrl}
@@ -136,6 +230,8 @@ class PlayList extends React.Component {
                     onchangeInputName={this.onchangeInputName}
                     onchangeInputUrl={this.onchangeInputUrl}
                     onchangeInputArtist={this.onchangeInputArtist}
+                    page = {this.props.page}
+                    onKeyDownTrack ={this.onKeyDownTrack}
                 />
             )
 
@@ -143,42 +239,49 @@ class PlayList extends React.Component {
 
 
         return (
-            <div>
+            <Container maxWidth='100wh'>
                 {this.state.viewTrack ? (
                     tracks()
                 ) : (
-                    <div>
-                        <input
-                            type="text"
-                            value={this.state.inputSearchPlayList}
-                            placeholder="Buscar Playlist"
-                            onChange={this.onchangeSearchPlayList}
-                        />
-                        <section>
-                            <button onClick={this.searchPlayList}>Buscar</button>
-                            <button onClick={this.resetSearch}>Limpar busca</button>
-                        </section>
+                    <Container>
+                        <DivSearch>
 
-                        <h3>PlayLists</h3>
+                            <Input
+                                onKeyDown={this.onKeyDown}
+                                type="text"
+                                value={this.state.inputSearchPlayList}
+                                placeholder="🔍 Buscar Playlist"
+                                onChange={this.onChangeSearchPlayList}
+                            />
+
+                            <DivTwoButton>
+                                <ButtonSearch onClick={this.searchPlayList}>Buscar</ButtonSearch>
+                                <ButtonSearch onClick={this.resetSearch}>Limpar busca</ButtonSearch>
+                            </DivTwoButton>
+                        </DivSearch>
+
+                        <Titulo>PlayLists</Titulo>
+
                         {this.state.playLists.map((playList) => {
                             return (
-                                <div key={playList.id}>
-                                    <div onClick={() => this.getplayListTracks(playList)}>
-                                        <li> {playList.name}</li>
-                                    </div>
-                                    <button onClick={() => this.deletePlayList(playList)}>Deletar</button>
-                                </div>
+
+                                <DivList key={playList.id}>
+                                    <DivOpenTrack onClick={() => this.getplayListTracks(playList)}>
+                                        <ListPlaylist> {playList.name}</ListPlaylist>
+                                    </DivOpenTrack>
+                                    <ButtonDelete onClick={() => this.deletePlayList(playList)}> X </ButtonDelete>
+                                </DivList>
                             )
                         }
                         )}
-                    </div>
+                    </Container>
                 )
 
                 }
 
 
 
-            </div>
+            </Container>
         )
 
     }
