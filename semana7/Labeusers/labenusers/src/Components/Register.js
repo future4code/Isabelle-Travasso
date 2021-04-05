@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { baseUrl, axiosConfig } from '../parameters'
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -23,21 +24,14 @@ class Register extends React.Component {
     handleIputEmailChange = (e) => {
         this.setState({ inputValueEmail: e.target.value })
     }
+
     createUser = () => {
         const body = {
             name: this.state.inputValueNome,
             email: this.state.inputValueEmail
         }
         axios
-            .post(
-                " https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users?=",
-                body,
-                {
-                    headers: {
-                        Authorization: "Isabelle-Travasso-TurmaCruz"
-                    }
-                }
-            )
+            .post(baseUrl, body, axiosConfig)
             .then((res) => {
                 this.setState({ inputValueEmail: '', inputValueNome: '' })
                 alert("Usuário criado com sucesso!")
@@ -47,10 +41,36 @@ class Register extends React.Component {
             })
     }
 
+
+    //----------------------------------- DADOS ANTIGOS---------------------------------------
+    // createUser = () => {
+    //     const body = {
+    //         name: this.state.inputValueNome,
+    //         email: this.state.inputValueEmail
+    //     }
+    //     axios
+    //         .post(
+    //             " https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users?=",
+    //             body,
+    //             {
+    //                 headers: {
+    //                     Authorization: "Isabelle-Travasso-TurmaCruz"
+    //                 }
+    //             }
+    //         )
+    //         .then((res) => {
+    //             this.setState({ inputValueEmail: '', inputValueNome: '' })
+    //             alert("Usuário criado com sucesso!")
+    //         })
+    //         .catch((err) => {
+    //             alert("E-mail ou Nome inválido, tente novamente")
+    //         })
+    // }
+    // ------------------------------------------------------------------------------------
     render() {
         return (
             <div>
-                <button onClick={this.props.nextPage}>Ir para a Lista de Usuários</button>
+                <button onClick={this.props.nextPage}>Ir para página de Usuários</button>
                 <Container>
                     <h3> Cadastro do Usuário</h3>
                     <label>Nome</label>

@@ -16,15 +16,19 @@ export default class App extends React.Component {
 
   render() {
     const actualPage = () => {
-    if(this.state.register){
-      return <Register nextPage={this.changePage} />
-    }  else {
-      return <UsersList nextPage={this.changePage} />
-  }}
+      if(this.state.register) {
+       return <Register nextPage={this.changePage} />
+       } else {
+       return  <UsersList nextPage={this.changePage} />
+       }
+      }
+
+
     return (
-      <div>
-        {actualPage()}       
-      </div>
+        <div >
+          {actualPage()}
+        </div>
+
     )
   }
 
