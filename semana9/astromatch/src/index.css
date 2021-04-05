@@ -1,0 +1,8 @@
+*{
+  background-color: rgb(177, 177, 189);
+}
+
+body{
+  display: flex;
+  justify-content: center;
+}
