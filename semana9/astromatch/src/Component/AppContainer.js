@@ -3,6 +3,8 @@ import Astromatch from './Astromatch/Astromatch'
 import Matches from './Matches/Matches'
 import { baseUrlPut } from '../parameters'
 import { mdiAccountHeart } from '@mdi/js'
+import Icon from '@mdi/react'
+import {MatchIcon} from './Style'
 import axios from 'axios';
 
 export function AppContainer(props) {
@@ -31,7 +33,7 @@ export function AppContainer(props) {
         if (page === 'AppContainer') {
             return (
                 <div>
-                    <mdiAccountHeart onClick={matchPage}></mdiAccountHeart>
+                    <MatchIcon><Icon size={2} path={mdiAccountHeart} onClick={matchPage}/></MatchIcon>
                     <Astromatch />
                 </div>
             )

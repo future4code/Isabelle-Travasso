@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { baseUrl, baseUrlChoose } from '../../parameters'
 import React, { useState, useEffect } from 'react'
-import { ButtonMatch } from './style'
+import { ButtonMatch, ProfileName, ProfileDetails, ButtonNotMatch, ButtonsPosition, ContainerProfile, ImgProfile } from './style'
+
+
 
 function Astromatch(props) {
 
-    const [profiles, setProfiles] = useState('')
+    const [profiles, setProfiles] = useState({})
 
     useEffect(() => {
         getProfiles()
@@ -52,17 +54,25 @@ function Astromatch(props) {
 
 
     return (
-        <div>
-                <img src={profiles.photo}></img>
-                <p> {profiles.name}, {profiles.age}</p>
+        <ContainerProfile>
+            {profiles.photo ? (
+                <>
+            <ContainerProfile>
+                <ImgProfile src={profiles.photo}></ImgProfile>
+                <ProfileName> {profiles.name}, {profiles.age}</ProfileName>
 
-                <p>{profiles.bio}</p>   
-
+                <ProfileDetails>{profiles.bio}</ProfileDetails>
+            </ContainerProfile>
+            <ButtonsPosition>
                 <ButtonMatch onClick={doMatch}> ♥ </ButtonMatch>
 
-                <ButtonMatch onClick={doNotMatch}> X </ButtonMatch>
-            
-        </div>
+                <ButtonNotMatch onClick={doNotMatch}> X </ButtonNotMatch>
+            </ButtonsPosition>
+            </>
+            ) : (
+                <p>Carregando...</p>
+            )}
+        </ContainerProfile>
     )
 
 

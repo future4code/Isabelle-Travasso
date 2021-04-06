@@ -9,7 +9,8 @@ export function Matches(props) {
 
     useEffect(() => {
         getMatches()
-    }, [])
+        document.title = `Você tem ${matches.length} matches`;
+  }, [matches]);
 
 
     const getMatches = async () => {
