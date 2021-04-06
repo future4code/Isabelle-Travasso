@@ -1,8 +1,5 @@
-*{
-  background-color: rgb(177, 177, 189);
-}
-
 body{
   display: flex;
+  background-color: rgba(197, 140, 199, 0.877);
   justify-content: center;
 }

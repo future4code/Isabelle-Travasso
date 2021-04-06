@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { baseUrl, baseUrlChoose } from '../../parameters'
 import React, { useState, useEffect } from 'react'
-import { ButtonMatch, ProfileName, ProfileDetails, ButtonNotMatch, ButtonsPosition, ContainerProfile, ImgProfile } from './style'
-
+import { ContainerWhite, Divider, ButtonMatch, Container, Text, ButtonNotMatch, ButtonsPosition, ContainerProfile, ProfileImgBackground, MainText } from './style'
+import Paper from '@material-ui/core/Paper';
 
 
 function Astromatch(props) {
@@ -52,27 +52,29 @@ function Astromatch(props) {
         }
     }
 
-
     return (
-        <ContainerProfile>
+        <ContainerWhite>
+            
             {profiles.photo ? (
-                <>
-            <ContainerProfile>
-                <ImgProfile src={profiles.photo}></ImgProfile>
-                <ProfileName> {profiles.name}, {profiles.age}</ProfileName>
+                <Container>
+                    <Paper elevation={3} ><ProfileImgBackground src={profiles.photo} /></Paper>
+                    <MainText>
+                        <Text title heavy large> {profiles.name}, {profiles.age} </Text>
+                        <Divider />
+                        <Text bold small>{profiles.bio}</Text>
+                    </MainText>
+                    <ButtonsPosition>
+                        <ButtonMatch onClick={doMatch}> ♥ </ButtonMatch>
 
-                <ProfileDetails>{profiles.bio}</ProfileDetails>
-            </ContainerProfile>
-            <ButtonsPosition>
-                <ButtonMatch onClick={doMatch}> ♥ </ButtonMatch>
+                        <ButtonNotMatch onClick={doNotMatch}> X </ButtonNotMatch>
+                    </ButtonsPosition>
 
-                <ButtonNotMatch onClick={doNotMatch}> X </ButtonNotMatch>
-            </ButtonsPosition>
-            </>
+
+                </Container>
             ) : (
                 <p>Carregando...</p>
             )}
-        </ContainerProfile>
+        </ContainerWhite>
     )
 
 

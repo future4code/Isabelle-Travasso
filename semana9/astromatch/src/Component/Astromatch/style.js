@@ -73,21 +73,12 @@ export const ButtonMatch = styled.button`
    }
 `
 
-export const ContainerProfile = styled.div`
-	padding: 20px;
-	padding-bottom: 0;
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-	justify-content: flex-end;
+export const ButtonsPosition = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
   align-items: center;
-  background-color: white;
-  width: 50%
-
-`
-
-export const ImgProfile = styled.img`
-  width: 50%
+  padding: 10px 0;
 `
 
 export const ProfileDetails = styled.p`
@@ -100,11 +91,61 @@ export const ProfileName = styled.p`
   background-color: white;
 `
 
-export const ButtonsPosition = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  align-items: center;
-  padding: 10px 0;
+export const Container = styled.div`
+display:flex;
+flex-direction: column;
+position: relative;
 `
 
+export const Text = styled.p`
+position: absolute;
+color: ${(props) => (props.dark ? "#0000" : "#FFFF")};
+font-family: "AvenirNext-Regular"
+
+${({title, large, small}) => {
+  switch(true) {
+    case title:
+      return `font-size: 32px`;
+    case large:
+      return `font-size: 20px`;
+    case small:
+      return `font-size: 13px`;
+  }
+
+}}
+
+${({bold, heavy}) => {
+switch(true) {
+    case bold:
+      return `font-weight: 600`;
+    case heavy:
+      return `font-weight: 700`;
+}
+}}
+`
+
+export const ProfileImgBackground = styled.img`
+   width: 60%;
+   height: 100%;
+   position: absolute;
+   align-self:center;
+   justify-self: center;
+   border-radius: 20px;
+`
+
+export const MainText = styled.div` 
+padding: 0 32px;
+margin: 170px 0;
+`
+
+export const Divider = styled.div `
+border-bottom-color: #fff;
+border-bottom-width: 2px;
+width: 150px;
+margin: 8px 0;
+`
+
+export const ContainerWhite = styled.div `
+background-color: #fff;
+width: 600px
+`

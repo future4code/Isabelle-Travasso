@@ -4,8 +4,9 @@ import Matches from './Matches/Matches'
 import { baseUrlPut } from '../parameters'
 import { mdiAccountHeart } from '@mdi/js'
 import Icon from '@mdi/react'
-import {MatchIcon} from './Style'
+import {MatchIcon, Logo, ContainerLogo} from './Style'
 import axios from 'axios';
+import { Container } from '../Component/Astromatch/style'
 
 export function AppContainer(props) {
     const [page, setPage] = useState('AppContainer')
@@ -32,10 +33,10 @@ export function AppContainer(props) {
     const openPage = () => {
         if (page === 'AppContainer') {
             return (
-                <div>
-                    <MatchIcon><Icon size={2} path={mdiAccountHeart} onClick={matchPage}/></MatchIcon>
-                    <Astromatch />
-                </div>
+                <ContainerLogo>
+                    <Logo>astromatch</Logo>
+                    <MatchIcon><Icon size={1} path={mdiAccountHeart} onClick={matchPage}/></MatchIcon>
+                </ContainerLogo>
             )
         } else if (page === 'Match') {
             return <button onClick={astomatchPage}>Voltar</button>
@@ -52,12 +53,11 @@ export function AppContainer(props) {
     }
 
     return (
-        <div>
-            <h2>astromatch</h2>
+        <Container>
             {openPage()}
             {renderPage()}
             <button onClick={clearProfiles}>limpar swipes e matches</button>
-        </div>
+        </Container>
     )
 
 }
