@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { baseUrl, baseUrlChoose } from '../../parameters'
 import React, { useState, useEffect } from 'react'
-import { ContainerWhite, Divider, ButtonMatch, Container, Text, ButtonNotMatch, ButtonsPosition, ContainerProfile, ProfileImgBackground, MainText } from './style'
-import Paper from '@material-ui/core/Paper';
+import { Tilt, options, useStyles, MainImg, ContainerWhite, ButtonMatch, Container, Text, ButtonsPosition, ProfileImgBackground } from './Style'
+import ReactDOM from 'react-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+function Astromatch() {
 
-function Astromatch(props) {
+    const classes = useStyles();
 
     const [profiles, setProfiles] = useState({})
 
@@ -29,7 +31,7 @@ function Astromatch(props) {
             choice: true
         }
         try {
-            const res = await axios.post(baseUrlChoose, body)
+            await axios.post(baseUrlChoose, body)
             getProfiles()
             console.log("Deu Match ♥")
         } catch (err) {
@@ -44,7 +46,7 @@ function Astromatch(props) {
             choice: false
         }
         try {
-            const res = await axios.post(baseUrlChoose, body)
+            await axios.post(baseUrlChoose, body)
             getProfiles()
             console.log("Não deu Match 😢")
         } catch (err) {
@@ -54,25 +56,32 @@ function Astromatch(props) {
 
     return (
         <ContainerWhite>
-            
-            {profiles.photo ? (
-                <Container>
-                    <Paper elevation={3} ><ProfileImgBackground src={profiles.photo} /></Paper>
-                    <MainText>
-                        <Text title heavy large> {profiles.name}, {profiles.age} </Text>
-                        <Divider />
-                        <Text bold small>{profiles.bio}</Text>
-                    </MainText>
-                    <ButtonsPosition>
-                        <ButtonMatch onClick={doMatch}> ♥ </ButtonMatch>
 
-                        <ButtonNotMatch onClick={doNotMatch}> X </ButtonNotMatch>
-                    </ButtonsPosition>
+            {profiles.name ? (
+                <Tilt
+                    options={options}
+                >
+                    <Container>
+
+                        <ProfileImgBackground src={profiles.photo} />
+                        <MainImg>
+                            <Text title > {profiles.name}, {profiles.age} </Text>
+                            <Text >{profiles.bio}</Text>
+                        </MainImg>
+                        <ButtonsPosition>
+                            <ButtonMatch onClick={doMatch}> ♥ </ButtonMatch>
+
+                            <ButtonMatch notMatch onClick={doNotMatch}> X </ButtonMatch>
+                        </ButtonsPosition>
 
 
-                </Container>
+                    </Container>
+                </Tilt>
+
             ) : (
-                <p>Carregando...</p>
+                <div className={classes.root}>
+                    <CircularProgress color="secondary" />
+                </div>
             )}
         </ContainerWhite>
     )
@@ -82,3 +91,5 @@ function Astromatch(props) {
 }
 
 export default Astromatch
+const rootElement = document.getElementById('root');
+ReactDOM.render(<Astromatch />, rootElement);
