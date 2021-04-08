@@ -1,14 +1,13 @@
 import axios from 'axios';
 import { baseUrl, baseUrlChoose } from '../../parameters'
-import React, { useState, useEffect } from 'react'
-import { Tilt, options, useStyles, MainImg, ContainerWhite, ButtonMatch, Container, Text, ButtonsPosition, ProfileImgBackground } from './Style'
+import React, { useState, useEffect, useRef } from 'react'
+import { Tilt, options, useStyles, MainText, ContainerWhite, ButtonMatch, Container, Text, ButtonsPosition, ProfileImgBackground } from './Style'
 import ReactDOM from 'react-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import TinderCard from 'react-tinder-card'
 
 function Astromatch() {
-
     const classes = useStyles();
-
     const [profiles, setProfiles] = useState({})
 
     useEffect(() => {
@@ -31,9 +30,12 @@ function Astromatch() {
             choice: true
         }
         try {
-            await axios.post(baseUrlChoose, body)
+            const res = await axios.post(baseUrlChoose, body)
+
+            if (res.data) {
+                console.log("Deu Match ♥")
+            } else { console.log("Não deu Match 😢") }
             getProfiles()
-            console.log("Deu Match ♥")
         } catch (err) {
             alert("Ação indisponivel no momento tente novamente mais tarde")
         }
@@ -54,36 +56,51 @@ function Astromatch() {
         }
     }
 
+    const onSwipe = (direction) => {
+        return (direction === 'left' ? (doMatch()
+        ) : (
+            doNotMatch()
+        )
+        )
+    }
+
+
     return (
         <ContainerWhite>
-
             {profiles.name ? (
+
                 <Tilt
                     options={options}
                 >
-                    <Container>
+                    <TinderCard className='swipe' onSwipe={onSwipe} preventSwipe={['right', 'left']}>
+                        <Container>
 
-                        <ProfileImgBackground src={profiles.photo} />
-                        <MainImg>
-                            <Text title > {profiles.name}, {profiles.age} </Text>
-                            <Text >{profiles.bio}</Text>
-                        </MainImg>
-                        <ButtonsPosition>
-                            <ButtonMatch onClick={doMatch}> ♥ </ButtonMatch>
+                            <ProfileImgBackground photo={profiles.photo} />
+                            <ProfileImgBackground src={profiles.photo} />
 
-                            <ButtonMatch notMatch onClick={doNotMatch}> X </ButtonMatch>
-                        </ButtonsPosition>
+                            <MainText>
+                                <Text title > {profiles.name}, {profiles.age} </Text>
+                                <Text >{profiles.bio}</Text>
+                            </MainText>
 
+                            <ButtonsPosition>
+                                <ButtonMatch onClick={doMatch} > ♥ </ButtonMatch>
 
-                    </Container>
+                                <ButtonMatch notMatch onClick={doNotMatch} > X </ButtonMatch>
+                            </ButtonsPosition>
+
+                        </Container>
+                    </TinderCard>
                 </Tilt>
+
 
             ) : (
                 <div className={classes.root}>
                     <CircularProgress color="secondary" />
                 </div>
-            )}
-        </ContainerWhite>
+            )
+            }
+        </ContainerWhite >
     )
 
 

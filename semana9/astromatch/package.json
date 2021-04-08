@@ -19,11 +19,14 @@
     "react-responsive": "^8.2.0",
     "react-scripts": "4.0.3",
     "react-spring": "^9.0.0",
+    "react-swing": "^2.0.0",
+    "react-tinder-card": "^1.4.0",
     "react-vanilla-tilt": "^1.0.0",
     "sass": "^1.32.8",
     "soft-ui-design-system": "^1.0.2",
     "styled-components": "^5.2.3",
     "use-3d-effect": "^1.1.0",
+    "use-swipe-hook": "^1.2.2",
     "web-vitals": "^1.1.1"
   },
   "scripts": {

@@ -95,15 +95,23 @@ export const ProfileImgBackground = styled.img`
     height: 100%;
     position: absolute;
     align-self:center;
-    justify-self: center;
     border-radius: 20px;
+    
 
+    ${({ photo }) => {
+    if (photo)
+      return `
+					background-image: url(${photo});
+					filter: blur(20px);
+					height: 100%;
+					max-width: 90%;
+					position: absolut;
+				`
+  }}
 `
 
-export const MainImg = styled.div` 
+export const MainText = styled.div` 
 margin: 170px 0;
-transform: translateZ(30px);
-box-shadow: 0 0 50px 0 rgba(51, 51, 51, 0.3);
 `
 
 export const ContainerWhite = styled.div`
