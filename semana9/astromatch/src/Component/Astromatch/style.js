@@ -96,8 +96,7 @@ export const ProfileImgBackground = styled.img`
     position: absolute;
     align-self:center;
     border-radius: 20px;
-    
-
+  
     ${({ photo }) => {
     if (photo)
       return `
@@ -139,6 +138,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     margin: '50% 0',
   },
+
 }));
 
 export const options = {

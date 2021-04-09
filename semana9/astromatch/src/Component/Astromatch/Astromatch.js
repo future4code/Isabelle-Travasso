@@ -57,13 +57,12 @@ function Astromatch() {
     }
 
     const onSwipe = (direction) => {
-        return (direction === 'left' ? (doMatch()
-        ) : (
+        if (direction === 'left' || direction === 'up') {
+            doMatch()
+        } else if (direction === 'right' || direction === 'down') {
             doNotMatch()
-        )
-        )
+        }
     }
-
 
     return (
         <ContainerWhite>
@@ -72,7 +71,7 @@ function Astromatch() {
                 <Tilt
                     options={options}
                 >
-                    <TinderCard className='swipe' onSwipe={onSwipe} preventSwipe={['right', 'left']}>
+                    <TinderCard onSwipe={onSwipe} preventSwipe={['right', 'left', 'up', 'down']} >
                         <Container>
 
                             <ProfileImgBackground photo={profiles.photo} />
