@@ -1,10 +1,12 @@
 import axios from 'axios';
-import { baseUrl, baseUrlChoose } from '../../parameters'
-import React, { useState, useEffect, useRef } from 'react'
-import { Tilt, options, useStyles, MainText, ContainerWhite, ButtonMatch, Container, Text, ButtonsPosition, ProfileImgBackground } from './Style'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TinderCard from 'react-tinder-card'
+
+import { baseUrl, baseUrlChoose } from '../../parameters'
+import { Tilt, options, useStyles, MainText, ContainerWhite, ButtonMatch, Container, Text, ButtonsPosition, ProfileImgBackground } from './Style'
+
 
 function Astromatch() {
     const classes = useStyles();

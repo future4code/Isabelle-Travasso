@@ -1,15 +1,16 @@
 import * as  React from 'react'
+import axios from 'axios';
 import { useState, useEffect } from 'react'
+import Icon from '@mdi/react'
+import Button from '@material-ui/core/Button'
+import { mdiAccountArrowLeft, mdiAccountHeart } from '@mdi/js'
+import Badge from '@material-ui/core/Badge'
+
 import Astromatch from './Astromatch/Astromatch'
 import Matches from './Matches/Matches'
 import { baseUrlPut, baseUrlMatch } from '../parameters'
-import Icon from '@mdi/react'
 import { MatchIcon, Logo, ContainerLogo, useStyles, MachesNumber } from './Style'
-import axios from 'axios';
 import { Container } from './Astromatch/Style'
-import Button from '@material-ui/core/Button';
-import { mdiAccountArrowLeft, mdiAccountHeart } from '@mdi/js'
-import Badge from '@material-ui/core/Badge';
 
 export function AppContainer(props) {
 
@@ -45,13 +46,7 @@ export function AppContainer(props) {
         }
     }
 
-    const matchPage = () => {
-        setPage('Match')
-    }
-
-    const astomatchPage = () => {
-        setPage('AppContainer')
-    }
+    const changePage = (newPage) => { setPage(newPage) }
 
     const openPage = () => {
         if (page === 'AppContainer') {
@@ -66,7 +61,7 @@ export function AppContainer(props) {
                         }}
                         badgeContent={<MachesNumber>{matches.length}</MachesNumber>}
                     >
-                        <MatchIcon><Icon className={classes.root} size={1} path={mdiAccountHeart} onClick={matchPage} /></MatchIcon>
+                        <MatchIcon><Icon className={classes.root} size={1} path={mdiAccountHeart} onClick={() => changePage('Match')} /></MatchIcon>
                     </Badge>
                 </ContainerLogo>
 
@@ -75,7 +70,7 @@ export function AppContainer(props) {
             return (
                 <ContainerLogo matches>
                     <Logo>astro<Logo match>match</Logo></Logo>
-                    <MatchIcon className={classes.root}><Icon size={1} path={mdiAccountArrowLeft} onClick={astomatchPage} /></MatchIcon>
+                    <MatchIcon className={classes.root}><Icon size={1} path={mdiAccountArrowLeft} onClick={() => changePage('AppContainer')} /></MatchIcon>
                 </ContainerLogo>
             )
         }

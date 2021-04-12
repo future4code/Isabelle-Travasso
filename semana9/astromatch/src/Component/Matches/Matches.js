@@ -1,10 +1,9 @@
-import axios from 'axios';
-
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Avatar from '@material-ui/core/Avatar';
+
 import { ContainerWhite } from '../Astromatch/Style'
 import { Text, useStyles, StyledBadge, options } from './Style'
-import Avatar from '@material-ui/core/Avatar';
 
 export function Matches(props) {
 
@@ -20,12 +19,12 @@ export function Matches(props) {
 
 
     useEffect(() => {
-        if(props.matches.length === 0){
-        const timer = setTimeout(() => {
-            alert("🤔 Você ainda não possui matches, volte para a tela de perfis")
-        }, 2000);
-        return () => clearTimeout(timer);
-    } 
+        if (props.matches.length === 0) {
+            const timer = setTimeout(() => {
+                alert("🤔 Você ainda não possui matches, volte para a tela de perfis")
+            }, 2000);
+            return () => clearTimeout(timer);
+        }
     }, [props.matches]);
 
     return (
