@@ -1,4 +1,5 @@
-import useInput from "./hooks/useInput";
+import React from 'react'
+import useInput from "../hooks/useInputs";
 
 function LoginPage() {
     const [email, handleEmail] = useInput()
@@ -8,7 +9,7 @@ function LoginPage() {
             <input value={email} onChange={handleEmail} placeholder={"E-mail"} />
             <input value={password} onChange={handlePassword} placeholder={"Senha"} />
           
-            <button onClick={login}>Entrar</button>
+            <button >Entrar</button>
         </div>
     );
 }

@@ -1,4 +1,5 @@
-import useInput from "./hooks/useInput";
+import React from 'react';
+import useInput from "../hooks/useInputs";
 
 function CreateTripPage() {
     const [name, handleName] = useInput()

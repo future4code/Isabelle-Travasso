@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         minWidth: 300,
         width: '100%',
-        justifyContent:'center',
+        justifyContent: 'center',
         margin: '5em 0',
     },
     image: {
@@ -77,7 +77,7 @@ export const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const Logo = styled.h1`
+export const Titulo = styled.h1`
     color: #fff;
     font-size: 40px;
     font-family: cursive;
@@ -89,4 +89,56 @@ export const Container = styled.div`
    justify-content: center;
    align-content:center;
    margin-top: 2em
+`
+
+export const useStylesTheme = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        backgroundColor: theme.palette.background.paper,
+    },
+    gridList: {
+        width: 800,
+        height: 550,
+    },
+    icon: {
+        color: 'rgba(255, 255, 255, 0.54)',
+    },
+
+    paperIconHome: {
+        background: 'rgb(205, 221, 226)',
+        display: 'grid',
+
+    }
+
+}));
+
+export const HomeIcon = styled.img`
+    width: 75px;
+    margin: 4px 16px 0;
+    cursor: pointer;
+`
+
+export const Button = styled.button`
+    border-radius: 20px;
+    border-color: #02698c;
+    background-image: linear-gradient( #3c8095,  #62878b);
+    color: rgb(243, 243, 243);
+    font-size: 16px;
+    padding: 12px;
+    margin: 12px;
+    cursor: pointer;
+`
+
+export const ContainerHeader = styled.div`
+    background: rgb(205, 221, 226);
+    display: flex;
+    justify-content: space-between;
+    padding-right: 16px;
+`
+
+export const ImgCard = styled.img`
+    width:100%;
+    height: 100%
 `

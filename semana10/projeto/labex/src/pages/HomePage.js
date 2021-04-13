@@ -1,33 +1,27 @@
 import React from 'react'
-import {useStyles, Logo, Container } from '../styles/homeStyle'
+import { useStyles, Titulo, Container } from '../styles/style'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-import trip from '../img/viagem.jpg'
-import login from '../img/login.jpg'
-
-
-
-const images = [
-    {
-        image: trip,
-        title: 'Visualizar viagens',
-        width: '40%',
-    },
-    {
-        image: login,
-        title: 'Login',
-        width: '40%',
-    }
-]
-
+import { images } from '../constants/image'
+import { useHistory } from 'react-router';
+import { goToLogin, goToTripList } from '../Router/coordinator'
 
 function HomePage() {
-
+    const history = useHistory()
     const classes = useStyles()
+
+    const handleClick = (item) => {
+        item === 'Login' ? (
+            goToLogin(history)
+        ) : (
+            goToTripList(history)
+        )
+    }
 
     return (
         <Container>
-            <Logo>LabeX</Logo>
+            <Titulo>LabeX</Titulo>
+
             <div className={classes.root}>
 
                 {images.map((image) => (
@@ -39,6 +33,7 @@ function HomePage() {
                         style={{
                             width: image.width,
                         }}
+                        onClick={() => handleClick(image.title)}
                     >
                         <span
                             className={classes.imageSrc}
@@ -46,6 +41,7 @@ function HomePage() {
                                 backgroundImage: `url(${image.image})`,
                             }}
                         />
+
                         <span className={classes.imageBackdrop} />
                         <span className={classes.imageButton}>
                             <Typography
