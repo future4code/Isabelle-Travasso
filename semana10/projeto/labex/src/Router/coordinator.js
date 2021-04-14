@@ -3,7 +3,7 @@ export const goToHomePage = (history) => {
 }
 
 export const goToHomeAdmin = (history) => {
-    history.push('admin/trips/list')
+    history.push('/admin/trips/list')
 }
 
 export const goToTripList = (history) => {
@@ -15,7 +15,7 @@ export const goToTripCreate = (history) => {
 }
 
 export const goToTripDetails = (history) => {
-    history.push('/admin/trips/:id')
+    history.push('/admin/trips/id')
 }
 
 export const goToLogin = (history) => {

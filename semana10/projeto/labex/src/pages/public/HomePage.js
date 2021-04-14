@@ -1,10 +1,10 @@
 import React from 'react'
-import { useStyles, Titulo, Container } from '../styles/style'
+import { useStyles, Title, Container } from '../../styles/style'
 import ButtonBase from '@material-ui/core/ButtonBase';
 import Typography from '@material-ui/core/Typography';
-import { images } from '../constants/image'
+import { images } from '../../constants/image'
 import { useHistory } from 'react-router';
-import { goToLogin, goToTripList } from '../Router/coordinator'
+import { goToLogin, goToTripList } from '../../Router/coordinator'
 
 function HomePage() {
     const history = useHistory()
@@ -20,7 +20,7 @@ function HomePage() {
 
     return (
         <Container>
-            <Titulo>LabeX</Titulo>
+            <Title>LabeX</Title>
 
             <div className={classes.root}>
 

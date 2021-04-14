@@ -1,4 +1,8 @@
-import useInput from "./hooks/useInput";
+import React from 'react'
+import useInput from "../../hooks/useInputs";
+import { ContainerInput, Input, Button, Title } from '../../styles/style'
+import { useHistory } from 'react-router';
+import { goToHomeAdmin } from '../../Router/coordinator'
 
 function ApplicationFormPage() {
     const [name, handleName] = useInput()

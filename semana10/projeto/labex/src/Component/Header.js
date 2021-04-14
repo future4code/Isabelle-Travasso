@@ -1,12 +1,17 @@
 import React from 'react';
 import { HomeIcon, Button, ContainerHeader } from '../styles/style'
-import { goToHomePage, gotToLastPage, goToApplicationPage, goToHomeAdmin } from '../Router/coordinator';
+import { goToHomePage, gotToLastPage, goToApplicationPage, goToHomeAdmin, goToLogin } from '../Router/coordinator';
 import { useHistory } from 'react-router';
 import home from '../img/home.png'
 
 
 function Header() {
     const history = useHistory()
+
+    const logout = () => {
+        window.localStorage.removeItem("token");
+        goToLogin(history);
+      };
 
     const buttonNav = () => {
         switch (history.location.pathname) {
@@ -21,7 +26,7 @@ function Header() {
                     return (
                         <div>
                             <Button onClick={() => gotToLastPage(history)}>Voltar</Button>
-                            <Button onClick={() => goToHomeAdmin(history)}>Logout</Button>
+                            <Button onClick={logout}>Logout</Button>
                         </div>
                     )
             default:

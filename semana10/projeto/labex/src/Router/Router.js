@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import ListTripsPage from '../pages/ListTripsPage'
 import CreateTripPage from '../pages/CreateTripPage'
-import ApplicationFormPage from '../pages/AdminHomePage'
+import ApplicationFormPage from '../pages/ApplicationFormPage'
 import LoginPage from '../pages/LoginPage'
 import TripDetailsPage from '../pages/TripDetailsPage'
 import ErrorPage from '../pages/ErrorPage'
@@ -32,17 +32,17 @@ function Router() {
                     <LoginPage />
                 </Route>
 
-                <Route exact path='admin/trips/list'>
+                <Route exact path='/admin/trips/list'>
                     <Header />
                     <AdminHomePage />
                 </Route>
 
-                <Route exact path='admin/trips/create'>
+                <Route exact path='/admin/trips/create'>
                     <Header />
                     <CreateTripPage />
                 </Route>
 
-                <Route exact path='admin/trips/:id'>
+                <Route exact path='/admin/trips/id'>
                     <Header />
                     <TripDetailsPage />
                 </Route>
