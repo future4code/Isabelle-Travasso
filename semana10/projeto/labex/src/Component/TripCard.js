@@ -11,14 +11,12 @@ import { goToTripDetails } from '../Router/coordinator'
 
 export function TripCard() {
     const history = useHistory()
-    const classes = useStyles();
-
+    const classes = useStyles()
     const [tripList, setTripList] = useState([])
-    const [detail, setDetail] = useState({})
 
     useEffect(() => {
         getTripList()
-    }, [])
+    }, [tripList])
 
     const getTripList = async () => {
         try {
@@ -32,11 +30,24 @@ export function TripCard() {
 
     const getTripDetail = async (id) => {
         try {
-            const res = await axios.get(`${baseUrl}/trip/${id}`, axiosConfig)
-            setDetail(res.data.trip)
-            goToTripDetails(history)
+            await axios.get(`${baseUrl}/trip/${id}`, axiosConfig)
+            goToTripDetails(history, id)
         } catch (err) {
             alert('Ops! Não foi possivel acessar os detalhes dessa viagem')
+        }
+    }
+
+    const deleteTrip = async (trip) => {
+        const confirm = window.confirm(`Você tem certeza que deseja excluir a viagem ${trip.name}?`)
+        if (confirm === true) {
+
+            try {
+                await axios.delete(`${baseUrl}/trips/${trip.id}`, axiosConfig)
+                alert("Viagem deletada com sucesso!")
+            } catch (err) {
+                alert("Não foi possivel deletar essa viagem, tente novamente mais tarde")
+            }
+
         }
     }
 
@@ -60,7 +71,7 @@ export function TripCard() {
                         })
 
                     ) : (
-                        <Container>
+                        <Container progress>
                             <CircularProgress />
                         </Container>
                     )}
@@ -73,7 +84,7 @@ export function TripCard() {
                                 <AdminList key={trip.id}>
                                     <Avatar className={classes.avatar} alt={trip.planet} src={imagePlanet(trip.planet)} onClick={() => { getTripDetail(trip.id) }} />
                                     <TextAdmin onClick={() => { getTripDetail(trip.id) }}>{trip.name} - {trip.planet} </TextAdmin>
-                                        <ImgTrash src={trash} ></ImgTrash>
+                                    <ImgTrash src={trash} onClick={() => deleteTrip(trip)} ></ImgTrash>
                                 </AdminList>
                             )
                         })

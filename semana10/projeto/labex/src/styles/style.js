@@ -79,45 +79,25 @@ export const useStyles = makeStyles((theme) => ({
     avatar: {
         width: theme.spacing(7),
         height: theme.spacing(7),
-    }
+    },
+
 }));
 
 export const Title = styled.h1`
     color: #fff;
     font-size: 40px;
     font-family: cursive;
+    text-shadow: 5px 6px 8px black;
 `
 export const Container = styled.div`
    display: flex;
-   flex-direction:column;
+   flex-direction: ${props => props.button ? "row" : 'column'};
    align-items:center;
    justify-content: center;
    align-content:center;
    margin-top: 2em;
+   grid-column:${props => props.progress ? "2" : 'auto'}
 `
-
-export const useStylesTheme = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-        width: 800,
-        height: 550,
-    },
-    icon: {
-        color: 'rgba(255, 255, 255, 0.54)',
-    },
-
-    paperIconHome: {
-        background: 'rgb(205, 221, 226)',
-        display: 'grid',
-
-    }
-
-}));
 
 export const HomeIcon = styled.img`
     width: 75px;
@@ -144,8 +124,8 @@ export const ContainerHeader = styled.div`
 `
 
 export const ImgCard = styled.img`
-    width:100%;
-    height: 50%;
+    width: 100%;
+    height: ${props => props.detail ? "20em" : "50%"};
     margin-top: 8px;
 `
 export const CardList = styled.div`
@@ -157,7 +137,6 @@ export const CardList = styled.div`
 export const ContainerCard = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 20rem);
-    grid-template-rows: repeat(3, 1fr);
     margin: 20px;
     padding-top: 4px;
 `
@@ -166,26 +145,39 @@ export const Text = styled.p`
 `
 
 export const TitleText = styled.h3`
-    padding: 4px
+    padding: 4px;
 `
 
 export const Input = styled.input`
     font-family: monospace;
+    color: gray;
     font-size: 20px;
-    width: 50%;
-    padding: 2% 2%;
+    width: ${props => props.login ? "50%" : "200%"};
+    padding: ${props => props.login ? "2%" : "5% 2%"}; 
     border-radius: 2rem;
     margin-bottom: 2%;
     border: 2px inset rgb(160, 160, 160);
     background-color: rgb(233, 233, 233);
 `
 
-export const ContainerInput = styled.div`
+export const Select = styled.select`
+    font-family: monospace;
+    color: gray;
+    font-size: 20px;
+    width: ${props => props.login ? "55%" : "205%"}; 
+    padding: ${props => props.login ? "2%" : "5% 2%"}; 
+    border-radius: 2rem;
+    margin-bottom: 2%;
+    border: 2px inset rgb(160, 160, 160);
+    background-color: rgb(233, 233, 233);
+`
+
+export const ContainerInput = styled.form`
     display: flex;
     justify-items: center;
     align-items:center;
     flex-direction: column;
-    margin: 5% 30px;
+    margin: 1em 30px;
 `
 
 export const ImgTrash = styled.img`
@@ -204,69 +196,77 @@ export const TextAdmin = styled.h3`
 `
 
 export const StyledBadge = withStyles((theme) => ({
-  badge: {
-    backgroundColor: '#44b700',
-    color: '#44b700',
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    '&::after': {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      borderRadius: '50%',
-      animation: '$ripple 1.2s infinite ease-in-out',
-      border: '1px solid currentColor',
-      content: '""',
+    badge: {
+        backgroundColor: '#44b700',
+        color: '#44b700',
+        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+        '&::after': {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            animation: '$ripple 1.2s infinite ease-in-out',
+            border: '1px solid currentColor',
+            content: '""',
+        },
     },
-  },
-  '@keyframes ripple': {
-    '0%': {
-      transform: 'scale(.8)',
-      opacity: 1,
+    '@keyframes ripple': {
+        '0%': {
+            transform: 'scale(.8)',
+            opacity: 1,
+        },
+        '100%': {
+            transform: 'scale(2.4)',
+            opacity: 0,
+        },
     },
-    '100%': {
-      transform: 'scale(2.4)',
-      opacity: 0,
-    },
-  },
 }))(Badge);
 
 export const StyledBadgeRed = withStyles((theme) => ({
-  badge: {
-    backgroundColor: 'red',
-    color: 'red',
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    '&::after': {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      borderRadius: '50%',
-      animation: '$ripple 1.2s infinite ease-in-out',
-      border: '1px solid currentColor',
-      content: '""',
+    badge: {
+        backgroundColor: 'red',
+        color: 'red',
+        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+        '&::after': {
+            position: 'relative',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            animation: '$ripple 1.2s infinite ease-in-out',
+            border: '1px solid currentColor',
+            content: '""',
+        },
     },
-  },
-  '@keyframes ripple': {
-    '0%': {
-      transform: 'scale(.8)',
-      opacity: 1,
+    '@keyframes ripple': {
+        '0%': {
+            transform: 'scale(.8)',
+            opacity: 1,
+        },
+        '100%': {
+            transform: 'scale(2.4)',
+            opacity: 0,
+        },
     },
-    '100%': {
-      transform: 'scale(2.4)',
-      opacity: 0,
-    },
-  },
 }))(Badge);
 
 export const Avatar = styled.p`
-    font-size: 25px;
+    font-size: ${props => props.text || props.name ? "20px" : "25px"};
     padding: 0;
-    margin: 0;
+    margin:${props => props.text ? "4px 8px 0" : "12px 3px"};
+    display: ${props => props.name ? "inline-flexbox" : "auto"}
 `
 
 export const Section = styled.section`
+    display: ${props => props.avatar ? "flex" : "flexbox"};
+    flex-direction: ${props => props.avatar ? "column" : "auto"};
+    margin-bottom:${props => props.bottom ? "30px" : 'auto'};
+`
+
+export const ContainerDetail = styled.section`
     display: flex;
+    width: 30%;
 `

@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import ListTripsPage from '../pages/ListTripsPage'
-import CreateTripPage from '../pages/CreateTripPage'
-import ApplicationFormPage from '../pages/ApplicationFormPage'
-import LoginPage from '../pages/LoginPage'
-import TripDetailsPage from '../pages/TripDetailsPage'
-import ErrorPage from '../pages/ErrorPage'
-import AdminHomePage from "../pages/AdminHomePage";
+import HomePage from "../pages/public/HomePage";
+import ListTripsPage from '../pages/public/ListTripsPage'
+import CreateTripPage from '../pages/private/CreateTripPage'
+import ApplicationFormPage from '../pages/public/ApplicationFormPage'
+import LoginPage from '../pages/public/LoginPage'
+import TripDetailsPage from '../pages/private/TripDetailsPage'
+import ErrorPage from '../pages/public/ErrorPage'
+import AdminHomePage from "../pages/private/AdminHomePage";
 import Header from '../Component/Header'
 
 function Router() {
@@ -42,7 +42,7 @@ function Router() {
                     <CreateTripPage />
                 </Route>
 
-                <Route exact path='/admin/trips/id'>
+                <Route exact path='/admin/trips/:id'>
                     <Header />
                     <TripDetailsPage />
                 </Route>

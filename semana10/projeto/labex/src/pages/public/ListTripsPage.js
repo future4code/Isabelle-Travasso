@@ -9,6 +9,7 @@ export function ListTripsPage(props) {
 
             <Title>Lista de Viagens</Title>
             <ContainerCard>
+                
                 <TripCard />
 
             </ContainerCard>

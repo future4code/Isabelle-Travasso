@@ -1,6 +1,6 @@
 import React from 'react';
 import { HomeIcon, Button, ContainerHeader } from '../styles/style'
-import { goToHomePage, gotToLastPage, goToApplicationPage, goToHomeAdmin, goToLogin } from '../Router/coordinator';
+import { goToTripCreate, goToHomePage, gotToLastPage, goToApplicationPage, goToLogin } from '../Router/coordinator';
 import { useHistory } from 'react-router';
 import home from '../img/home.png'
 
@@ -22,10 +22,10 @@ function Header() {
                         <Button onClick={() => goToApplicationPage(history)}>Inscreva-se</Button>
                     </div>
                 )
-            case 'admin/trips/list':
+            case '/admin/trips/list':
                     return (
                         <div>
-                            <Button onClick={() => gotToLastPage(history)}>Voltar</Button>
+                            <Button onClick={() => goToTripCreate(history)}>Adicionar Viagem</Button>
                             <Button onClick={logout}>Logout</Button>
                         </div>
                     )
