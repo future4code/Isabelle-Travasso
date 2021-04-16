@@ -8,7 +8,6 @@ function ErrorPage() {
         <ErrorDiv className="erros">
             <ImgError alt="Erro 404" src={errorImg}></ImgError>
         </ErrorDiv>
-
     )
 
 }
