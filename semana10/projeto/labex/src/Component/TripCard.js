@@ -64,7 +64,7 @@ export function TripCard() {
                                     <ImgCard src={imagePlanet(trip.planet)} alt={trip.planet} />
                                     <TitleText>{trip.name} - {trip.planet} </TitleText>
                                     <Text>{trip.description}</Text>
-                                    <Text><strong>Duração: </strong> {trip.duration} dias</Text>
+                                    <Text><strong>Duração: </strong> {trip.durationInDays} dias</Text>
                                     <Text><strong>Data: </strong>{trip.date}</Text>
                                 </CardList>
                             )

@@ -88,6 +88,12 @@ export const Title = styled.h1`
     font-size: 40px;
     font-family: cursive;
     text-shadow: 5px 6px 8px black;
+
+        
+    @media only screen and (max-width: 836px){
+       font-size: 30px;
+       margin: 0 5%;
+    }
 `
 export const Container = styled.div`
    display: flex;
@@ -96,13 +102,19 @@ export const Container = styled.div`
    justify-content: center;
    align-content:center;
    margin-top: 2em;
-   grid-column:${props => props.progress ? "2" : 'auto'}
+   grid-column:${props => props.progress ? "2" : 'auto'};
+   
+   @media only screen and (max-width: 836px){
+       margin-bottom: 20%;
+    }
+
 `
 
 export const HomeIcon = styled.img`
     width: 75px;
     margin: 4px 16px 0;
     cursor: pointer;
+
 `
 
 export const Button = styled.button`
@@ -114,6 +126,12 @@ export const Button = styled.button`
     padding: 12px;
     margin: 12px;
     cursor: pointer;
+
+    @media only screen and (max-width: 955px){
+        margin-top: ${props => props.back ? "18%" : "7%"};
+        font-weight: bold;
+    }
+
 `
 
 export const ContainerHeader = styled.div`
@@ -127,25 +145,41 @@ export const ImgCard = styled.img`
     width: 100%;
     height: ${props => props.detail ? "20em" : "50%"};
     margin-top: 8px;
+
 `
 export const CardList = styled.div`
     height: 100%;
     margin: 4px;
     box-shadow: 2px 2px 5px darkgray;
+
+    @media only screen and (max-width: 836px){
+        margin:${props => props.textAproved ? " 10% 0 25% 0" : ""};
+    }
 `
 
 export const ContainerCard = styled.div`
     display: grid;
-    grid-template-columns: repeat(3, 20rem);
-    margin: 20px;
+    grid-template-columns: repeat(3, 30%);
+    margin: 20px 0 0 10%;
     padding-top: 4px;
+
+    @media only screen and (max-width: 955px){
+        grid-template-columns: repeat(2, 50%);
+        margin-right: 10%;
+    }
+
+    @media only screen and (max-width: 836px){
+        grid-template-columns: repeat(1, 100%);
+        margin: 10%;
+    }
 `
 export const Text = styled.p`
-    padding: 4px
+    padding: 4px;
 `
 
 export const TitleText = styled.h3`
     padding: 4px;
+
 `
 
 export const Input = styled.input`
@@ -158,6 +192,14 @@ export const Input = styled.input`
     margin-bottom: 2%;
     border: 2px inset rgb(160, 160, 160);
     background-color: rgb(233, 233, 233);
+
+    @media only screen and (max-width: 955px){
+        width: ${props => props.create ? "200%" : "200%"};
+    }
+
+    @media only screen and (max-width: 836px){
+        width: ${props => props.create ? "155%" : "195%"};
+    }
 `
 
 export const Select = styled.select`
@@ -170,6 +212,10 @@ export const Select = styled.select`
     margin-bottom: 2%;
     border: 2px inset rgb(160, 160, 160);
     background-color: rgb(233, 233, 233);
+
+    @media only screen and (max-width: 836px){
+        width: ${props => props.create ? '160%' : "200%"};
+    }
 `
 
 export const ContainerInput = styled.form`
@@ -178,6 +224,14 @@ export const ContainerInput = styled.form`
     align-items:center;
     flex-direction: column;
     margin: 1em 30px;
+
+    @media only screen and (max-width: 955px){
+        margin: 1px 30%;
+    }
+
+    @media only screen and (max-width: 836px){
+        margin: 10% 30%;
+    }
 `
 
 export const ImgTrash = styled.img`
@@ -189,10 +243,26 @@ export const AdminList = styled.div`
     display: grid;
     grid-template-columns: 2em 1fr 2em;
     align-items: center;
+
+    @media only screen and (max-width: 955px){
+        grid-template-columns: 1em 1fr 1em;
+    }
+
+    @media only screen and (max-width: 836px){
+        grid-template-columns: 0.5em 1fr 0.3em;
+        margin: 0 5%;
+    }
 `
 export const TextAdmin = styled.h3`
     padding: 0 38px;
     cursor:pointer;
+
+    @media only screen and (max-width: 955px){
+    }
+
+    @media only screen and (max-width: 836px){
+        margin: 5% 5%;
+    }
 `
 
 export const StyledBadge = withStyles((theme) => ({
@@ -257,7 +327,12 @@ export const Avatar = styled.p`
     font-size: ${props => props.text || props.name ? "20px" : "25px"};
     padding: 0;
     margin:${props => props.text ? "4px 8px 0" : "12px 3px"};
-    display: ${props => props.name ? "inline-flexbox" : "auto"}
+    display: ${props => props.name ? "inline-flexbox" : "auto"};
+
+    @media only screen and (max-width: 836px){
+        margin:${props => props.textNoCandidate ? "10% 8px 10%" : ""};
+ 
+    }
 `
 
 export const Section = styled.section`
@@ -268,5 +343,14 @@ export const Section = styled.section`
 
 export const ContainerDetail = styled.section`
     display: flex;
-    width: 30%;
+    width: 40%;
+
+    @media only screen and (max-width: 955px){
+        width: 60%;
+    }
+
+    @media only screen and (max-width: 474px){
+        width: 90%;
+        margin: 10% 0;
+    }
 `

@@ -25,14 +25,14 @@ function Header() {
             case '/admin/trips/list':
                     return (
                         <div>
-                            <Button onClick={() => goToTripCreate(history)}>Adicionar Viagem</Button>
+                            <Button onClick={() => goToTripCreate(history)}>Adicionar</Button>
                             <Button onClick={logout}>Logout</Button>
                         </div>
                     )
             default:
                 return (
                     <div>
-                        <Button onClick={() => gotToLastPage(history)}>Voltar</Button>
+                        <Button back onClick={() => gotToLastPage(history)}>Voltar</Button>
                     </div>
                 )
         }

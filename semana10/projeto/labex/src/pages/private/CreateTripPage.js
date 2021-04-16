@@ -3,7 +3,7 @@ import { useForm } from "../../hooks/useForm";
 import { Container, ContainerInput, Title, Select, Button, Input } from '../../styles/style'
 import { useProtectedPage } from '../../hooks/useProtectedPage'
 import { planets } from '../../constants/options'
-import { axiosConfig, baseUrl, bodyCreate } from '../../constants/api'
+import { axiosConfig, baseUrl } from '../../constants/api'
 import { initialForm } from '../../constants/inputs'
 import axios from 'axios';
 
@@ -42,18 +42,18 @@ function CreateTripPage() {
         <Container>
             <Title>Criar Viagem</Title>
             <ContainerInput onSubmit={onSubmitForm}>
-                <Input
+                <Input create
                     required
                     type={'text'}
                     name={"trips"}
-                    min={3}
+                    pattern={"^([a-zA-Z]|[à-ú]|[À-Ú]|[ ])+$"}
                     value={form.trips}
                     onChange={onChange}
                     placeholder={"Nome"}
-                    title={'Nome deve ter no mínimo 3 caracteres'}
+                    title={'Nome inválido'}
                 />
 
-                <Select
+                <Select create
                     name={"planet"}
                     value={form.planet}
                     onChange={onChange}
@@ -65,28 +65,29 @@ function CreateTripPage() {
                     })}
 
                 </Select>
-                <Input
+               
+                <Input create
                     value={form.date}
                     name={"date"}
                     onChange={onChange}
                     placeholder={"dd / mm / aaaa"}
-                    pattern={"[0-9]{1,2}(/|-)[0-9]{1,2}(/|-)[0-9]{4}"}
+                    pattern={"[0-9]{1,2}(/)[0-9]{1,2}(/)[0-9]{4}"}
                     required
                     type={"date"}
                 />
 
-                <Input
+                <Input create
                     value={form.text}
                     onChange={onChange}
                     name={"text"}
                     placeholder={"Descrição"}
+                    pattern={`^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$`}
                     required
                     type={'text'}
-                    min={6}
-                    title={"A descrição deve conter no mínimo 6 caracteres"}
+                    title={"Cuidado com os caracteres especiais"}
                 />
 
-                <Input
+                <Input create
                     value={form.time}
                     onChange={onChange}
                     name={"time"}

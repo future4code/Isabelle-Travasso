@@ -1,6 +1,6 @@
 import React from 'react'
 import TripCard from '../../Component/TripCard';
-import { Container, ContainerCard, Title } from '../../styles/style'
+import { Container, Title } from '../../styles/style'
 
 export function ListTripsPage(props) {
 
@@ -8,11 +8,9 @@ export function ListTripsPage(props) {
         <Container>
 
             <Title>Lista de Viagens</Title>
-            <ContainerCard>
-                
-                <TripCard />
 
-            </ContainerCard>
+            <TripCard />
+
         </Container>
     );
 }

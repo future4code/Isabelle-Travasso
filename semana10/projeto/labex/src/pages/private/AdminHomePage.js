@@ -9,7 +9,9 @@ function AdminHomePage() {
     return (
         <Container>
             <Title>Painel administrativo</Title>
-            <TripCard />
+            <Container>
+                <TripCard />
+            </Container>
         </Container>
     );
 }
