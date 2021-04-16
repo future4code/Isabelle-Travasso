@@ -354,3 +354,34 @@ export const ContainerDetail = styled.section`
         margin: 10% 0;
     }
 `
+export const ErrorDiv = styled.div`
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+
+    @media only screen and (max-width: 955px){
+        width: 100%;
+    }
+
+    @media only screen and (max-width: 474px){
+        width: 90%;
+    }
+    
+`
+
+export const ImgError = styled.img`
+    position: absolute;
+    
+
+@media only screen and (max-width: 955px){
+        width: 100%;
+    }
+
+    @media only screen and (max-width: 474px){
+        width: 80%;
+        height: 80%;
+        margin-left: 5%
+        
+    }
+`
