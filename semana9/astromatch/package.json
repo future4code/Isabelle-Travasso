@@ -1,0 +1,56 @@
+{
+  "name": "astromatch",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
+    "@mdi/js": "^5.9.55",
+    "@mdi/react": "^1.5.0",
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "node-sass-chokidar": "^1.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-native": "^0.64.0",
+    "react-responsive": "^8.2.0",
+    "react-scripts": "4.0.3",
+    "react-spring": "^9.0.0",
+    "react-swing": "^2.0.0",
+    "react-tinder-card": "^1.4.0",
+    "react-vanilla-tilt": "^1.0.0",
+    "sass": "^1.32.8",
+    "soft-ui-design-system": "^1.0.2",
+    "styled-components": "^5.2.3",
+    "use-3d-effect": "^1.1.0",
+    "use-swipe-hook": "^1.2.2",
+    "web-vitals": "^1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
