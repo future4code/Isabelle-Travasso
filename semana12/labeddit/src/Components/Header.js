@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { HomeIcon, Button, ContainerHeader } from '../Styles/style'
+import React from 'react';
+import { Text, HomeIcon, Button, ContainerHeader } from '../Styles/style'
 import { goToRegister, goToFeed, goToAddPosts, gotToLastPage, goToLogin } from '../Router/coordinator';
 import { useHistory } from 'react-router';
 import labedditLogo from '../img/labeddit-logo.png'
-
 
 function Header() {
     const history = useHistory()
@@ -31,7 +30,7 @@ function Header() {
                 return (
                     <div>
                         <Button onClick={() => goToAddPosts(history)}>Criar Post</Button>
-                        <Button onClick={logout}>Logout</Button>
+                        <Button logout onClick={logout}>Logout</Button>
                     </div>
                 )
             default:
@@ -48,6 +47,7 @@ function Header() {
         <div>
             <ContainerHeader >
                 <HomeIcon src={labedditLogo} onClick={() => goToFeed(history)}></HomeIcon>
+                <Text reader bold>LabEddit</Text>
                 {buttonNav()}
             </ContainerHeader>
         </div>

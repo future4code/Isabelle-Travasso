@@ -14,6 +14,11 @@ export const goToAddPosts = (history) => {
     history.push('/add/post')
 }
 
+export const goToComments = (history, postId) => {
+    history.push(`/post/${postId}`)
+}
+
 export const gotToLastPage = (history) => {
     history.goBack()
 }
+

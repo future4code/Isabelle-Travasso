@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import { Container, ContainerInput, Input, Button, Title, Text } from '../../Styles/style'
-import { useHistory } from 'react-router-dom';
-import { goToFeed, goToLogin, goToRegister } from '../../Router/coordinator'
+import React, { useState } from 'react'
+import { Container, Title } from '../../Styles/style'
 import { useProtectedPage } from '../../Hooks/useProtectedPage'
-import { baseUrl, axiosConfig } from '../../Constants/api'
+import CardPosts from '../../Components/CardPosts'
 
 function FeedPage() {
     useProtectedPage()
 
     return (
         <Container>
-            <Title>Acessar Conta </Title>
-
+            <CardPosts />
         </Container>
     );
 }

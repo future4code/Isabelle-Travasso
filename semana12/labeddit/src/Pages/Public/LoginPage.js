@@ -29,7 +29,6 @@ function LoginPage() {
             const res = await axios.post(`${baseUrl}/login`, body)
             localStorage.setItem('token', res.data.token)
             goToFeed(history)
-            console.log(res.data.token)
         } catch (err) {
             alert(err.response.data.message)
 

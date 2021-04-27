@@ -5,6 +5,8 @@ import FeedPage from '../Pages/Private/FeedPage'
 import LoginPage from '../Pages/Public/LoginPage'
 import ErrorPage from '../Pages/Public/ErrorPage'
 import Header from '../Components/Header'
+import CommentPage from '../Pages/Private/CommentPage'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 function Router() {
     return (
@@ -28,6 +30,11 @@ function Router() {
                 <Route exact path='/add/post'>
                     <Header />
                     <PostsPage />
+                </Route>
+
+                <Route exact path='/post/:postId'>
+                    <Header />
+                    <CommentPage />
                 </Route>
 
                 <Route>

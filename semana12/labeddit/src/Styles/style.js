@@ -5,6 +5,12 @@ export const HomeIcon = styled.img`
     margin: 4px 16px 0;
     cursor: pointer;
 `
+
+export const Avatar = styled.img`
+    width: ${props => props.big ? "34px" : '25px'};
+    margin-right: 10px;
+`
+
 export const ContainerHeader = styled.div`
     background: #ffff;
     display: flex;
@@ -14,45 +20,71 @@ export const ContainerHeader = styled.div`
 `
 
 export const Button = styled.button`
-    border-radius: 20px;
+    border-radius: ${props => props.add ? "100%" : '20px'};
     border-color: rgb(67 81 90);
     background-image: linear-gradient( rgb(253 126 0),  rgb(248 179 77));
     color: rgb(39 47 52);
-    font-size: 16px;
-    padding: 12px;
-    margin-top: ${props => props.main ? "8%" : 'auto'};
+    font-size: ${props => props.add ? "28px" : '16px'};
+    padding: ${props => props.add ? "18px 24px" : '12px'};
+    margin-top: ${props => props.main ? "6%" : 'auto'};
+    margin-left: ${props => props.logout ? "18px" : ''};
     cursor: pointer;
     font-weight: bold;
-`
 
-export const Container = styled.div`
-   display: flex;
-   flex-direction: ${props => props.button ? "row" : 'column'};
-   align-items:center;
-   justify-content: center;
-   align-content:center;
-   margin-top: 2em;
-   grid-column:${props => props.progress ? "2" : 'auto'};
-   
-   @media only screen and (max-width: 836px){
-       margin-bottom: 20%;
+    @media only screen and (max-width: 505px){
+        padding: ${props => props.add ? "12px 16px" : '12px'};
     }
+    
+`
+export const ContainerButton = styled.div`
+    position: fixed;
+    bottom:10px;
+    right:20px;
+`
+export const Container = styled.div`
+    display: flex;
+    flex-direction: ${props => props.button ? "row" : 'column'};
+    align-items:center;
+    justify-content: center;
+    align-content:center;
+    margin-top: 1em;
+    grid-column:${props => props.progress ? "2" : 'auto'};
+   
 `
 export const Title = styled.h1`
     color: rgb(67 81 90);
     font-size: 40px;
     font-family: cursive;
+    margin: ${props => props.error ? "0" : ''};
         
-    @media only screen and (max-width: 836px){
-       /* font-size: 30px;
-       margin: 0 5%; */
-    }
 `
+
 export const Text = styled.p`
-    color: rgb(67 81 90);
+    text-transform: ${props => props.name ? "capitalize" : ''};
+    color: ${props => props.reader ? "rgb(253 126 0)" : 'rgb(67 81 90)'};
     margin-left: 4px;
     cursor: ${props => props.link ? "pointer" : 'auto'};
     text-decoration: ${props => props.link ? "underline" : 'auto'};
+    font-size: ${props => props.reader ? "2em" : ''};
+    font-family: ${props => props.reader ? "cursive" : ''};
+    font-weight: ${props => props.bold ? "bold" : ''};
+   
+    @media only screen and (max-width: 460px){
+        font-size: ${props => props.reader ? "0px" : ''};
+    }
+
+`
+
+export const Vote = styled.p`
+    font-weight: bold;
+    font-size: 28px;
+    color: rgb(67 81 90);
+    margin: 8px;
+    cursor: pointer;
+    &:hover{
+        cursor: pointer;
+        color: ${props => props.up ? "LimeGreen" : 'red'};
+    }
 `
 
 export const ContainerInput = styled.form`
@@ -61,13 +93,6 @@ export const ContainerInput = styled.form`
     align-items:center;
     flex-direction: ${props => props.register ? "row" : "column"};
     margin: 1em 30px;
-
-    @media only screen and (max-width: 955px){
-        /* margin: 1px 30%; */
-    }
-    @media only screen and (max-width: 836px){
-        /* margin: 10% 30%; */
-    }
 `
 
 export const Input = styled.input`
@@ -80,10 +105,65 @@ export const Input = styled.input`
     margin-bottom: 2%;
     border: 2px inset rgb(67 81 90);
     background-color: rgb(233, 233, 233);
-    @media only screen and (max-width: 955px){
-        width: ${props => props.create ? "200%" : "200%"};
+
+    @media only screen and (max-width: 505px){
+        width: ${props => props.create ? "155%" : "100%"};
     }
-    @media only screen and (max-width: 836px){
-        width: ${props => props.create ? "155%" : "195%"};
+`
+
+export const InputComment = styled.input`
+    font-family: monospace;
+    color: gray;
+    font-size: 20px;
+    width: 100%;
+    min-height: 150px;
+    border-radius: 10px;
+    border: 2px inset rgb(67 81 90);
+    background-color: rgb(233, 233, 233);
+`
+
+export const ContainerPagination = styled.div`
+    width: 100%;
+    margin-top: 16px;
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+`
+
+export const ContainerVote = styled.div`
+    display: flex;
+    justify-content: start;
+    align-items:center;
+`
+
+export const ContainerScroll = styled.div`
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+    background-color: #3d7dca;
     }
+
+`
+
+export const CardPost = styled.div`
+    width: calc(80% - 15px);
+    max-width: 60%;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 15px -5px;
+`
+export const CardPostSpaceBetween = styled.div`
+    display:flex;
+    justify-content: space-between;
 `

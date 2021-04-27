@@ -5,9 +5,9 @@ import { initialForm } from "../../Constants/inputs";
 import { Container, ContainerInput, Input, Button, Title } from '../../Styles/style'
 import { useForm } from "../../Hooks/useForm";
 
-
 function RegisterPage() {
     const [form, onChange, resetForm] = useForm(initialForm)
+    
     const register = async () => {
         const body = {
             'email': form.email,
@@ -17,7 +17,7 @@ function RegisterPage() {
 
         try {
             await axios.post(`${baseUrl}/signup`, body)
-            alert(" ✅ Cadastro realizado com sucesso")
+            alert(" ✅ Cadastro realizado com sucesso!")
         } catch (err) {
             alert('❌ Não foi possivel realizar o seu cadastro, tente novamente mais tarde')
         }
