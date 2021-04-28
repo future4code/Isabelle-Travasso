@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { baseUrl } from '../../Constants/api'
 import axios from 'axios';
 import { initialForm } from "../../Constants/inputs";
 import { Container, ContainerInput, Input, Button, Title } from '../../Styles/style'
 import { useForm } from "../../Hooks/useForm";
+import { useAlert } from "../../Hooks/useAlert";
+import GlobalStateContext from '../../Global/GlobalStateContext'
 
 function RegisterPage() {
     const [form, onChange, resetForm] = useForm(initialForm)
+    let { setters} = useContext(GlobalStateContext)
+    const [alert] = useAlert('Cadastro realizado com sucesso!')
     
     const register = async () => {
         const body = {
@@ -17,7 +21,7 @@ function RegisterPage() {
 
         try {
             await axios.post(`${baseUrl}/signup`, body)
-            alert(" ✅ Cadastro realizado com sucesso!")
+            setters.setAlert(true)
         } catch (err) {
             alert('❌ Não foi possivel realizar o seu cadastro, tente novamente mais tarde')
         }
@@ -67,6 +71,7 @@ function RegisterPage() {
 
                 <Button main>Cadastrar</Button>
             </ContainerInput>
+            {alert()}
         </Container>
     );
 }

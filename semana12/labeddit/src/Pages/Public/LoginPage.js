@@ -30,7 +30,7 @@ function LoginPage() {
             localStorage.setItem('token', res.data.token)
             goToFeed(history)
         } catch (err) {
-            alert(err.response.data.message)
+            alert(`❌ ${err.response.data.message}`)
 
         }
     }

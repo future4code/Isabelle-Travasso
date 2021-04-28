@@ -6,5 +6,7 @@ export const initialForm = {
     title:'',
     comment:'',
     inputSearch:'',
-    order:'Decrescente'
+    order:'',
 }
+
+export const options = ['Posts recentes', 'Posts antigos', 'Posts mais votados', 'Posts menos votados']

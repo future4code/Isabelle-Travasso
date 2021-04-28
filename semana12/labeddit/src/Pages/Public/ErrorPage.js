@@ -9,7 +9,8 @@ function Error() {
            
            <img src={labedditLogo} alt='Logo' />
            <Title error>Ooops! Erro 404</Title>
-           <Title error>Página não encontrada</Title>
+           
+           <Title errorPage>Página não encontrada</Title>
            
         </Container>
     )

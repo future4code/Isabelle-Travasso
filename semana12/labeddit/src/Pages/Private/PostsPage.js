@@ -1,14 +1,18 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { baseUrl, axiosConfig } from '../../Constants/api'
 import axios from 'axios';
 import { initialForm } from "../../Constants/inputs";
 import { Container, ContainerInput, Input, Button, Title, Text } from '../../Styles/style'
 import { useProtectedPage } from '../../Hooks/useProtectedPage'
 import { useForm } from "../../Hooks/useForm";
+import { useAlert } from "../../Hooks/useAlert";
+import GlobalStateContext from '../../Global/GlobalStateContext'
 
 function PostsPage() {
     useProtectedPage()
     const [form, onChange, resetForm] = useForm(initialForm)
+    const [alert] = useAlert('Conteúdo postado com sucesso!')
+    let { setters } = useContext(GlobalStateContext)
 
     const postPost = async () => {
         const body = {
@@ -17,9 +21,9 @@ function PostsPage() {
         }
         try {
             await axios.post(`${baseUrl}/posts`, body, axiosConfig)
-            alert(" ✅ Conteúdo postado com sucesso!")
+            setters.setAlert(true)
         } catch (err) {
-            alert(err.response.data.message)
+            alert( `❌ ${err.response.data.message}`)
         }
     }
 
@@ -52,6 +56,7 @@ function PostsPage() {
 
                 <Button main>Enviar</Button>
             </ContainerInput>
+            {alert()}
         </Container>
     )
 }

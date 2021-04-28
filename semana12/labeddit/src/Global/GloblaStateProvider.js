@@ -5,11 +5,11 @@ import { baseUrl, axiosConfig } from '../Constants/api'
 import axios from 'axios';
 
 const GlobalStateProvider = (props) => {
-    const history = useHistory()
     const [posts, setPosts] = useState([])
     const [page, setPage] = useState(0)
     const [perPage, setPerPage] = useState(10)
     const [lengthPages, setLengthPages] = useState()
+    const [alert, setAlert] = useState(false)
    
     useEffect(() => {
         getPosts()
@@ -20,7 +20,7 @@ const GlobalStateProvider = (props) => {
             const res = await axios.get(`${baseUrl}/posts`, axiosConfig)
             setPosts(res.data.posts)
         } catch (err) {
-            alert(err.response.data.message)
+            alert(`❌ ${err.response.data.message}`)
         }
     }
 
@@ -30,17 +30,18 @@ const GlobalStateProvider = (props) => {
         }
         try {
             await axios.put(`${baseUrl}/posts/${id}/vote`, body, axiosConfig)
-            alert('voto realizado com sucesso.')
+            setAlert(true)
         } catch (err) {
-            alert(err.response.data.message)
+            alert(`❌ ${err.response.data.message}`)
         }
     }
+    
 
     let start = page * perPage
     let end = start + perPage
 
-    const states = { start, end, posts, perPage, page, lengthPages };
-    const setters = { setPerPage, setPage, setLengthPages};
+    const states = { alert, start, end, posts, perPage, page, lengthPages };
+    const setters = { setAlert, setPerPage, setPage, setLengthPages};
     const requests = { getPosts, votePost };
 
     const data = { states, setters, requests };

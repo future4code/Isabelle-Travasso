@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { baseUrl, axiosConfig } from '../../Constants/api'
 import axios from 'axios';
 import { useParams } from 'react-router';
-import { Img, ContainerInput, InputComment, Container, CardPostSpaceBetween, ContainerScroll, CardPost, Text, ContainerVote, Button, Title } from '../../Styles/style'
+import { Img, ContainerInput, InputComment, Container, CardPostSpaceBetween, ContainerScroll, CardPost, Text, Button, Title } from '../../Styles/style'
 import { initialForm } from "../../Constants/inputs";
 import { useForm } from "../../Hooks/useForm";
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -24,7 +24,7 @@ function CardPosts() {
             const res = await axios.get(`${baseUrl}/posts/${postId}`, axiosConfig)
             setPostDetail(res.data.post)
         } catch (err) {
-            alert(err.response.data.message)
+            alert(`❌ ${err.response.data.message}`)
         }
     }
 
@@ -35,7 +35,7 @@ function CardPosts() {
         try {
             await axios.post(`${baseUrl}/posts/${postId}/comment`, body, axiosConfig)
         } catch (err) {
-            alert(err.response.data.message)
+            alert(`❌ ${err.response.data.message}`)
         }
     }
 

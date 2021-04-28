@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Container, Title } from '../../Styles/style'
+import React from 'react'
+import { Container } from '../../Styles/style'
 import { useProtectedPage } from '../../Hooks/useProtectedPage'
 import CardPosts from '../../Components/CardPosts'
 

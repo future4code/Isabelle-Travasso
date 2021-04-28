@@ -12,7 +12,6 @@ export const Img = styled.img`
     height: ${props => props.share ? "25px" : ''};
     cursor: ${props => props.share ? "pointer" : ''};
     margin: ${props => props.share ? "15px 0" : ''};
-
 `
 
 export const ContainerHeader = styled.div`
@@ -49,10 +48,25 @@ export const ButtonFilter = styled.button`
     cursor: pointer;
 `
 
-export const ContainerButton = styled.div`
+export const ContainerButtonFloat = styled.div`
     position: fixed;
-    bottom:10px;
-    right:20px;
+    bottom:${props => props.alert ? "50vh" : '10px'};
+    right:${props => props.alert ? "85vh" : '20px'};
+    background:${props => props.alert ? "lightgreen" : ''};
+    display:${props => props.alert ? "flex" : ''};
+    justify-content:${props => props.alert ? "center" : ''};
+    align-content:${props => props.alert ? "center" : ''};
+    align-items:${props => props.alert ? "center" : ''};
+    padding:${props => props.alert ? "20px" : ''};
+
+    @media only screen and (max-width: 836px){
+        right:${props => props.alert ? "30vh" : '5px'};
+    }
+
+    @media only screen and (max-width: 505px){
+        bottom:${props => props.alert ? "40vh" : ''};
+        right:${props => props.alert ? "5vh" : ''};
+    }
 `
 export const Container = styled.div`
     display: flex;
@@ -63,18 +77,26 @@ export const Container = styled.div`
     margin-top: 1em;
     grid-column:${props => props.progress ? "2" : 'auto'};
    
+    @media only screen and (max-width: 836px){
+        flex-direction: ${props => props.option ? "column" : ''};
+    }
 `
+
 export const Title = styled.h1`
     color: rgb(67 81 90);
-    font-size: 40px;
+    font-size: ${props => props.errorPage ? "28px" : '40px'};;
     font-family: cursive;
-    margin: ${props => props.error ? "0" : ''};
-        
+    margin: ${props => props.error ? "0" : ''};        
 `
 export const TextFilter = styled.p` 
     font-size: 28px;
     padding: 10px;
     cursor: pointer;
+
+    @media only screen and (max-width: 836px){
+        margin: 0;
+        padding: 12px;
+    }
 `
 
 export const Text = styled.p`
@@ -115,7 +137,22 @@ export const ContainerInput = styled.form`
     align-items:center;
     flex-direction: ${props => props.register ? "row" : "column"};
     margin: 1em 30px;
+
+    @media only screen and (max-width: 836px){
+        margin: ${props => props.share ? "0" : ''};
+    }
 `
+export const ContainerOptionsButton = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding:0;
+
+    @media only screen and (max-width: 836px){
+        flex-direction: ${props => props.button ? "row" : ''};
+    }
+`
+
 
 export const Input = styled.input`
     font-family: monospace;
@@ -132,6 +169,27 @@ export const Input = styled.input`
         width: ${props => props.create ? "155%" : "100%"};
     }
 `
+export const InputSearch = styled.input`
+    font-family: monospace;
+    color: gray;
+    font-size: 20px;
+    width: auto;
+    height: 20%;
+    padding: 5% 2%; 
+    border-radius: 2rem;
+    margin-bottom: 2%;
+    border: 2px inset rgb(67 81 90);
+    background-color: rgb(233, 233, 233);
+
+    @media only screen and (max-width: 836px){
+        width: 90%;
+    }
+
+    @media only screen and (max-width: 505px){
+        width: 89%;
+    }
+`
+
 
 export const InputComment = styled.input`
     font-family: monospace;
@@ -142,6 +200,34 @@ export const InputComment = styled.input`
     border-radius: 10px;
     border: 2px inset rgb(67 81 90);
     background-color: rgb(233, 233, 233);
+`
+
+export const Select = styled.select`
+    font-family: monospace;
+    color: gray;
+    font-size: 20px;
+    height: 10%;
+    padding: 5% 2%; 
+    border-radius: 2rem;
+    margin-bottom: 2%;
+    margin-right: 8px;
+    border: 2px inset rgb(67 81 90);
+    background-color: rgb(233, 233, 233);
+
+    @media only screen and (max-width: 836px){
+        margin-left:10px;
+        width: 95%;
+    }
+`
+
+export const ContainerOptions = styled.div`
+    width: 40%;
+    margin: 8px;
+    display: flex;
+
+    @media only screen and (max-width: 836px){
+        flex-direction: column
+    }
 `
 
 export const ContainerPagination = styled.div`
@@ -189,8 +275,29 @@ export const CardPostSpaceBetween = styled.div`
     display:flex;
     justify-content: space-between;
 
-    @media only screen and (max-width: 505px){
+    @media only screen and (max-width: 840px){
         flex-direction: ${props => props.responsive ? "column" : ""}; 
         align-items: ${props => props.responsive ? "center" : ""};    
     }
+`
+export const ContainerForm = styled.form`
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+    align-content:center;
+    margin-top: 1em;
+   
+    @media only screen and (max-width: 836px){
+        flex-direction: ${props => props.option ? "column" : ''};
+    }
+
+`
+export const CloseAlert = styled.p`
+    font-size: 20px;
+    font-weight: bold;
+    margin:0;
+    margin-left: 12px;
+    align-self: flex-end;
+    cursor: pointer;    
 `

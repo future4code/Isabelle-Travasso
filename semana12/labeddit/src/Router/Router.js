@@ -6,7 +6,6 @@ import LoginPage from '../Pages/Public/LoginPage'
 import ErrorPage from '../Pages/Public/ErrorPage'
 import Header from '../Components/Header'
 import CommentPage from '../Pages/Private/CommentPage'
-import CircularProgress from '@material-ui/core/CircularProgress'
 
 function Router() {
     return (
