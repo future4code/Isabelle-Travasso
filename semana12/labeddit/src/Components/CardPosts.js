@@ -16,17 +16,18 @@ function CardPosts() {
     const post = states.posts
     const [filter, setFilter] = useState(post)
     const history = useHistory()
-    const paginated = filter.slice(states.start, states.end)
-    setters.setLengthPages(Math.ceil(filter.length / states.perPage))
 
-    useEffect(() => {
-        requests.getPosts()
-    }, [paginated])
+    setters.setLengthPages(Math.ceil(filter.length / states.perPage))
+    const paginated = filter.length === 0 ? post.slice(states.start, states.end) : filter.slice(states.start, states.end)
+
+    // useEffect(() => {
+    //     requests.getPosts()
+    // }, [])
 
     const handleChange = (e, value) => {
         setters.setPage(value)
     }
-    
+
     const sendForm = (e) => {
         e.preventDefault()
         filterName()
@@ -43,7 +44,6 @@ function CardPosts() {
                 } else {
                     return (post)
                 }
-
             })
 
         return (
@@ -66,9 +66,8 @@ function CardPosts() {
                         >
                         </Input>
                         <ButtonFilter>🔍</ButtonFilter>
-                        <TextFilter  onClick={() => setFilter(post)}>⟲</TextFilter>
+                        <TextFilter onClick={() => setFilter(post)}>⟲</TextFilter>
                     </ContainerInput>
-                    
 
                     {paginated && paginated.map((post) => {
                         let date = new Date(post.createdAt)
