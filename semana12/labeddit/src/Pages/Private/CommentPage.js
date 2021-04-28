@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { baseUrl, axiosConfig } from '../../Constants/api'
 import axios from 'axios';
 import { useParams } from 'react-router';
-import { Avatar, ContainerInput, InputComment, Container, CardPostSpaceBetween, ContainerScroll, CardPost, Text, ContainerVote, Button, Title } from '../../Styles/style'
+import { Img, ContainerInput, InputComment, Container, CardPostSpaceBetween, ContainerScroll, CardPost, Text, ContainerVote, Button, Title } from '../../Styles/style'
 import { initialForm } from "../../Constants/inputs";
 import { useForm } from "../../Hooks/useForm";
 import CircularProgress from '@material-ui/core/CircularProgress'
@@ -53,7 +53,7 @@ function CardPosts() {
                     <Title>Detalhes do post</Title>
                     <CardPost>
                         <CardPostSpaceBetween>
-                            <Text bold name><Avatar big src={labedditLogo}></Avatar>{postDetail.username}</Text>
+                            <Text bold name><Img big src={labedditLogo}></Img>{postDetail.username}</Text>
                             <Text>{date.toLocaleDateString('pt-BR')} - {date.toLocaleTimeString()}</Text>
                         </CardPostSpaceBetween>
                         <Text bold>{postDetail.title}</Text>
@@ -88,7 +88,7 @@ function CardPosts() {
                         return (
                             <CardPost comment key={post.id}>
                                 <CardPostSpaceBetween>
-                                    <Text bold name><Avatar src={labedditLogo}></Avatar>{post.username}</Text>
+                                    <Text bold name><Img src={labedditLogo}></Img>{post.username}</Text>
                                     <Text>{dateComment.toLocaleDateString('pt-BR')} - {dateComment.toLocaleTimeString()}</Text>
                                 </CardPostSpaceBetween>
                                 <Text bold>{post.title}</Text>

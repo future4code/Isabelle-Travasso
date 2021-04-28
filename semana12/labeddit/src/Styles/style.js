@@ -6,9 +6,13 @@ export const HomeIcon = styled.img`
     cursor: pointer;
 `
 
-export const Avatar = styled.img`
+export const Img = styled.img`
     width: ${props => props.big ? "34px" : '25px'};
     margin-right: 10px;
+    height: ${props => props.share ? "25px" : ''};
+    cursor: ${props => props.share ? "pointer" : ''};
+    margin: ${props => props.share ? "15px 0" : ''};
+
 `
 
 export const ContainerHeader = styled.div`
@@ -184,4 +188,9 @@ export const CardPost = styled.div`
 export const CardPostSpaceBetween = styled.div`
     display:flex;
     justify-content: space-between;
+
+    @media only screen and (max-width: 505px){
+        flex-direction: ${props => props.responsive ? "column" : ""}; 
+        align-items: ${props => props.responsive ? "center" : ""};    
+    }
 `
