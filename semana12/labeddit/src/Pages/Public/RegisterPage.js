@@ -36,7 +36,7 @@ function RegisterPage() {
 
     return (
         <Container>
-            <Title>Cadastrar-se </Title>
+            <Title>Cadastrar-se</Title>
             <ContainerInput onSubmit={onSubmitForm}>
                 <Input
                     type={'text'}
