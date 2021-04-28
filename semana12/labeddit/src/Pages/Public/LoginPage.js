@@ -24,7 +24,7 @@ function LoginPage() {
             'email': form.email,
             'password': form.password
         }
-        
+
         try {
             const res = await axios.post(`${baseUrl}/login`, body)
             localStorage.setItem('token', res.data.token)
@@ -39,8 +39,8 @@ function LoginPage() {
         e.preventDefault()
         login()
     }
-    
-    
+
+
     return (
         <Container>
             <Title>Acessar Conta </Title>

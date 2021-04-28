@@ -9,9 +9,9 @@ import GlobalStateContext from '../../Global/GlobalStateContext'
 
 function RegisterPage() {
     const [form, onChange, resetForm] = useForm(initialForm)
-    let { setters} = useContext(GlobalStateContext)
+    let { setters } = useContext(GlobalStateContext)
     const [alert] = useAlert('Cadastro realizado com sucesso!')
-    
+
     const register = async () => {
         const body = {
             'email': form.email,

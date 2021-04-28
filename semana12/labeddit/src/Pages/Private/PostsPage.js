@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { baseUrl, axiosConfig } from '../../Constants/api'
 import axios from 'axios';
 import { initialForm } from "../../Constants/inputs";
@@ -23,7 +23,7 @@ function PostsPage() {
             await axios.post(`${baseUrl}/posts`, body, axiosConfig)
             setters.setAlert(true)
         } catch (err) {
-            alert( `❌ ${err.response.data.message}`)
+            alert(`❌ ${err.response.data.message}`)
         }
     }
 
@@ -33,7 +33,7 @@ function PostsPage() {
         resetForm()
     }
 
-    return(
+    return (
         <Container>
             <Title> Crie seu Post! </Title>
             <ContainerInput onSubmit={onSubmitForm}>

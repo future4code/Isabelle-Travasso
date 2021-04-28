@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { InputSearch, ContainerButtonFloat, Img, Vote, CardPostSpaceBetween, ContainerScroll, CardPost, Text, ContainerVote, Button } from '../Styles/style'
 import { goToAddPosts, goToComments } from '../Router/coordinator';
-import { useHistory, useParams } from 'react-router';
+import { useHistory } from 'react-router';
 import GlobalStateContext from '../Global/GlobalStateContext'
 import Pagination from '@material-ui/lab/Pagination';
 import { ContainerOptionsButton, Select, ButtonFilter, TextFilter, Container, ContainerPagination, ContainerForm } from '../Styles/style'
@@ -11,7 +11,6 @@ import share from '../img/share.png'
 import { useForm } from "../Hooks/useForm";
 import { useAlert } from "../Hooks/useAlert";
 import { initialForm, options } from "../Constants/inputs";
-import { baseUrl } from '../Constants/api'
 
 function CardPosts() {
     const [form, onChange, resetForm] = useForm(initialForm)
@@ -32,7 +31,7 @@ function CardPosts() {
             text: text,
             url: url
         })
-            .catch((error) => alert (`❌ Oops! ${error}`));
+            .catch((error) => alert(`❌ Oops! ${error}`));
     }
 
 
@@ -93,7 +92,7 @@ function CardPosts() {
                             })}
                         </Select>
 
-                        <InputSearch 
+                        <InputSearch
                             type={"text"}
                             name={"inputSearch"}
                             value={form.inputSearch}

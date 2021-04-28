@@ -1,54 +1,20 @@
-import React from 'react';
-import { Text, HomeIcon, Button, ContainerHeader } from '../Styles/style'
-import { goToRegister, goToFeed, goToAddPosts, gotToLastPage, goToLogin } from '../Router/coordinator';
+import React, { useContext } from 'react';
+import { Text, HomeIcon, ContainerHeader } from '../Styles/style'
+import { goToFeed } from '../Router/coordinator';
 import { useHistory } from 'react-router';
 import labedditLogo from '../img/labeddit-logo.png'
+import GlobalStateContext from '../Global/GlobalStateContext'
 
 function Header() {
+    let { requests } = useContext(GlobalStateContext)
     const history = useHistory()
-    
-    const logout = () => {
-        window.localStorage.removeItem("token");
-        goToLogin(history);
-    };
-
-    const buttonNav = () => {
-        switch (history.location.pathname) {
-            case '/':
-                return (
-                    <div>
-                        <Button onClick={() => goToRegister(history)}>Inscreva-se</Button>
-                    </div>
-                )
-            case '/signup':
-                return (
-                    <div>
-                        <Button onClick={() => goToLogin(history)}>Login</Button>
-                    </div>
-                )
-            case '/feed':
-                return (
-                    <div>
-                        <Button onClick={() => goToAddPosts(history)}>Criar Post</Button>
-                        <Button logout onClick={logout}>Logout</Button>
-                    </div>
-                )
-            default:
-                return (
-                    <div>
-                        <Button back onClick={() => gotToLastPage(history)}>Voltar</Button>
-                    </div>
-                )
-        }
-
-    }
 
     return (
         <div>
             <ContainerHeader >
                 <HomeIcon src={labedditLogo} onClick={() => goToFeed(history)}></HomeIcon>
                 <Text reader bold>LabEddit</Text>
-                {buttonNav()}
+                {requests.buttonNav(history.location.pathname)}
             </ContainerHeader>
         </div>
     )

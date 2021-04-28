@@ -1,6 +1,6 @@
 import GlobalStateContext from '../Global/GlobalStateContext'
-import { CloseAlert, ContainerButtonFloat} from '../Styles/style'
-import React, {useContext} from 'react';
+import { CloseAlert, ContainerButtonFloat } from '../Styles/style'
+import React, { useContext } from 'react';
 
 export const useAlert = (text) => {
     let { states, setters } = useContext(GlobalStateContext)
