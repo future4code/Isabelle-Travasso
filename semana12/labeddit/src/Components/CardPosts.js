@@ -1,10 +1,10 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Input, ContainerButton, Avatar, Vote, CardPostSpaceBetween, ContainerScroll, CardPost, Text, ContainerVote, Button, ContainerInput } from '../Styles/style'
 import { goToAddPosts, goToComments } from '../Router/coordinator';
 import { useHistory } from 'react-router';
 import GlobalStateContext from '../Global/GlobalStateContext'
 import Pagination from '@material-ui/lab/Pagination';
-import { Select, Container, ContainerPagination, Title } from '../Styles/style'
+import { ButtonFilter, TextFilter, Container, ContainerPagination } from '../Styles/style'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import labedditLogo from '../img/labeddit-logo.png'
 import { useForm } from "../Hooks/useForm";
@@ -13,80 +13,62 @@ import { initialForm } from "../Constants/inputs";
 function CardPosts() {
     const [form, onChange, resetForm] = useForm(initialForm)
     let { states, setters, requests } = useContext(GlobalStateContext)
-    const history = useHistory()
     const post = states.posts
-
-    let start = states.page * states.perPage
-    let end = start + states.perPage
-    const paginated = post.slice(start, end)
+    const [filter, setFilter] = useState(post)
+    const history = useHistory()
+    const paginated = filter.slice(states.start, states.end)
+    setters.setLengthPages(Math.ceil(filter.length / states.perPage))
 
     useEffect(() => {
         requests.getPosts()
-    }, [post])
+    }, [paginated])
 
     const handleChange = (e, value) => {
         setters.setPage(value)
     }
-
-    const orderDate = () => {
-
-        const ordered = paginated && paginated.sort((x, y) =>
-            form.order === 'Crescente' ? x.createdAt - y.createdAt : y.createdAt - x.createdAt
-        )
-        return ordered;
-
+    
+    const sendForm = (e) => {
+        e.preventDefault()
+        filterName()
+        resetForm()
     }
 
     const filterName = () => {
 
-        const filter = paginated.filter((post) => {
-            if (form.inputSearch) {
-                return (form.inputSearch && post.name.includes(form.inputSearch))
-            } else {
-                return true
-            }
-        })
+        let filtered = post
+
+            .filter((post) => {
+                if (form.inputSearch) {
+                    return (form.inputSearch && post && post.username && post.username.includes(form.inputSearch))
+                } else {
+                    return (post)
+                }
+
+            })
 
         return (
-            filter
+            setFilter(filtered)
         )
     }
 
-    console.log(filterName())
-
-    const sendForm = (e) => {
-        e.preventDefault()
-        resetForm()
-        // orderDate()
-        filterName()
-    }
-
-    console.log(paginated)
-
     return (
         <Container>
+
             {post && post.length === 0 ? <Container progress><CircularProgress /></Container> : (
                 <>
-                    <ContainerInput onSubmit={sendForm}>
+                    <ContainerInput register onSubmit={sendForm}>
                         <Input
-                            type="text"
-                            name="name"
+                            type={"text"}
+                            name={"inputSearch"}
                             value={form.inputSearch}
-                            label="Pesquisar por nome"
+                            placeholder={"Pesquisa por nome "}
                             onChange={onChange}
                         >
                         </Input>
+                        <ButtonFilter>🔍</ButtonFilter>
+                        <TextFilter  onClick={() => setFilter(post)}>⟲</TextFilter>
                     </ContainerInput>
-
-                    <label>Ordenar por: </label>
-                    <select
-                        name={'order'}
-                        value={form.order}
-                        onChange={onChange}
-                    >
-                        <option value="Crescente">Mais antigos </option>
-                        <option value="Decrescente">Mais recentes </option>
-                    </select>
+                    
 
                     {paginated && paginated.map((post) => {
                         let date = new Date(post.createdAt)
@@ -120,9 +102,7 @@ function CardPosts() {
                         />
                     </ContainerPagination>
                 </>
-
-            )
-            }
+            )}
             <ContainerButton>
                 <Button add onClick={() => goToAddPosts(history)}>+</Button>
             </ContainerButton>

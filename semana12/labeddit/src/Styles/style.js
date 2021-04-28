@@ -33,9 +33,18 @@ export const Button = styled.button`
 
     @media only screen and (max-width: 505px){
         padding: ${props => props.add ? "12px 16px" : '12px'};
+        font-size: ${props => props.comment ? "12px" : ''};
     }
     
 `
+
+export const ButtonFilter = styled.button`
+    background:none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+`
+
 export const ContainerButton = styled.div`
     position: fixed;
     bottom:10px;
@@ -58,6 +67,11 @@ export const Title = styled.h1`
     margin: ${props => props.error ? "0" : ''};
         
 `
+export const TextFilter = styled.p` 
+    font-size: 28px;
+    padding: 10px;
+    cursor: pointer;
+`
 
 export const Text = styled.p`
     text-transform: ${props => props.name ? "capitalize" : ''};
@@ -71,6 +85,7 @@ export const Text = styled.p`
    
     @media only screen and (max-width: 460px){
         font-size: ${props => props.reader ? "0px" : ''};
+        font-size: ${props => props.vote ? "12px" : ''};
     }
 
 `
@@ -83,7 +98,10 @@ export const Vote = styled.p`
     cursor: pointer;
     &:hover{
         cursor: pointer;
-        color: ${props => props.up ? "LimeGreen" : 'red'};
+        font-size: 32px;
+    }
+    @media only screen and (max-width: 460px){
+        font-size: 20px
     }
 `
 
