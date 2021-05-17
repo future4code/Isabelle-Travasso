@@ -1,0 +1,14 @@
+{
+  "name": "aula-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Exercicio2.js",
+  "scripts": {
+    "start": "node ./Exercicio2.js"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Isabelle Travasso",
+  "license": "ISC"
+}
