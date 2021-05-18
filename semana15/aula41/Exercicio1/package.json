@@ -1,0 +1,15 @@
+{
+  "name": "aula-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./Exercicio1.js"
+  },
+  "keywords": [
+    "aula",
+    "node"
+  ],
+  "author": "Isabelle Travasso",
+  "license": "ISC"
+}
