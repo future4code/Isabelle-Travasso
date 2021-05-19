@@ -1,0 +1,15 @@
+{
+  "name": "aula42",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start1": "clear && tsc && node ./build/Exercicio1.js",
+    "start2": "clear && tsc && node ./build/Exercicio2.js",
+    "start3": "clear && tsc && node ./build/Exercicio3.js",
+    "start4": "clear && tsc && node ./build/Exercicio4.js"
+  },
+  "keywords": ["node"],
+  "author": "Isabelle Travasso",
+  "license": "ISC"
+}
