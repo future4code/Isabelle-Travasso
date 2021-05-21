@@ -1,0 +1,5 @@
+const now = new Date()
+const todayDay = now.getDate()
+const todayMonth = now.getMonth()
+const todayYear = now.getFullYear()
+export const today = new Date(`${todayYear}-${todayMonth}-${todayDay}`)
