@@ -14,10 +14,17 @@ export type historic = {
 
 export const users: User[] = [
     {
-        name: "Usuário teste",
+        name: "Patricia Peres",
         cpf: "22357489076",
         birthDate: "25/11/1994",
-        balance: 0,
+        balance: 2000,
+        extract: []
+    },
+    {
+        name: "Nadia Oh",
+        cpf: "66796467890",
+        birthDate: "10/03/2000",
+        balance: 3000,
         extract: []
     }
 ]

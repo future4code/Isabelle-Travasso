@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import { User, users } from './accounts'
-import { today } from './util'
 
 const app = express()
 
@@ -11,13 +10,13 @@ app.use(cors())
 app.get("/users", (req: Request, res: Response) => {
     if (users) {
         res
-        .status(200)
-        .send(users)
+            .status(200)
+            .send(users)
     } else {
         res
-          .status(404)
-          .send("Users not found")
-      }
+            .status(404)
+            .send("Users not found")
+    }
 })
 
 app.get("/users/:cpf", (req: Request, res: Response) => {
@@ -52,7 +51,7 @@ app.put("/users/:cpf/balance", (req: Request, res: Response) => {
         const { cpf } = req.params
         const { name } = req.query
         const value = Number(req.body.value)
-        const description = req.body.description as string
+        // const description = req.body.description as string
 
         const findUser = users.find(user => user.cpf === cpf)
         const index = users.findIndex(user => user.cpf === cpf)
@@ -68,7 +67,8 @@ app.put("/users/:cpf/balance", (req: Request, res: Response) => {
             const operation = {
                 value: value,
                 date: Date(),
-                description: description
+                // description: description
+                description: "Depósito de dinheiro"//defasio
             }
 
             users[index].extract.push(operation)
@@ -76,7 +76,8 @@ app.put("/users/:cpf/balance", (req: Request, res: Response) => {
             res
                 .status(200)
                 .send({
-                    message: `Operation performed. Your current balance is $${findUser.balance},00`
+                    message: `Operation performed. Your current balance is $${findUser.balance}`,
+                    date: `${operation.date}`
                 })
         } else {
             throw new Error("Invalid value")
@@ -93,13 +94,13 @@ app.put("/users/:cpf/payment", (req: Request, res: Response) => {
     try {
         const { cpf } = req.params
         const { name } = req.query
-        const payment = Number(req.body.payment)
+        const payment = Number(req.body.value)
         const description = req.body.description as string
         const dateString = req.body.date as string
-        
+
+        const today = new Date()
         const [day, month, year] = dateString.split("/")
-        const date = new Date(`${year}-${month}-${day}`)
-        const payDay = date - today
+        let date = new Date(`${year}-${month}-${day}`)
 
         const findUser = users.find(user => user.cpf === cpf)
         const index = users.findIndex(user => user.cpf === cpf)
@@ -108,28 +109,112 @@ app.put("/users/:cpf/payment", (req: Request, res: Response) => {
             throw new Error("cpf not found")
         } else if (findUser.name !== name) {
             throw new Error("name is not compatible with the cpf informed")
-        } 
-        
+        }
+
+        if (!dateString || dateString === '') {
+            date = today
+        }
+
         if (payment) {
-            if(payDay === 0)
+            if (today > date) {
+                throw new Error("Invalid payment date")
+            } else if (today < date) {
+                const operation = {
+                    value: payment,
+                    date: dateString,
+                    description: description
+                }
 
-            findUser.balance -= payment
+                users[index].extract.push(operation)
 
+                res
+                    .status(200)
+                    .send({
+                        message: `$${payment} payment successfully scheduled`,
+                        balance: `Your current balance is $${findUser.balance}`
+                    })
+            } else if (today === date) {
+                const operation = {
+                    value: payment,
+                    date: dateString,
+                    description: description
+                }
+
+                findUser.balance -= payment
+
+                users[index].extract.push(operation)
+                if (findUser.balance < 0) {
+                    throw new Error("insufficient account balances")
+                } else {
+                    res
+                        .status(200)
+                        .send({
+                            message: `$${payment} payment made successfully`,
+                            balance: `Your current balance is $${findUser.balance}`
+                        })
+                }
+            }
+        } else {
+            throw new Error("Invalid payment")
+        }
+
+    } catch (err) {
+        res
+            .status(400)
+            .send({ message: err.message })
+    }
+})
+
+app.put("/users/:cpfR/:cpf/transfer", (req: Request, res: Response) => {
+    // R = sender
+    try {
+        const { cpf } = req.params
+        const { cpfR } = req.params
+        const { name } = req.query
+        const { nameR } = req.query
+        const value = Number(req.body.value)
+        const description = req.body.description as string
+
+        const findUser = users.find(user => user.cpf === cpf)
+        const findUserR = users.find(userR => userR.cpf === cpfR)
+
+        const index = users.findIndex(user => user.cpf === cpf)
+        const indexR = users.findIndex(userR => userR.cpf === cpfR)
+
+
+        if (!findUser || !findUserR) {
+            throw new Error("cpf not found")
+        } else if (findUser.name !== name || findUserR.name !== nameR) {
+            throw new Error("name is not compatible with the cpf informed")
+        }
+
+
+        if (value && description) {
             const operation = {
-                value: payment,
-                date: dateString,
+                value: value,
+                date: new Date(),
                 description: description
             }
 
-            users[index].extract.push(operation)
+            if (findUserR.balance > value) {
+                findUserR.balance -= value
+                findUser.balance += value
 
-            res
-                .status(200)
-                .send({
-                    message: `Operation performed. Your current balance is $${findUser.balance},00`
-                })
+                users[indexR].extract.push(operation)
+                users[index].extract.push(operation)
+
+                res
+                    .status(200)
+                    .send({
+                        message: `$${value} tranfer made successfully`,
+                        balance: `Your current balance is $${findUserR.balance}`
+                    })
+            } else {
+                throw new Error("insufficient account balances")
+            }
+
         } else {
-            throw new Error("Invalid payment")
+            throw new Error("Invalid value or description")
         }
 
     } catch (err) {
@@ -157,10 +242,15 @@ app.post("/users/add", (req: Request, res: Response) => {
             throw new Error("invalid CPF")
         }
 
-        const actualYear = new Date().getFullYear()
+        const today = new Date()
         const [day, month, year] = birthDate.split("/")
         birthDate = new Date(`${year}-${month}-${day}`)
-        const age = (actualYear - birthDate)
+        let age = today.getFullYear() - birthDate.getFullYear()
+        const monthCompare = today.getMonth() - birthDate.getMonth()
+
+        if (monthCompare <= 0 && today.getDate() < birthDate.getDate()) {
+            age = age - 1
+        }
 
         if (name && cpf && birthDate) {
 
