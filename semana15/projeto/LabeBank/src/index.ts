@@ -68,7 +68,7 @@ app.put("/users/:cpf/balance", (req: Request, res: Response) => {
                 value: value,
                 date: Date(),
                 // description: description
-                description: "Depósito de dinheiro"//defasio
+                description: "Depósito de dinheiro"
             }
 
             users[index].extract.push(operation)
