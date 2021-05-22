@@ -35,7 +35,7 @@ app.get("/users/:cpf", (req: Request, res: Response) => {
                 .status(200)
                 .send({
                     balance: findUser.balance,
-                    message: `Your account balance is $${findUser.balance},00`
+                    message: `Your account balance is $${findUser.balance}`
                 })
         }
 
@@ -95,7 +95,7 @@ app.put("/users/:cpf/payment", (req: Request, res: Response) => {
         const { cpf } = req.params
         const { name } = req.query
         const payment = Number(req.body.value)
-        const description = req.body.description as string
+        // const description = req.body.description as string
         const dateString = req.body.date as string
 
         const today = new Date()
@@ -122,7 +122,8 @@ app.put("/users/:cpf/payment", (req: Request, res: Response) => {
                 const operation = {
                     value: payment,
                     date: dateString,
-                    description: description
+                    // description: description
+                    description: "Payment scheduled"
                 }
 
                 users[index].extract.push(operation)
@@ -137,7 +138,8 @@ app.put("/users/:cpf/payment", (req: Request, res: Response) => {
                 const operation = {
                     value: payment,
                     date: dateString,
-                    description: description
+                    // description: description
+                    description: "Payment"
                 }
 
                 findUser.balance -= payment
@@ -173,7 +175,7 @@ app.put("/users/:cpfR/:cpf/transfer", (req: Request, res: Response) => {
         const { name } = req.query
         const { nameR } = req.query
         const value = Number(req.body.value)
-        const description = req.body.description as string
+        // const description = req.body.description as string
 
         const findUser = users.find(user => user.cpf === cpf)
         const findUserR = users.find(userR => userR.cpf === cpfR)
@@ -189,11 +191,12 @@ app.put("/users/:cpfR/:cpf/transfer", (req: Request, res: Response) => {
         }
 
 
-        if (value && description) {
+        if (value) {
             const operation = {
                 value: value,
                 date: new Date(),
-                description: description
+                // description: description
+                description: `transfer from ${nameR} to ${name}`
             }
 
             if (findUserR.balance > value) {
