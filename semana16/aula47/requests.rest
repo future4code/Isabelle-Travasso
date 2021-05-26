@@ -1,0 +1,14 @@
+# GET http://localhost:3003/actors
+
+# GET http://localhost:3003/actors/Juliana
+
+# GET http://localhost:3003/gender?gender=female
+
+PUT http://localhost:3003/actors/005
+Content-Type: application/json
+
+{
+    "name": "Cleo Pires",
+    "birth_date": "1982-10-02",
+    "gender": "female",
+}
