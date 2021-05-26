@@ -27,7 +27,7 @@ app.get("/actors/:name", async (req: Request, res: Response) => {
     }
 })
 ```
-### **c-)** 
+### **c-) e Exercicio 3b**
 ```
 const countGender = async (gender: string): Promise<any> => {
     const result = await connection.raw(`
@@ -126,4 +126,16 @@ app.get('/actors/gender/salary/avg', async (req, res) => {
         res.status(500).send("An unexpected error occurred")
     }
 })
+```
+
+## Exercício 3
+
+### **a-)**
+```
+const getActorById = async (id: string): Promise<any> => {
+    const result = await connection.raw(`
+    SELECT * FROM Actor WHERE id = '${id}'
+  `)
+    return result[0][0]
+}
 ```
