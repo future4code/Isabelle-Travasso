@@ -1,4 +1,4 @@
-# Aula 46 - Aprofundamento SQL
+# Aula 47 - Knex.js
 
 ## Exercício 1
 
@@ -80,5 +80,50 @@ app.put("/actors/:id", async (req, res) => {
     }
  })
  ```
- 
+
 ### **b-)** 
+```
+const deleteActor = async (id: string): Promise<void> => {
+    await connection("Actor")
+    .delete()
+    .where({id})
+}
+
+ app.delete("/actors/:id", async(req, res) => {
+     try{
+         const id = req.params.id
+         await deleteActor(id)
+
+         res
+         .send({message: "Actor Deleted"})
+     } catch (err){
+         res.send({ message: err.sqlMessage || err.message})
+     }
+ })
+
+```
+
+### **C-)** 
+```
+const avgSalary = async (gender: string): Promise<any> => {
+    const result = await connection("Actor")
+        .avg("salary as salary_avg")
+        .where({ gender })
+    return result[0]
+}
+
+app.get('/actors/gender/salary/avg', async (req, res) => {
+    try {
+        const gender = req.query.gender as string
+        const avg = await avgSalary(gender)
+
+        res.send({ average: avg })
+
+    } catch (err) {
+
+        console.log(err.sqlMessage || err.message);
+
+        res.status(500).send("An unexpected error occurred")
+    }
+})
+```

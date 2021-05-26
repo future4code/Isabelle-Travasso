@@ -4,11 +4,10 @@
 
 # GET http://localhost:3003/gender?gender=female
 
-PUT http://localhost:3003/actors/005
-Content-Type: application/json
+# GET http://localhost:3003/actors/gender/salary/avg?gender=female
 
-{
-    "name": "Cleo Pires",
-    "birth_date": "1982-10-02",
-    "gender": "female",
-}
+GET http://localhost:3003/actors/004
+
+
+###
+DELETE http://localhost:3003/actors/006
