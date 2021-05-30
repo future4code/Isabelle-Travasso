@@ -1,7 +1,6 @@
-// import cors from "cors";
 import express from 'express'
 
-import { deleteResponsible, getUserResponsible, getAllTasks, getTasksDelayed, getTasksSearch, createTask, addStatus, getTaskAndUserById, getTaskById, getTaskByCreatorUserId, createResponsible } from '../Querys/tasksQuerys'
+import { deleteResponsible, getUserResponsible, getAllTasks, getTasksDelayed, getTasksSearch, createTask, addStatus, getTaskById, getTaskByCreatorUserId, createResponsible } from '../Querys/tasksQuerys'
 
 import { Status } from '../types'
 

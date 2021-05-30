@@ -28,7 +28,7 @@ route.get("", async (req, res) => {
 
         res
             .status(200)
-            .send({ actor: result })
+            .send({ user: result })
 
     } catch (err) {
         res

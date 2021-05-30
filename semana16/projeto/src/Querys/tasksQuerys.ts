@@ -16,32 +16,23 @@ export const createTask = async (taskData: Task): Promise<void> => {
 
 export const getAllTasks = async (): Promise<any> => {
   const result = await connection
-      .select("*")
-      .from("Tasks")
-      
-  return result
-}
+    .select("*")
+    .from("Tasks")
 
-export const getTaskAndUserById = async (id: string): Promise<any> => {
-  const result = await connection.raw(`
-    SELECT t.*, u.id as id_user, u.nickname as nicknameUser FROM Tasks t
-    JOIN Users u ON t.creatorUserId = u.id
-    WHERE ${id} = creatorUserId
-  `)
-  return result[0][0]
+  return result
 }
 
 export const getTaskByCreatorUserId = async (id: string): Promise<any> => {
   const result = await connection
-  .select("*")
-  .from("Tasks")
-  .where(`${id}`, "creatorUserId")
+    .select("*")
+    .from("Tasks")
+    .where(`${id}`, "creatorUserId")
 
   return result
 }
 
 export const createResponsible = async (taskData: TaskResponsible): Promise<void> => {
-  
+
   await connection
     .insert({
       task_id: taskData.task_id,
@@ -50,22 +41,22 @@ export const createResponsible = async (taskData: TaskResponsible): Promise<void
     .into("Task_Responsible")
 }
 
-export const getUserResponsible = async (id: string): Promise<any> => {  
-  const result = await connection.raw(`
-  SELECT tr.user_id, u.nickname as nicknameUser FROM Task_Responsible tr
-  JOIN Users u ON tr.user_id = u.id
-  WHERE '${id}' = tr.task_id;
-`)
-  return result[0]
+export const getUserResponsible = async (id: string): Promise<any> => {
+  const result = await connection
+    .select("Task_Responsible.user_id", "Users.nickname")
+    .from('Task_Responsible')
+    .where("Task_Responsible.task_id", `${id}`)
+    .join('Users', 'Task_Responsible.user_id', 'Users.id')
+  return result
 }
 
 export const getTaskById = async (id: string): Promise<any> => {
-  const result = await connection.raw(`
-  SELECT * FROM Tasks t 
-  JOIN Task_Responsible tr ON t.id = tr.task_id
-  WHERE t.id = '${id}'
-`)
-  return result[0][0]
+  const result = await connection
+    .select("*")
+    .from('Tasks')
+    .where("Tasks.id", `${id}`)
+    .join('Task_Responsible', 'Tasks.id', 'Task_Responsible.task_id')
+  return result
 }
 
 export const addStatus = async (id: string, status: Status): Promise<void> => {
@@ -78,11 +69,11 @@ export const addStatus = async (id: string, status: Status): Promise<void> => {
 
 export const getTasksSearch = async (search: string): Promise<any> => {
   const result = await connection
-  .select("*")
-  .from("Tasks")
-  .where("status", "like", `%${search}%`)
-  .orWhere("title", "like", `%${search}%`)
-  .orWhere("description", "like", `%${search}%`)
+    .select("*")
+    .from("Tasks")
+    .where("status", "like", `%${search}%`)
+    .orWhere("title", "like", `%${search}%`)
+    .orWhere("description", "like", `%${search}%`)
 
   return result
 }
@@ -97,23 +88,23 @@ export const getTasksDelayed = async (): Promise<any> => {
 }
 
 export const deleteResponsible = async (taskId: string, responsibleUserId: string): Promise<any> => {
-  try{
+  try {
 
-    if(!taskId){
+    if (!taskId) {
       throw new Error("Invalid task id")
     } else if (!responsibleUserId) {
       throw new Error("Invalid user id")
     }
 
     const result = await connection
-    .delete()
-    .from("Task_Responsible")
-    .where("task_id", `${taskId}`)
-    .andWhere("user_id", `${responsibleUserId}`) 
+      .delete()
+      .from("Task_Responsible")
+      .where("task_id", `${taskId}`)
+      .andWhere("user_id", `${responsibleUserId}`)
 
     return result
 
-  } catch (err){
+  } catch (err) {
     throw new Error(err.sqlMessage || err.message)
   }
 }
