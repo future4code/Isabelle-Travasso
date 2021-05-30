@@ -1,7 +1,7 @@
 // import cors from "cors";
 import express from 'express'
 
-import { deleteResponsible, getAllTasks, getTasksDelayed, getTasksSearch, createTask, addStatus, getTaskAndUserById, getTaskById, getTaskByCreatorUserId, createResponsible } from '../Querys/tasksQuerys'
+import { deleteResponsible, getUserResponsible, getAllTasks, getTasksDelayed, getTasksSearch, createTask, addStatus, getTaskAndUserById, getTaskById, getTaskByCreatorUserId, createResponsible } from '../Querys/tasksQuerys'
 
 import { Status } from '../types'
 
@@ -99,7 +99,7 @@ route.get("/:id", async (req, res) => {
 route.get("/:id/responsible", async (req, res) => {
     try {
         const id = req.params.id;
-        const user = await getTaskAndUserById(id);
+        const user = await getUserResponsible(id);
 
         if (!user) {
             res
@@ -117,7 +117,7 @@ route.get("/:id/responsible", async (req, res) => {
     }
 });
 
-route.put("/responsible", async (req, res) => {
+route.post("/responsible", async (req, res) => {
     try {
         const responsible = {
             task_id: req.body.task_id,
