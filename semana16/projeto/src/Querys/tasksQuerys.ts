@@ -4,6 +4,7 @@ import { Task, TaskResponsible, Status } from '../types'
 export const createTask = async (taskData: Task): Promise<void> => {
   await connection
     .insert({
+      id: taskData.id,
       title: taskData.title,
       description: taskData.description,
       limitDate: taskData.limitDate,
@@ -11,6 +12,14 @@ export const createTask = async (taskData: Task): Promise<void> => {
       creatorUserId: taskData.creatorUserId
     })
     .into("Tasks")
+}
+
+export const getAllTasks = async (): Promise<any> => {
+  const result = await connection
+      .select("*")
+      .from("Tasks")
+      
+  return result
 }
 
 export const getTaskAndUserById = async (id: string): Promise<any> => {
@@ -23,10 +32,12 @@ export const getTaskAndUserById = async (id: string): Promise<any> => {
 }
 
 export const getTaskByCreatorUserId = async (id: string): Promise<any> => {
-  const result = await connection.raw(`
-    SELECT * FROM Tasks WHERE ${id} = creatorUserId
-  `)
-  return result[0][0]
+  const result = await connection
+  .select("*")
+  .from("Tasks")
+  .where(`${id}`, "creatorUserId")
+
+  return result
 }
 
 export const createResponsible = async (taskData: TaskResponsible): Promise<void> => {
@@ -67,14 +78,14 @@ export const addStatus = async (id: string, status: Status): Promise<void> => {
 
 export const getTasksSearch = async (search: string): Promise<any> => {
   const result = await connection.raw(`
-    SELECT * FROM Tasks WHERE status LIKE '%${search}%' || title LIKE '%${search}%' || description LIKE '%${search}%'
+    SELECT * FROM Tasks WHERE status LIKE '%${search}%' OR title LIKE '%${search}%' OR description LIKE '%${search}%'
   `)
   return result[0][0]
 }
 
 export const getTasksDelayed = async (): Promise<any> => {
   const result = await connection.raw(`
-    SELECT * FROM Tasks WHERE status != done and limitDate < curdate()
+    SELECT * FROM Tasks WHERE status != "done" and limitDate < curdate()
   `)
   return result[0][0]
 }
@@ -98,13 +109,3 @@ export const deleteResponsible = async (taskId: string, responsibleUserId: strin
     throw new Error(err.sqlMessage || err.message)
   }
 }
-
-// export const deleteTaskById = async (taskId: string): Promise<any> => {
-//   try{
-  
-//   const result = await connection.raw(`
-//     SELECT * FROM Task_Responsible WHERE status != done and limitDate < curdate()
-//   `)
-//   }
-//   return result[0][0]
-// }

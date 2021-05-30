@@ -1,22 +1,14 @@
-import route from '../index'
-// import cors from "cors";
 import express from 'express'
-
 import { createUser, getAllUsers, getUserById, editUserById, searchUser } from '../Querys/usersQuerys'
 
 import { User } from '../types'
 
-// const route = express();
-
-// route.use(express.json());
-// route.use(cors());
-
-export const userRoute = express.Router()
+const route = express.Router()
 
 route.get("/all", async (req, res) => {
     try {
 
-        const user = await getAllUsers
+        const user = await getAllUsers()
 
         res
             .status(200)
@@ -67,7 +59,7 @@ route.get("/:id", async (req, res) => {
 });
 
 
-route.post("/edit/:id", async (req, res) => {
+route.put("/edit/:id", async (req, res) => {
     try {
         const userEdit: User = {
             id: req.params.id,
@@ -95,25 +87,27 @@ route.post("/edit/:id", async (req, res) => {
             .status(200)
             .send("Updated!")
 
-    } catch (error) {
+    } catch (err) {
         res
             .status(400)
             .send("Ops! Something is wrong. Try again later")
     }
 })
 
-route.put("", async (req, res) => {
+route.post("/", async (req, res) => {
     try {
 
         const idGenerator = () => "_" + Math.random().toString(36).substr(2, 9)
 
-        const userData = {
-            id: idGenerator(),
-            name: req.body.name,
-            nickname: req.body.nickname,
-            email: req.body.email
-        }
+        const { name, nickname, email } = req.body
 
+        const userData: User = {
+            id: idGenerator(),
+            name: name,
+            nickname: nickname,
+            email: email
+        }
+        
         const keys = Object.keys(req.body)
         for (const key of keys) {
             if (req.body[key] === "")
@@ -124,14 +118,18 @@ route.put("", async (req, res) => {
 
         await createUser(userData)
 
+
         res
             .status(200)
-            .send("User Created!")
+            .send(`User ${userData.nickname} Created!`)
 
-    } catch (error) {
+    } catch (err) {
         res
             .status(400)
-            .send("Ops! Something is wrong. Try again later")
+            .send({ message: err.message,
+                sql: err.sqlMessage, 
+                aki: "Ops! Something is wrong. Try again later"})
     }
 })
 
+export {route as userRoute}

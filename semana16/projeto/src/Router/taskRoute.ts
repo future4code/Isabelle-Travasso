@@ -1,19 +1,29 @@
-import route from '../index'
 // import cors from "cors";
 import express from 'express'
 
-import { deleteResponsible, getTasksDelayed, getTasksSearch, createTask, addStatus, getTaskAndUserById, getTaskById, getTaskByCreatorUserId, createResponsible } from '../Querys/tasksQuerys'
+import { deleteResponsible, getAllTasks, getTasksDelayed, getTasksSearch, createTask, addStatus, getTaskAndUserById, getTaskById, getTaskByCreatorUserId, createResponsible } from '../Querys/tasksQuerys'
 
 import { Status } from '../types'
 
-// const route = express();
+const route = express.Router()
 
-// route.use(express.json());
-// route.use(cors());
+route.get("/all", async (req, res) => {
+    try {
 
-export const taskRoute = express.Router()
+        const tasks = await getAllTasks()
 
-route.get("", async (req, res) => {
+        res
+            .status(200)
+            .send({ tasks: tasks })
+
+    } catch (err) {
+        res
+            .status(400)
+            .send({ message: "Ops! Something is wrong. Try again later" })
+    }
+})
+
+route.get("/creator", async (req, res) => {
     try {
         const creatorUserId = req.query.creatorUserId as string;
         const task = await getTaskByCreatorUserId(creatorUserId);
@@ -52,7 +62,7 @@ route.get("", async (req, res) => {
 
 route.get("/delayed", async (req, res) => {
     try {
-        const result = await getTasksDelayed
+        const result = await getTasksDelayed()
 
         res
             .status(200)
@@ -107,7 +117,7 @@ route.get("/:id/responsible", async (req, res) => {
     }
 });
 
-route.post("/responsible", async (req, res) => {
+route.put("/responsible", async (req, res) => {
     try {
         const responsible = {
             task_id: req.body.task_id,
@@ -135,7 +145,7 @@ route.post("/responsible", async (req, res) => {
     }
 })
 
-route.post("/status/edit", async (req, res) => {
+route.put("/status/edit", async (req, res) => {
     try {
         const id = req.query.id as string;
         const statusEdit = req.body.status as Status
@@ -161,23 +171,23 @@ route.post("/status/edit", async (req, res) => {
     }
 })
 
-route.put("", async (req, res) => {
-    const idGenerator = '_' + Math.random().toString(36).substr(2, 9);
-
+route.post("/", async (req, res) => {
     try {
+        const idGenerator = () => "_" + Math.random().toString(36).substr(2, 9)
 
         let date = req.body.limitDate
+        const { title, description, status, creatorUserId } = req.body
 
         const [day, month, year] = date.split("/")
         date = new Date(`${year}-${month}-${day}`)
 
         const taskData = {
-            id: idGenerator,
-            title: req.body.title,
-            description: req.body.description,
+            id: idGenerator(),
+            title: title,
+            description: description,
             limitDate: date,
-            status: req.body.description,
-            creatorUserId: req.body.creatorUserId
+            status: status,
+            creatorUserId: creatorUserId
         }
 
         const keys = Object.keys(req.body)
@@ -219,3 +229,5 @@ route.delete("/:taskId/responsible/:responsibleUserId", async (req, res) => {
             .send("Ops! Something is wrong. Try again later")
     }
 })
+
+export {route as taskRoute}

@@ -1,17 +1,17 @@
-import express, {Express} from "express";
+import express from "express";
 import cors from "cors";
 import { AddressInfo } from "net";
 import {userRoute} from './Router/userRoute'
 import {taskRoute} from './Router/taskRoute'
 
-const route: Express = express();
+const app = express();
+app.use(express.json());
+app.use("/user", userRoute);
+app.use("/task", taskRoute);
 
-route.use(express.json());
-route.use(cors());
-route.use("/user", userRoute);
-route.use("/task", taskRoute);
+app.use(cors());
 
-const server = route.listen(process.env.PORT || 3003, () => {
+const server = app.listen(process.env.PORT || 3003, () => {
   if (server) {
     const address = server.address() as AddressInfo;
     console.log(`Server is running in http://localhost:${address.port}`);
@@ -19,5 +19,3 @@ const server = route.listen(process.env.PORT || 3003, () => {
     console.error(`Failure upon starting server.`);
   }
 });
-
-export default route 
