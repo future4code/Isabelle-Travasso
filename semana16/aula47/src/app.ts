@@ -1,15 +1,10 @@
-
 import express from "express";
 import cors from "cors";
 import { AddressInfo } from "net";
-import {userRoute} from './Router/userRoute'
-import {taskRoute} from './Router/taskRoute'
 
 const app = express();
-app.use(express.json());
-app.use("/user", userRoute);
-app.use("/task", taskRoute);
 
+app.use(express.json());
 app.use(cors());
 
 const server = app.listen(process.env.PORT || 3003, () => {
@@ -20,3 +15,5 @@ const server = app.listen(process.env.PORT || 3003, () => {
     console.error(`Failure upon starting server.`);
   }
 });
+
+export default app
