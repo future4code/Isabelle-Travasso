@@ -1,0 +1,13 @@
+# GET http://localhost:3003/actors
+
+GET http://localhost:3003/actors/t
+
+# GET http://localhost:3003/gender?gender=female
+
+# GET http://localhost:3003/actors/gender/salary/avg?gender=female
+
+# GET http://localhost:3003/actor/004
+
+
+###
+DELETE http://localhost:3003/actors/006
