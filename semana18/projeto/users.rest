@@ -1,0 +1,42 @@
+
+### Get All Users
+GET http://localhost:3003/users
+
+### Creat User
+
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+   "name": "Isa", 
+   "email": "isabellefullstack@gmail.com",
+   "password": "123456",
+   "role": "ADMIN"
+}
+
+### Login
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+   "email": "isabellefullstack@gmail.com" ,
+   "password": "123456"
+}
+
+### Edit User
+@id = {{signup.response.body.newUser.id}}
+PUT http://localhost:3003/user/edit/{{id}}
+Content-Type: application/json
+
+{
+   "name": "Tati" 
+}
+
+### RESET PASSWORD
+
+POST http://localhost:3003/user/password/reset
+Content-Type: application/json
+
+{
+   "email": "yuzo.dev.practice@gmail.com"
+}
