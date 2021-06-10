@@ -2,17 +2,17 @@ import axios from 'axios'
 import { ApiError } from '../utils/ApiError'
 import { UserAddress } from "../types/address";
 
-export const getAddress = async (cep: string): Promise<UserAddress | null> => {
+export const getAddressCep = async (cep: string) => {
   try {
 
     const res = await axios.get(`https://viacep.com.br/ws/${cep}/json`)
     const {localidade, bairro, uf, logradouro} = res.data
 
     const address: UserAddress = {
-      city: localidade,
+      street: logradouro,
       neighborhood: bairro,
-      state: uf,
-      street: logradouro
+      city: localidade,
+      state: uf
     }
 
     return address

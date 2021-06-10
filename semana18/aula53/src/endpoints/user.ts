@@ -1,22 +1,20 @@
 import { Router } from 'express'
 import { getTokenData } from '../services/authenticator'
-import { getAddress } from '../services/getAddress'
 import { getUserById, deleteUser } from '../database/user'
-import { Address } from '../types/address'
 import { ApiError } from '../utils/ApiError'
+import { getAll } from '../database/user'
 
 export const userRoute = Router()
 
-userRoute.post("/address", async (req, res) => {
-   const { cep } = req.params
+userRoute.get("/all", async (req, res) => {
 
-   if (isNaN(Number(cep)) || cep.includes("-")) {
-      throw ApiError.wrongParams("Por favor, digite apenas números, sem '-' ");
+   const allUser = await getAll()
+
+   if (!allUser.length) {
+      res.send("Ainda não há usuários cadastrados")
+   } else {
+      res.send(allUser)
    }
-
-   const address: Address = getAddress(cep)
-
-   res.status(200).send({ address });
 
 })
 

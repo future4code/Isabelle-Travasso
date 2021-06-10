@@ -2,6 +2,7 @@ import { User, USER_ROLES } from '../types/user'
 import { verifyEmail } from '../database/login'
 import { ApiError } from './ApiError'
 import { LoginInput } from '../types/login'
+import { Address } from '../types/address'
 
 export const userValidator = (newUser: Omit<User, 'id'>) => {
 
@@ -30,6 +31,17 @@ export const userValidator = (newUser: Omit<User, 'id'>) => {
     }
 
     return newUser
+}
+
+export const addressValidator = (newAddress: Omit<Address, 'id'>) => {
+
+    const { public_place, number, street, neighborhood, city, state, complement, user_id } = newAddress
+
+    if (!public_place || !number || !street || !neighborhood || !city || !state || !user_id){
+        throw ApiError.wrongParams("Atenção! Apenas o campo complemento não é obrigatório")
+    }
+
+    return newAddress
 }
 
 export const loginValidator = (data: LoginInput) => {
