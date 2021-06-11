@@ -26,6 +26,7 @@ export const updateRecipe = async (
 
 export const getYourRecipes = async (user_id: string): Promise<any> => {
     const result = await recipesTable()
+        .select('title', 'description', 'user_name', 'date')
         .where({ user_id })
         .orderBy('date', 'desc')
 
@@ -33,16 +34,21 @@ export const getYourRecipes = async (user_id: string): Promise<any> => {
 }
 
 export const getFollowedRecipes = async (user_id: string): Promise<any> => {
-    const result = connection 
-    .select('r.title', 'r.description', 'r.date', 'r.user_name')
-    .from({r : 'recipes_list'})
-    .join({f : 'followers_list'}, 'f.follower_id', `${user_id}`)
-    .where( 'r.user_id', `${user_id}`)
-    .orWhere('f.followed_id', 'r.user_id')
-    .orderBy('r.date', 'desc')
+    const result = await recipesTable()
+    .select('title', 'description', 'date', 'user_name')
+    .join({ f: 'followers_list'}, 'f.follower_id', `${user_id}`)
+    .distinct()
+    .orderBy('date', 'desc')
 
     return result;
 }
+
+// export const getFollowedRecipes = async (user_id: string): Promise<any> => {
+//     const result = await connection.raw(`SELECT r.title, r.description, r.date, r.user_name FROM recipes_list r
+//     JOIN followers_list as f
+//     ON f.follower_id = ${user_id}`) 
+//     return result;
+// }
 
 export const getRecipeById = async (id: string): Promise<any> => {
     const result = await recipesTable()

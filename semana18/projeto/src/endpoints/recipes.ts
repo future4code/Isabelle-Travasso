@@ -45,11 +45,14 @@ recipesRoute.get('/myfeed', async (req, res) => {
 
         const recipes = await getFollowedRecipes(authenticationData.id)
 
-        // if (!recipes) {
-        //     throw new Error("Receitas não encontradas");
-        // }
+        if (!recipes) {
+            throw new Error("Receitas não encontradas");
+        }
+        if(recipes.length === 0){
+            throw new Error("Você ainda não segue ninguem com receitas publicadas");
+        }
 
-        res.status(400).send({ recipes })
+        res.status(200).send({ recipes })
 
     } catch (err) {
         res.status(400).send({
@@ -58,7 +61,7 @@ recipesRoute.get('/myfeed', async (req, res) => {
     }
 })
 
-recipesRoute.get("/myRecipes", async (req, res) => {
+recipesRoute.get("/my", async (req, res) => {
     const token = req.headers.authorization as string;
 
     const authenticationData = getTokenData(token);
