@@ -25,7 +25,8 @@ CREATE TABLE IF NOT EXISTS recipes_list (
     description TEXT NOT NULL,
     date DATE NOT NULL,
     user_id VARCHAR(64) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users_list(id)
+    FOREIGN KEY (user_id) REFERENCES users_list(id),
+    user_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS followers_list (

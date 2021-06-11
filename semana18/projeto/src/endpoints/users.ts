@@ -51,15 +51,17 @@ usersRoute.get("/:id", async (req, res) => {
         throw new Error("Usuário não encontrado");
     }
 
-    if (authenticationData.role !== "NORMAL") {
-        throw new Error("Ops, apenas usuários 'NORMAL' podem realizar essa tarefa");
+    if(authenticationData.role === "ADMIN") {
+        res.status(200).send({user})
     }
 
     res.status(200).send({
         id: user.id,
+        name: user.name,
         email: user.email,
         role: authenticationData.role
     });
+    
 
 });
 
@@ -80,7 +82,7 @@ usersRoute.post('/signup', async (req, res) => {
 
         const userCreated = createUser(userData)
 
-        if (!userCreated) console.log("Erro aqui")
+        if (!userCreated) throw Error('Não foi possivel criar o usuário')
 
         const tokenData: authenticationData = {
             id: userData.id,
@@ -101,7 +103,7 @@ usersRoute.post('/signup', async (req, res) => {
 
 })
 
-usersRoute.post("login", async (req, res) => {
+usersRoute.post("/login", async (req, res) => {
     try {
         const loginCheck = loginValidator(req.body)
 
@@ -126,38 +128,6 @@ usersRoute.post("login", async (req, res) => {
 
         res.status(200).send({ token });
 
-    } catch (err) {
-        res.status(400).send({
-            message: err.message
-        })
-    }
-
-})
-
-usersRoute.post("/:id", async (req, res) => {
-    try {
-        const loginCheck = loginValidator(req.body)
-
-        const userRegistered = await verifyEmail(loginCheck.email)
-
-        if (!userRegistered) {
-            throw new Error("Usuário não encontrado")
-        }
-
-        const passwordIsCorrect: boolean = compareHash(loginCheck.password, userRegistered.password)
-
-        if (!passwordIsCorrect) {
-            throw new Error("Senha inválida")
-        }
-
-        const tokenData: authenticationData = {
-            id: userRegistered.id,
-            role: userRegistered.role
-        }
-
-        const token = generateToken(tokenData)
-
-        res.status(200).send({ token });
     } catch (err) {
         res.status(400).send({
             message: err.message
@@ -168,27 +138,23 @@ usersRoute.post("/:id", async (req, res) => {
 
 usersRoute.put("/edit/:id", async (req, res) => {
     try {
+        const { id } = req.params
         const token = req.headers.authorization as string;
 
         const authenticationData = getTokenData(token);
 
-        // if (id !== authenticationData.id) {
-        //     throw new Error("Usuário não encontrado");
-        // }
         if (authenticationData.role !== "ADMIN") {
-            throw new Error("Ops, apenas usuários 'NORMAL' podem realizar essa tarefa");
+            throw new Error("Ops, apenas usuários 'ADMIN' podem realizar essa tarefa");
         }
 
-        const checkEddit = editUserValidator(req.body)
+        const checkEddit = editUserValidator(req.body, id)
 
-        const editUser = updateUser(authenticationData.id, checkEddit)
+        const editedUser = await updateUser(id, checkEddit)
 
-
-        if (!editUser) {
-            throw ApiError.internal()
-        }
-
-        res.status(200).send({ message: "Usuário atualizado" });
+        res.status(200).send({
+            message: "Usuário atualizado",
+            editedUser
+        });
     } catch (err) {
         res.status(400).send({
             message: err.message
@@ -196,8 +162,7 @@ usersRoute.put("/edit/:id", async (req, res) => {
     }
 });
 
-
-usersRoute.delete('/:id', (req, res) => {
+usersRoute.delete('/delete/:id', (req, res) => {
     try {
         const { id } = req.params
 
@@ -218,10 +183,11 @@ usersRoute.delete('/:id', (req, res) => {
         const userDeleted = deleteUser(id)
 
         if (!userDeleted) {
-            throw ApiError.badRequest('Cant found student')
+            throw Error('Usuário não encontrado')
         }
 
-        res.send({ message: 'deleted!' })
+        res.send({ message: 'Usuário excluido!' })
+
     } catch (err) {
         res.status(400).send({
             message: err.message

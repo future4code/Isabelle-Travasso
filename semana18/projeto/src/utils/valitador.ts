@@ -1,7 +1,9 @@
 import { User, USER_ROLES } from '../types/user'
-import { verifyEmail } from '../database/users'
-import { ApiError } from './ApiError'
 import { Login } from '../types/user'
+import { Recipes } from '../types/recipes'
+import { Feed } from '../types/feed'
+
+// Users
 
 export const userValidator = (newUser: Omit<User, 'id'>) => {
 
@@ -30,11 +32,7 @@ export const loginValidator = (data: Login) => {
     const { email, password } = data
 
     if (!email) {
-        throw new Error("Preencha o campo 'email'")
-    }
-
-    if (!email || email.indexOf("@") === -1) {
-        throw new Error("Email inválido");
+        throw new Error("Preencha o campo 'email'");
     }
 
     if (!password) {
@@ -44,13 +42,58 @@ export const loginValidator = (data: Login) => {
     return data
 }
 
-export const editUserValidator = (editUser: Omit<User, "id">) => {
+export const editUserValidator = (editUser: Omit<User, "id">, id: string) => {
 
     const { name } = editUser
 
-    if (!name){
+    if (!name) {
         throw new Error("Atenção! Apenas o campo nome pode ser alterado")
     }
 
+    if (!id) {
+        throw new Error("Por favor, informe o ID do usuário que deve ser alterado")
+    }
+
     return editUser
+}
+
+// Recipes
+
+export const recipeValidator = (newRecipe: Omit<Recipes, 'id' | 'user_id' | 'user_name'>) => {
+
+    const { title, description, date } = newRecipe
+
+    if (!title || !description || !date) {
+        throw new Error("Preencha os campos 'title', 'description' e date")
+    }
+
+    return newRecipe
+}
+
+export const editRecipeValidator = (editRecipe: Omit<Recipes, "id">, id: string) => {
+
+    const { title, description } = editRecipe
+
+    if (!title || !description) {
+        throw new Error("Atenção! Apenas o campo nome e description podem ser alterados")
+    }
+
+    if (!id) {
+        throw new Error("Por favor, informe o ID do usuário que deve ser alterado")
+    }
+
+    return editRecipe
+}
+
+// Follow
+
+export const followValidator = (newFollow: Omit<Feed, 'follower_id'>) => {
+
+    const { followed_id } = newFollow
+
+    if (!followed_id) {
+        throw new Error("Preencha o campo 'followed_id'")
+    }
+
+    return newFollow
 }

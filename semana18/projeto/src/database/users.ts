@@ -20,16 +20,14 @@ export const createUser = async (newUser: User) => {
 
 export const verifyEmail = async (email: string) => {
     const result = await usersTable()
-        .select("*")
-        .where(`${email}`);
-
-    return result;
+    .where("email", `${email}`)
+    return result[0]
 }
 
 export const updateUser = async (
     id: string,
     userData: Omit<User, 'id'>
-) => {
+) => { await
     usersTable()
         .update(userData)
         .where({ id })

@@ -15,17 +15,16 @@ Content-Type: application/json
 }
 
 ### Login
-POST http://localhost:3003/user/login
+POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-   "email": "isabellefullstack@gmail.com" ,
+   "email": "isabellefullstack@gmail.com",
    "password": "123456"
 }
 
 ### Edit User
-@id = {{signup.response.body.newUser.id}}
-PUT http://localhost:3003/user/edit/{{id}}
+PUT http://localhost:3003/users/edit/fd0c3a28-e311-4e7b-b1ca-31a97c1d4308
 Content-Type: application/json
 
 {

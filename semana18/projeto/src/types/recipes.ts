@@ -3,6 +3,6 @@ export type Recipes = {
     title: string,
     description: string
     date: Date,
-    creator_id: string,
-    creator_name: string
+    user_id: string,
+    user_name: string
 }
