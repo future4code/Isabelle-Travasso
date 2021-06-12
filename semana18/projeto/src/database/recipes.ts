@@ -36,7 +36,7 @@ export const getYourRecipes = async (user_id: string): Promise<any> => {
 export const getFollowedRecipes = async (user_id: string): Promise<any> => {
     const result = await recipesTable()
     .select('title', 'description', 'date', 'user_name')
-    .join({ f: 'followers_list'}, 'f.follower_id', `${user_id}`)
+    .innerJoin({ f: 'followers_list'}, 'f.follower_id', user_id)
     .distinct()
     .orderBy('date', 'desc')
 
@@ -53,6 +53,12 @@ export const getFollowedRecipes = async (user_id: string): Promise<any> => {
 export const getRecipeById = async (id: string): Promise<any> => {
     const result = await recipesTable()
         .where({ id })
+    return result[0];
+}
+
+export const getRecipeByTitle = async (title: string): Promise<any> => {
+    const result = await recipesTable()
+        .where('title', 'like', `%${title}%`)
     return result;
 }
 

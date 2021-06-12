@@ -70,16 +70,12 @@ export const recipeValidator = (newRecipe: Omit<Recipes, 'id' | 'user_id' | 'use
     return newRecipe
 }
 
-export const editRecipeValidator = (editRecipe: Omit<Recipes, "id">, id: string) => {
+export const editRecipeValidator = (editRecipe: Omit<Recipes, 'id'>) => {
 
     const { title, description } = editRecipe
 
-    if (!title || !description) {
-        throw new Error("Atenção! Apenas o campo nome e description podem ser alterados")
-    }
-
-    if (!id) {
-        throw new Error("Por favor, informe o ID do usuário que deve ser alterado")
+    if (!title && !description) {
+        throw new Error("Atenção! O campo title e description devem ser alterados")
     }
 
     return editRecipe

@@ -5,13 +5,11 @@ import {
     unFollow
 } from '../database/feed'
 
-import { generateId } from '../services/idGenerator'
 import { getTokenData } from '../services/authenticator'
 
 import {
     followValidator
 } from '../utils/valitador'
-import { getUserById } from '../database/users'
 
 export const feedRoute = Router()
 
@@ -51,17 +49,14 @@ feedRoute.delete('/delete', async (req, res) => {
 
         const follow = {
             follower_id: authenticationData.id,
-            followed_id: req.body.followed
+            followed_id: req.body.followed_id
         }
+
         if (!follow) {
-            throw new Error("Sequidor não encontrada");
+            throw new Error("Seguidor não encontrado");
         }
 
-        const deleteFollow = unFollow(follow)
-
-        if (!deleteFollow) {
-            throw Error('Não foi possivel realizar a ação de deletar')
-        }
+        await unFollow(follow)
 
         res.send({ message: 'unFollow realizado com sucesso!' })
 

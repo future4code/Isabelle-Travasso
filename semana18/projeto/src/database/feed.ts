@@ -12,5 +12,6 @@ export const createFollow = async (newFollow: Omit<Feed, 'follower_id'>) => {
 export const unFollow = async (follow: Feed): Promise<any> => {
     await followersTable()
         .delete()
-        .where({ follow });
+        .where( "followed_id", follow.followed_id)
+        .andWhere("follower_id", follow.follower_id)
 }

@@ -4,9 +4,10 @@ import {
     getYourRecipes,
     getAllRecipes,
     createRecipe,
-    getRecipeById,
+    getRecipeByTitle,
     getFollowedRecipes,
     updateRecipe,
+    getRecipeById,
     deleteRecipe
 } from '../database/recipes'
 
@@ -48,7 +49,7 @@ recipesRoute.get('/myfeed', async (req, res) => {
         if (!recipes) {
             throw new Error("Receitas não encontradas");
         }
-        if(recipes.length === 0){
+        if (recipes.length === 0) {
             throw new Error("Você ainda não segue ninguem com receitas publicadas");
         }
 
@@ -110,23 +111,36 @@ recipesRoute.post('/add', async (req, res) => {
 
 })
 
+recipesRoute.get("/:title", async (req, res) => {
+    const { title } = req.params
+
+    const recipes = await getRecipeByTitle(title)
+
+    if (!recipes) {
+        throw new Error("Receitas não encontradas");
+    }
+
+    res.status(200).send({ recipes })
+
+})
+
 recipesRoute.put("/edit/:id", async (req, res) => {
     try {
         const { id } = req.params
         const token = req.headers.authorization as string;
 
         const authenticationData = getTokenData(token);
-        const repiceData = await getRecipeById(id)
+        const recipeData = await getRecipeById(id)
 
-        if (!repiceData) {
+        if (!recipeData) {
             throw new Error("Receita não encontrada");
         }
 
-        if (authenticationData.role !== "ADMIN" || authenticationData.id !== repiceData.user_id) {
-            throw new Error("Ops, apenas usuários 'ADMIN' e autores podem realizar essa tarefa");
+        if (authenticationData.role !== "ADMIN" || authenticationData.id !== recipeData.user_id) {
+            throw new Error("Ops, apenas usuários 'ADMIN' e autores podem realizar essa tarefa")
         }
 
-        const checkEddit = editRecipeValidator(req.body, id)
+        const checkEddit = editRecipeValidator(req.body)
 
         const editedRecipe = await updateRecipe(id, checkEddit)
 
@@ -145,18 +159,16 @@ recipesRoute.put("/edit/:id", async (req, res) => {
 recipesRoute.delete('/delete/:id', async (req, res) => {
     try {
         const { id } = req.params
-
         const token = req.headers.authorization as string;
 
         const authenticationData = getTokenData(token);
+        const recipeData = await getRecipeById(id)
 
-        const recipes = await getYourRecipes(authenticationData.id);
-
-        if (!recipes) {
+        if (!recipeData) {
             throw new Error("Receita não encontrada");
         }
 
-        if (authenticationData.id !== recipes.user_id || authenticationData.role !== "ADMIN") {
+        if (authenticationData.id !== recipeData.user_id || authenticationData.role !== "ADMIN") {
             throw new Error("Ops, Apenas ADMIN ou o criador da receita que podem deletá-la");
         }
 
