@@ -36,19 +36,12 @@ export const getYourRecipes = async (user_id: string): Promise<any> => {
 export const getFollowedRecipes = async (user_id: string): Promise<any> => {
     const result = await recipesTable()
     .select('title', 'description', 'date', 'user_name')
-    .innerJoin({ f: 'followers_list'}, 'f.follower_id', user_id)
-    .distinct()
+    .join({ f: 'followers_list'}, 'f.followed_id', 'user_id')
+    .where ('f.follower_id', user_id)
     .orderBy('date', 'desc')
 
     return result;
 }
-
-// export const getFollowedRecipes = async (user_id: string): Promise<any> => {
-//     const result = await connection.raw(`SELECT r.title, r.description, r.date, r.user_name FROM recipes_list r
-//     JOIN followers_list as f
-//     ON f.follower_id = ${user_id}`) 
-//     return result;
-// }
 
 export const getRecipeById = async (id: string): Promise<any> => {
     const result = await recipesTable()
