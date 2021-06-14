@@ -44,10 +44,10 @@ export const loginValidator = (data: Login) => {
 
 export const editUserValidator = (editUser: Omit<User, "id">, id: string) => {
 
-    const { name } = editUser
+    const { name, password } = editUser
 
-    if (!name) {
-        throw new Error("Atenção! Apenas o campo nome pode ser alterado")
+    if (!name && !password) {
+        throw new Error("Atenção! Apenas os campos nome e password podem ser alterado")
     }
 
     if (!id) {

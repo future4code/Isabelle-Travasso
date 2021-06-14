@@ -6,7 +6,8 @@ import {
     verifyEmail,
     updateUser,
     getUserById,
-    deleteUser
+    deleteUser,
+    updatePassword
 } from '../database/users'
 
 import { generateHash, compareHash } from '../services/hashManager'
@@ -20,7 +21,7 @@ import {
     editUserValidator,
     loginValidator
 } from '../utils/valitador'
-import { ApiError } from '../utils/ApiError'
+import { transporter } from '../services/transporter'
 
 export const usersRoute = Router()
 
@@ -51,8 +52,8 @@ usersRoute.get("/:id", async (req, res) => {
         throw new Error("Usuário não encontrado");
     }
 
-    if(authenticationData.role === "ADMIN") {
-        res.status(200).send({user})
+    if (authenticationData.role === "ADMIN") {
+        res.status(200).send({ user })
     }
 
     res.status(200).send({
@@ -61,7 +62,7 @@ usersRoute.get("/:id", async (req, res) => {
         email: user.email,
         role: authenticationData.role
     });
-    
+
 
 });
 
@@ -136,6 +137,51 @@ usersRoute.post("/login", async (req, res) => {
 
 })
 
+usersRoute.post("/password/reset", async (req, res) => {
+    try {
+        const email = req.body.email as string
+    
+        if (!email) {
+            throw new Error("Por favor, informe o e-mail cadastrado")
+        }
+
+        const user = await verifyEmail(email)
+
+        if (!user) {
+            throw new Error("E-mail não encontrado")
+        }
+
+        const characters = "abcdfeujkcnd24356714327?!/[]{}"
+
+        let newPassword = ""
+
+        for (let i = 0; i < 10; i++) {
+            const index = Math.floor(Math.random() * (characters.length - 1))
+            newPassword += characters[index]
+        }
+
+        const newHash = generateHash(newPassword)
+
+        await updatePassword(email, newHash)
+
+        await transporter.sendMail({
+            from: `<${process.env.NODEMAILER_USER}>`,
+            to: email,
+            subject: "Recuperação de senha",
+            text: `Sua nova senha é ${newPassword}`,
+            html: `<p>Sua nova senha é <strong>${newPassword}</strong></p>`
+        })
+
+        res.send({
+            message: `Sua senha de recuperação foi enviada para o email ${email}. Por questão de segurança altere a senha no campo editar usuário`})
+
+    } catch (err) {
+        res.status(400).send({
+            message: err.message
+        })
+    }
+})
+
 usersRoute.put("/edit/:id", async (req, res) => {
     try {
         const { id } = req.params
@@ -143,8 +189,8 @@ usersRoute.put("/edit/:id", async (req, res) => {
 
         const authenticationData = getTokenData(token);
 
-        if (authenticationData.role !== "ADMIN") {
-            throw new Error("Ops, apenas usuários 'ADMIN' podem realizar essa tarefa");
+        if (authenticationData.role !== "ADMIN" && authenticationData.id !== id) {
+            throw new Error("Ops, apenas usuários 'ADMIN' ou o próprio usuário podem realizar essa tarefa");
         }
 
         const checkEddit = editUserValidator(req.body, id)

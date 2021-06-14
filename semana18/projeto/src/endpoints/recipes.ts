@@ -77,6 +77,19 @@ recipesRoute.get("/my", async (req, res) => {
 
 });
 
+recipesRoute.get("/:title", async (req, res) => {
+    const { title } = req.params
+
+    const recipes = await getRecipeByTitle(title)
+
+    if (!recipes) {
+        throw new Error("Receitas não encontradas");
+    }
+
+    res.status(200).send({ recipes })
+
+})
+
 recipesRoute.post('/add', async (req, res) => {
     try {
         const recipeCheck = recipeValidator(req.body)
@@ -111,19 +124,6 @@ recipesRoute.post('/add', async (req, res) => {
 
 })
 
-recipesRoute.get("/:title", async (req, res) => {
-    const { title } = req.params
-
-    const recipes = await getRecipeByTitle(title)
-
-    if (!recipes) {
-        throw new Error("Receitas não encontradas");
-    }
-
-    res.status(200).send({ recipes })
-
-})
-
 recipesRoute.put("/edit/:id", async (req, res) => {
     try {
         const { id } = req.params
@@ -136,7 +136,7 @@ recipesRoute.put("/edit/:id", async (req, res) => {
             throw new Error("Receita não encontrada");
         }
 
-        if (authenticationData.role !== "ADMIN" || authenticationData.id !== recipeData.user_id) {
+        if (authenticationData.role !== "ADMIN" && authenticationData.id !== recipeData.user_id) {
             throw new Error("Ops, apenas usuários 'ADMIN' e autores podem realizar essa tarefa")
         }
 
@@ -168,7 +168,7 @@ recipesRoute.delete('/delete/:id', async (req, res) => {
             throw new Error("Receita não encontrada");
         }
 
-        if (authenticationData.id !== recipeData.user_id || authenticationData.role !== "ADMIN") {
+        if (authenticationData.id !== recipeData.user_id && authenticationData.role !== "ADMIN") {
             throw new Error("Ops, Apenas ADMIN ou o criador da receita que podem deletá-la");
         }
 

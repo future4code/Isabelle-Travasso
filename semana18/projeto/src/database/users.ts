@@ -1,3 +1,4 @@
+import { Hash } from 'crypto'
 import connection from '../connection'
 import { User } from '../types/user'
 
@@ -31,6 +32,12 @@ export const updateUser = async (
     usersTable()
         .update(userData)
         .where({ id })
+}
+
+export const updatePassword = async(email: string, password: string) => {
+    await usersTable()
+    .update({password})
+    .where({email})
 }
 
 export const getUserById = async (id: string): Promise<any> => {
