@@ -15,8 +15,8 @@ class userDatabase extends BaseDatabase {
                     email: user.email,
                     password: user.password
                 });
-        } catch (error) {
-            throw new Error(error.sqlMessage || error.message);
+        } catch (err) {
+            throw new Error(err.sqlMessage || err.message);
         }
     }
 
@@ -30,8 +30,8 @@ class userDatabase extends BaseDatabase {
 
             return toUserModel(result[0])
 
-        } catch (error) {
-            throw new Error(error.sqlMessage || error.message)
+        } catch (err) {
+            throw new Error(err.sqlMessage || err.message)
         }
     }
 

@@ -30,8 +30,8 @@ class postDatabase extends BaseDatabase {
 
             return toPostModel(result[0]);
 
-        } catch (error) {
-            throw new Error(error.sqlMessage || error.message);
+        } catch (err) {
+            throw new Error(err.sqlMessage || err.message);
         }
     }
 }

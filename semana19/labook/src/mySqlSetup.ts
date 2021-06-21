@@ -25,6 +25,15 @@ export class MySql extends BaseDatabase {
          )
       `)
 
+            await BaseDatabase.connection.raw(`
+            CREATE TABLE labook_friendship(
+            user_id VARCHAR(255) NOT NULL,
+            FOREIGN KEY (user_id) REFERENCES labook_users(id)
+            friend_id name VARCHAR(255) NOT NULL,
+            FOREIGN KEY (friend_id) REFERENCES labook_users(id)
+            )
+        `)
+
             console.log("MySql setup completed!")
         } catch (err) {
             console.log(err)

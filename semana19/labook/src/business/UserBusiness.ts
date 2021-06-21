@@ -1,10 +1,11 @@
 import { SignupInputDTO, UserData, LoginInputDTO } from "../data/model/userModel";
 import { generateId } from "./services/IdGenerator";
+import { User } from '../business/entities/User'
 import HashGenerator from "./services/HashGenerator";
 import userDatabase from "../data/userDatabase";
 import TokenGenerator from "./services/TokenGenerator";
 
-export class UserBusiness {
+export abstract class UserBusiness {
 
     protected static signupBusiness = async (
         input: SignupInputDTO
@@ -27,7 +28,7 @@ export class UserBusiness {
             const id = generateId();
             const cypherPassword = await HashGenerator.hash(input.password);
 
-            const user: UserData = {
+            const user: User = {
                 id,
                 name: name,
                 email: email,
@@ -56,10 +57,10 @@ export class UserBusiness {
                 throw new Error('"email" and "password" must be provided')
             }
 
-            const user: UserData = await userDatabase.getUserByEmail(input.email);
+            const user: User = await userDatabase.getUserByEmail(input.email);
 
             if (!user) {
-                throw new Error("Invalid credentials");
+                throw new Error("User not founded");
             }
 
             const passwordIsCorrect: boolean = await HashGenerator.compare(input.password, user.password)

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { SignupInputDTO, LoginInputDTO } from "../data/model/userModel";
-import { UserBusiness } from "../business/userBusiness"
+import { UserBusiness } from "../business/UserBusiness"
 
-class UserController extends UserBusiness {
+export class UserController extends UserBusiness {
 
     signup = async (
         req: Request, res: Response
@@ -56,4 +56,3 @@ class UserController extends UserBusiness {
     }
 }
 
-export default new UserController()

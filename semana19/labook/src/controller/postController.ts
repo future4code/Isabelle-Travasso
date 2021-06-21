@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { createPostInputDTO, getPostByIdInputDTO, PostData, getPostByIdOutputDTO } from "../data/model/postModel";
-import { PostBusiness } from "../business/postBusiness"
+import { PostBusiness } from "../business/PostBusiness"
 
-class PostController extends PostBusiness {
+export class PostController extends PostBusiness {
 
    createPost = async (
       req: Request,
@@ -63,5 +63,3 @@ class PostController extends PostBusiness {
       }
    }
 }
-
-export default new PostController()
